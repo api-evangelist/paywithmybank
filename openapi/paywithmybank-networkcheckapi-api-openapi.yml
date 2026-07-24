@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: accountData networkCheckApi API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: networkCheckApi
+paths:
+  /users/lookup:
+    get:
+      operationId: get-user-lookup
+      summary: Look up whether a user is known to Trustly
+      description: 'Checks whether a user has previously used Trustly, based on one or more provided identifiers (email, phone, or your own customer ID).
+
+
+        Merchants can use this endpoint without having to launch Trustly widget/lightbox. One such use case could be to use this endpoint early in the payment funnel — before the user reaches the payment selection screen — to determine whether to surface Trustly as the top payment option. A `true` response indicates the user is already familiar with Pay by Bank and is more likely to complete a Trustly-powered transaction.
+
+
+        **How it works:** The lookup queries Trustly''s user database across all stored identifiers. If any provided identifier matches a known Trustly user, `isTrustlyUser` is returned as `true`.
+
+
+        **Authentication:** Requests must be authenticated with HTTP Basic Auth using your `accessId` as the username and `accessKey` as the password.'
+      tags:
+      - networkCheckApi
+      parameters:
+      - name: email
+        in: query
+        description: User's email address.
+        required: true
+        schema:
+          type: string
+          format: email
+      - name: externalId
+        in: query
+        description: Your external identifier for the Customer.
+        required: true
+        schema:
+          type: string
+      - name: phone
+        in: query
+        description: User's phone number in ITU E.164 format.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Lookup result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLookupResponse'
+        '400':
+          description: Bad Request — missing mandatory fields or invalid email
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLookupResponse'
+        '401':
+          description: Access not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-user-lookupRequestUnauthorizedError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                description: Any type
+components:
+  schemas:
+    UserLookupResponseErrorsListItems:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        location:
+          type: string
+        domain:
+          type: string
+        occurredAt:
+          type: integer
+      title: UserLookupResponseErrorsListItems
+    BaseException:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: integer
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: integer
+      title: BaseException
+    Get-user-lookupRequestUnauthorizedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseException'
+      required:
+      - errors
+      title: Get-user-lookupRequestUnauthorizedError
+    UserLookupResponse:
+      type: object
+      properties:
+        isTrustlyUser:
+          type: boolean
+          description: True if any provided identifier matches a TRM user.
+        errorsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLookupResponseErrorsListItems'
+          description: Present only on error responses.
+      title: UserLookupResponse
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

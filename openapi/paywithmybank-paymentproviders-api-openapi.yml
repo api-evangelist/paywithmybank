@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  title: accountData paymentProviders API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: paymentProviders
+paths:
+  /paymentProviders:
+    get:
+      operationId: get-paymentProviders
+      summary: List payment providers
+      description: Returns a list of payment providers, filtered by country. It can be paged and filtered by appending arguments to the query string of the request.
+      tags:
+      - paymentProviders
+      parameters:
+      - name: countries
+        in: query
+        description: 2 character ISO Country code. There can be multiple instances of this query parameter to represent a list of countries.
+        required: false
+        schema:
+          type: string
+      - name: paymentType
+        in: query
+        description: Filters out payment providers not enabled for the specified payment type. Possible values are Instant, Deferred, Disbursement, Recurring, Verification, and Retrieval.
+        required: false
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        description: Returns payment providers from that offset.
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Returns the maximum number of payment providers specified by this field.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment Providers_get-paymentProviders_Response_200'
+components:
+  schemas:
+    Payment Providers_get-paymentProviders_Response_200:
+      type: object
+      properties:
+        paymentProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProvider'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      title: Payment Providers_get-paymentProviders_Response_200
+    PaymentProvider:
+      type: object
+      properties:
+        paymentProviderId:
+          type: string
+          description: A unique identifier for the Payment Provider.
+        type:
+          type: number
+          format: double
+        name:
+          type: string
+          description: Name of the payment provider
+        instantPayoutAvailable:
+          type: boolean
+          description: Whether payment provider supports instant payout.
+        subType:
+          $ref: '#/components/schemas/PaymentProviderSubType'
+          description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+        swift:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        country:
+          $ref: '#/components/schemas/PaymentProviderCountry'
+          description: 2-letter ISO country code of the financial institution
+        instantPayment:
+          type: boolean
+      required:
+      - name
+      description: Details of the Financial institution
+      title: PaymentProvider
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
+    PaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-letter ISO country code of the financial institution
+      title: PaymentProviderCountry
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

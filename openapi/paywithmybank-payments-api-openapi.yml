@@ -1,0 +1,803 @@
+openapi: 3.1.0
+info:
+  title: accountData payments API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: payments
+paths:
+  /payments:
+    get:
+      operationId: list-payments
+      summary: List payments
+      description: Returns a list of transactions. It can be paged and filtered by appending arguments to the query string of the request.
+      tags:
+      - payments
+      parameters:
+      - name: paymentType
+        in: query
+        description: Returns payments of this Payment Type. It is possible to filter by multiple values by repeating this argument.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: merchantReference
+        in: query
+        description: Returns transactions of the payments associated with this merchant reference.
+        required: false
+        schema:
+          type: string
+      - name: authorization.status
+        in: query
+        description: Returns transactions of the payments at this payment Authorization Status.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: verification.status
+        in: query
+        description: Returns transactions of the payments at this payment Verification Status.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: paymentId
+        in: query
+        description: Returns payments of this identification.
+        required: false
+        schema:
+          type: string
+      - name: merchant.merchantId
+        in: query
+        description: Returns payments by this merchant identification.
+        required: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: Returns payments by description.
+        required: false
+        schema:
+          type: string
+      - name: paymentProvider.paymentProviderId
+        in: query
+        description: Returns payments by this payment provider identification.
+        required: false
+        schema:
+          type: string
+      - name: customer.customerId
+        in: query
+        description: Returns payments by this customer identification.
+        required: false
+        schema:
+          type: string
+      - name: fingerprint
+        in: query
+        description: Returns payments by this fingerprint.
+        required: false
+        schema:
+          type: string
+      - name: createdAt.start
+        in: query
+        description: Returns payments after this creation date
+        required: false
+        schema:
+          type: string
+      - name: createdAt.end
+        in: query
+        description: Returns payments before this creation date
+        required: false
+        schema:
+          type: string
+      - name: updatedAt.start
+        in: query
+        description: Returns payments after this update date
+        required: false
+        schema:
+          type: string
+      - name: updatedAt.end
+        in: query
+        description: Returns payments before this update date
+        required: false
+        schema:
+          type: string
+      - name: amount.min
+        in: query
+        description: Returns payments for that minimum amount.
+        required: false
+        schema:
+          type: string
+      - name: amount.max
+        in: query
+        description: Returns payments for that maximum amount.
+        required: false
+        schema:
+          type: string
+      - name: paid.min
+        in: query
+        description: Returns payments for that minimum paid.
+        required: false
+        schema:
+          type: string
+      - name: paid.max
+        in: query
+        description: Returns payments for that maximum paid.
+        required: false
+        schema:
+          type: string
+      - name: refunded.min
+        in: query
+        description: Returns payments with this minimum refund amount.
+        required: false
+        schema:
+          type: string
+      - name: refunded.max
+        in: query
+        description: Returns payments with this maximum refund amount.
+        required: false
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        description: List payments by order field.
+        required: false
+        schema:
+          type: string
+      - name: sortOrder
+        in: query
+        description: Returns payments by this sort order
+        required: false
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        description: Returns payments from that offset
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Returns the maximum number of payments specified by this field
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payments_list-payments_Response_200'
+  /payments/{paymentId}:
+    get:
+      operationId: get-payments
+      summary: Retrieve payment
+      description: Retrieves the details of a Payment. Supply the unique paymentId that was returned from your previous request, and Trustly will return the corresponding payment information.
+      tags:
+      - payments
+      parameters:
+      - name: paymentId
+        in: path
+        description: The identifier of the payment object to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+components:
+  schemas:
+    Verification:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/VerificationStatus'
+          description: "Verification Status:\n  * `1`: Automatic - Payment verification followed Trustly internal rules.\n  * `2`: ToVerify\t- Payment transaction is held (status = OnHold) for further investigation and approval by the merchant.\n  * `3`: Verified - Payment was verified and approved by the merchant or Trustly (see Verification Mode).\n  * `4`: Refused - Payment was denied by the merchant or Trustly after verification.\n"
+        mode:
+          $ref: '#/components/schemas/VerificationMode'
+          description: "Verification Mode:\n  * `1`: VerifiedByMerchant\n  * `2`: ApprovedByMerchant\n  * `3`: VerifiedByTrustly\n  * `4`: AmountAuthorizedByMerchant\n"
+        verifyCustomer:
+          type: boolean
+          description: If true, the Customer information (name and zip code) was verified against information provided by the User's bank.
+      title: Verification
+    CustomerCustomData:
+      type: object
+      properties: {}
+      description: Object for sending merchant-specific custom data.
+      title: CustomerCustomData
+    PaymentSystem:
+      type: string
+      enum:
+      - '-1'
+      - '1'
+      - '2'
+      description: "Financial Institution Account Type:\n  * `-1`: None\n  * `1`: PayWithMyBank\n  * `2`: TrustlyAB"
+      title: PaymentSystem
+    PaymentMerchant:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Unique Trustly Merchant ID.
+        name:
+          type: string
+          description: Merchants name.
+      title: PaymentMerchant
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
+    DriverLicense:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Driver License number.
+        state:
+          type: string
+          description: 2 character ISO State code.
+      required:
+      - number
+      - state
+      title: DriverLicense
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
+    FinancialInstitutionAccountVerificationScore:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+      title: FinancialInstitutionAccountVerificationScore
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the Customer
+        taxId:
+          type: string
+          description: Customer tax ID (e.g. SSN [US], SIN [CA]). *May be required depending on industry and location.*
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: Customer phone number.
+        email:
+          type: string
+          description: Customer email address.
+        dateOfBirth:
+          type: string
+          description: Customer date of birth.
+        createdAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        customerId:
+          type: string
+          description: A unique Trustly customer identifier.
+        externalId:
+          type: string
+          description: A unique merchant customer identifier.
+        merchantId:
+          type: string
+          description: A unique Trustly merchant identifier.
+        enrollDate:
+          type: integer
+          description: Date of the user's first transaction in your system, regardless of payment method used as a UNIX timestamp.
+        vip:
+          type: string
+          description: Range that determines how low-risk the customer represents to the merchant
+        currency:
+          type: string
+          description: Customer currency.
+        balance:
+          type: string
+          description: Customer account balance (not associated with a financial institution account).
+        organizationNumber:
+          type: string
+          description: Organization number for business accounts
+        externalTier:
+          type: string
+          description: It should describe the customer''s rank to the merchant (e.g. Gold, Diamond, 4 stars, etc.)
+        personId:
+          type: string
+          description: Unique customer identity throughout different banks.
+        customData:
+          $ref: '#/components/schemas/CustomerCustomData'
+          description: Object for sending merchant-specific custom data.
+        driverLicense:
+          $ref: '#/components/schemas/DriverLicense'
+        nationalId:
+          type: string
+          description: Customer National ID
+      required:
+      - name
+      - address
+      - phone
+      - email
+      description: The Trustly customer object, containing identification details and contact information.
+      title: Customer
+    VerificationStatus:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      description: "Verification Status:\n  * `1`: Automatic - Payment verification followed Trustly internal rules.\n  * `2`: ToVerify\t- Payment transaction is held (status = OnHold) for further investigation and approval by the merchant.\n  * `3`: Verified - Payment was verified and approved by the merchant or Trustly (see Verification Mode).\n  * `4`: Refused - Payment was denied by the merchant or Trustly after verification.\n"
+      title: VerificationStatus
+    PaymentCurrency:
+      type: string
+      enum:
+      - USD
+      description: 3-letter ISO Currency Code. Currently only USD is supported.
+      title: PaymentCurrency
+    AccountCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: AccountCountry
+    Payments_list-payments_Response_200:
+      type: object
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      required:
+      - payments
+      - startIndex
+      - itemsPerPage
+      title: Payments_list-payments_Response_200
+    PaymentProviderSubtype:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Payment Provider Subtype:\n  * `1000`: EasyOnline\n  * `2000`: MEC\n  * `2001`: MCD"
+      title: PaymentProviderSubtype
+    PaymentProvider:
+      type: object
+      properties:
+        paymentProviderId:
+          type: string
+          description: A unique identifier for the Payment Provider.
+        type:
+          type: number
+          format: double
+        name:
+          type: string
+          description: Name of the payment provider
+        instantPayoutAvailable:
+          type: boolean
+          description: Whether payment provider supports instant payout.
+        subType:
+          $ref: '#/components/schemas/PaymentProviderSubType'
+          description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+        swift:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        country:
+          $ref: '#/components/schemas/PaymentProviderCountry'
+          description: 2-letter ISO country code of the financial institution
+        instantPayment:
+          type: boolean
+      required:
+      - name
+      description: Details of the Financial institution
+      title: PaymentProvider
+    VerificationMode:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      description: "Verification Mode:\n  * `1`: VerifiedByMerchant\n  * `2`: ApprovedByMerchant\n  * `3`: VerifiedByTrustly\n  * `4`: AmountAuthorizedByMerchant\n"
+      title: VerificationMode
+    PaymentCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: PaymentCountry
+    PaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-letter ISO country code of the financial institution
+      title: PaymentProviderCountry
+    FinancialInstitutionAccountVerification:
+      type: object
+      properties:
+        verified:
+          type: boolean
+          description: true if the account is verified; false otherwise.
+        type:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationType'
+          description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+        hasEnoughFunds:
+          type: boolean
+          description: If true, there is enough balance in account.
+        verificationDate:
+          type: integer
+          description: "The date and time the verification was completed \n as a UNIX timestamp."
+        score:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationScore'
+          description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+        thirdPartyScore:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationThirdPartyScore'
+          description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
+        numberOfTries:
+          type: number
+          format: double
+          description: Number of tries allowed.
+        numberOfAttemptsLeft:
+          type: number
+          format: double
+          description: Number of remaining attempts.
+      required:
+      - verified
+      - type
+      - hasEnoughFunds
+      - verificationDate
+      title: FinancialInstitutionAccountVerification
+    FinancialInstitutionAccountVerificationType:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+      title: FinancialInstitutionAccountVerificationType
+    RecurrenceFrequencyUnitType:
+      type: string
+      enum:
+      - Day
+      - Week
+      - Month
+      - Year
+      description: Frequency Unit Type
+      title: RecurrenceFrequencyUnitType
+    PaymentAuth:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Authorization token.
+        status:
+          type: integer
+          description: See Authorization Status Values.
+        message:
+          type: string
+          description: Authorization message.
+      title: PaymentAuth
+    Recurrence:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+          description: Recurring payment start date as a UNIX timestamp.
+        endDate:
+          type: string
+          format: date-time
+          description: Recurring payment end date as a UNIX timestamp.
+        nextOccurrence:
+          type: string
+          format: date-time
+          description: When the next capture will be issued if using automatic captures as a UNIX timestamp.
+        recurringAmount:
+          type: string
+          description: Recurring payment amount. (maximum of 10 characters with support for 2 decimal places)
+        debtSettlement:
+          type: string
+          description: Any debt amount settlement done outside of the Trustly like discounts or when consumers pays one recurring debt using another payment method like traditional checks or credit cards. (maximum of 10 characters with support for 2 decimal places)
+        frequency:
+          type: integer
+          default: 1
+          description: 'How many payments per frequencyUnit. Defaults to 1. Example: To define 2 recurring payments every 3 months set: frequency=2, frequencyUnit=3 and frequencyUnitType=3.'
+        frequencyUnit:
+          type: number
+          format: double
+          description: Defines with frequencyUnitType the interval of the frequency of payments.
+        frequencyUnitType:
+          $ref: '#/components/schemas/RecurrenceFrequencyUnitType'
+          description: Frequency Unit Type
+        automaticCapture:
+          type: boolean
+          description: If true, payment captures are issued automatically.
+        recurrenceId:
+          type: string
+      description: Recurring payment options
+      title: Recurrence
+    PaymentPaymentType:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      description: "Financial Institution Account Type:\n * `1`: Instant -\tInstant payment. The debit instruction is automatically initiated with that day's batch after consumer authorization.\n * `2`: Deferred - Deferred payment. Payment is authorized but the capture operation must be called to initiate the debit. You can start to initiate multiple captures that are less than or equal to the original transaction authorization amount.\n * `3`: Recurring - Recurring payment. Same as deferred but associated to a payment agreement between consumer and merchant that defines how much and when the capture can be started.\n * `4`: Disbursement - Disbursement payment. This payment type can only be used for disbursements.\n * `5`: Verification - This payment type is used to verify the customer financial institution account as the payments will be done outside of the Trustly system.\n * `6`: Retrieval\tData retrieval. This payment type is used to retrieve account and user information from Trustly without an associated payment request. This payment type is not enabled by default. Contact Trustly if you need this feature."
+      title: PaymentPaymentType
+    FinancialInstitutionAccountVerificationThirdPartyScore:
+      type: string
+      enum:
+      - '0'
+      - '100'
+      - '200'
+      - '300'
+      - '400'
+      - '500'
+      - '600'
+      - '700'
+      - '800'
+      - '900'
+      - '999'
+      description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
+      title: FinancialInstitutionAccountVerificationThirdPartyScore
+    Account:
+      type: object
+      properties:
+        providerId:
+          type: string
+          description: Payment provider ID.
+        paymentProvider:
+          $ref: '#/components/schemas/PaymentProvider'
+        country:
+          $ref: '#/components/schemas/AccountCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        name:
+          type: string
+          description: A description to identify a specific account (e.g. Test checking account)
+        type:
+          type: number
+          format: double
+          description: See Financial Institution Account Type Values.
+        profile:
+          type: number
+          format: double
+          description: See Financial Institution Account Profile Values
+        accountNumber:
+          type: string
+          description: Bank Account Number or VAN if `virtualAccountRoutingPair` is equal to `true`.
+        iban:
+          type: string
+          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
+        verified:
+          type: boolean
+          description: Indicates if the account is verified or not.
+        verification:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerification'
+        source:
+          type: number
+          format: double
+        routingNumber:
+          type: string
+          description: Bank Routing Number
+        token:
+          type: string
+          description: The Account Token
+        accountNumberLastFour:
+          type: string
+          description: The last 4 digits of the real account number.
+        virtualAccountRoutingPair:
+          type: boolean
+          description: Indicates if account is using virtual/tokenized account and routing numbers (VANs/TANs) or not.
+      title: Account
+    Payment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          description: A unique payment identifier generated by Trustly (15 character max).
+        paymentType:
+          $ref: '#/components/schemas/PaymentPaymentType'
+          description: "Financial Institution Account Type:\n * `1`: Instant -\tInstant payment. The debit instruction is automatically initiated with that day's batch after consumer authorization.\n * `2`: Deferred - Deferred payment. Payment is authorized but the capture operation must be called to initiate the debit. You can start to initiate multiple captures that are less than or equal to the original transaction authorization amount.\n * `3`: Recurring - Recurring payment. Same as deferred but associated to a payment agreement between consumer and merchant that defines how much and when the capture can be started.\n * `4`: Disbursement - Disbursement payment. This payment type can only be used for disbursements.\n * `5`: Verification - This payment type is used to verify the customer financial institution account as the payments will be done outside of the Trustly system.\n * `6`: Retrieval\tData retrieval. This payment type is used to retrieve account and user information from Trustly without an associated payment request. This payment type is not enabled by default. Contact Trustly if you need this feature."
+        merchant:
+          $ref: '#/components/schemas/PaymentMerchant'
+        merchantReference:
+          type: string
+          description: 'An external reference from the merchant. Ex: Order identifier from merchant e-commerce application.'
+        merchantId:
+          type: string
+          description: Your Trustly Merchant Id. It will be provided to you.
+        fingerprint:
+          type: string
+          description: Internal use only
+        verification:
+          $ref: '#/components/schemas/Verification'
+        account:
+          $ref: '#/components/schemas/Account'
+        description:
+          type: string
+          description: A summary description of the order.
+        returnUrl:
+          type: string
+          description: Return URL provided with the bank authorization.
+        cancelUrl:
+          type: string
+          description: Cancel URL provided with the bank authorization.
+        currency:
+          $ref: '#/components/schemas/PaymentCurrency'
+          description: 3-letter ISO Currency Code. Currently only USD is supported.
+        amount:
+          type: string
+          description: "\tThe total amount of the order, including tax and shipping. If transactionType is Recurring, this is the Setup Fee Amount."
+        paymentProvider:
+          $ref: '#/components/schemas/PaymentProvider'
+        allowedPaymentProviderType:
+          type: array
+          items:
+            type: integer
+        auth:
+          $ref: '#/components/schemas/PaymentAuth'
+        authorization:
+          type: string
+          description: Authorization token.
+        authorizationStatus:
+          type: number
+          format: double
+          description: Status of the related bank authorization. See Transaction Status Values.
+        authorizationStatusMessage:
+          type: string
+          description: Status message of the related bank authorization.
+        pending:
+          type: string
+          description: The total amount that is still pending completion. (10 characters with support for 2 decimal places)
+        paid:
+          type: string
+          description: The total amount that was already paid. (10 characters with support for 2 decimal places)
+        refunded:
+          type: string
+          description: The total amount that was refunded. (10 characters with support for 2 decimal places)
+        reversed:
+          type: string
+          description: The total amount that was reversed. (10 characters with support for 2 decimal places)
+        balance:
+          type: string
+          description: The balance of the amount paid, minus the amount reversed and/or refunded. (10 characters with support for 2 decimal places)
+        createdAt:
+          type: integer
+          description: The date and time the transaction was created as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The date and time the transaction was last updated as a UNIX timestamp.
+        recordVersion:
+          type: number
+          format: double
+          description: The current record version.
+        paymentFlow:
+          type: number
+          format: double
+          description: internal use only
+        customer:
+          $ref: '#/components/schemas/Customer'
+        address:
+          $ref: '#/components/schemas/Address'
+        recurrence:
+          $ref: '#/components/schemas/Recurrence'
+        system:
+          $ref: '#/components/schemas/PaymentSystem'
+          description: "Financial Institution Account Type:\n  * `-1`: None\n  * `1`: PayWithMyBank\n  * `2`: TrustlyAB"
+        country:
+          $ref: '#/components/schemas/PaymentCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        paymentProviderSubtype:
+          $ref: '#/components/schemas/PaymentProviderSubtype'
+      required:
+      - paymentId
+      - paymentType
+      - merchant
+      - merchantReference
+      - merchantId
+      - fingerprint
+      - verification
+      - account
+      - currency
+      - amount
+      - paymentProvider
+      - allowedPaymentProviderType
+      - auth
+      - authorization
+      - authorizationStatus
+      - authorizationStatusMessage
+      - pending
+      - paid
+      - refunded
+      - reversed
+      - balance
+      - createdAt
+      - updatedAt
+      - recordVersion
+      - paymentFlow
+      description: A Trustly Payment
+      title: Payment
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

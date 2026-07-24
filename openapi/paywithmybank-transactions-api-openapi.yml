@@ -1,0 +1,1877 @@
+openapi: 3.1.0
+info:
+  title: accountData transactions API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: transactions
+paths:
+  /transactions/{transactionId}/cancel:
+    post:
+      operationId: post-transactions-cancel
+      summary: Cancel transaction
+      description: 'Cancels an existing transaction that has not yet been processed. A cancellation should be issued as soon as you know the transaction will not be completed.
+
+
+        A Deferred or Instant payment transaction can only be canceled before the payment processing cut-off time. If the Cancel request returns an error, a Refund call should be executed instead.
+
+
+        Additionally, this endpoint can be used to cancel a Bank Authorization when a user revokes access to their bank from your application. If the bank authorization transaction is voided, further `/capture` or `/deposit` requests using the canceled transaction will not be permitted. Any outstanding transactions with a `pending` status related to the bank authorization will remain unchanged and must be canceled individually if necessary.'
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  description: A specific merchant reference for this cancellation. For example, this could be a merchant order number or the same merchant reference value used in the original establish call.
+                message:
+                  type: string
+                  description: An optional message describing the reason for the cancellation. (maximum of 40 characters)
+                reason:
+                  type: number
+                  format: double
+                  description: 'A specific reason code for this cancellation. '
+                signature:
+                  type: string
+                  description: 'A specific signature for this cancellation. '
+  /transactions/{transactionId}/capture:
+    post:
+      operationId: post-transactions-transactionId-capture
+      summary: Capture transaction
+      description: "Capture collects money amounts (minimum of 0.99) from a customer bank account of a previously authorized transaction.\n\nThis operation creates a new transaction called a Capture transaction. It is linked to the payment you are partially or fully capturing.\n\nYou can issue multiple capture requests against a single Authorization. However, the sum of these captures must be less than or equal to what is allowed by the authorized payment.\n\nEnsure you also implement an Event Notification Handler to get transaction status updates. Although the splitToken field is optional at the API level, if you are using 'guaranteed' payments, omitting this field will result in a Fail event. When providing a splitToken, be sure the string is URL encoded.\n\n> **Note for Money Transfer** \n> If your application is configured for \"Money Transfer\" many properties in the `beneficiary` and `beneficiaryAccount` objects will be required. \n> See [Send money](/integrate/send-money) for more details."
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  description: A specific merchant reference for this capture such as an order number. If your account is configured for idempotency, this value must be unique to prevent duplicate transactions.
+                amount:
+                  type: string
+                  description: The amount to be captured. If the value is omitted, the maximum allowed amount is captured. (maximum of 10 characters with support for 2 decimal places)
+                splitToken:
+                  type: string
+                  description: Encrypted token received from the Authorize event. Note, token may include url escape characters which must be encoded or the request will result in an error.
+                beneficiaryAccount.iban:
+                  type: string
+                  description: International Bank Account Number (IBAN)
+                beneficiaryAccount.accountNumber:
+                  type: string
+                  description: Account Number
+                beneficiaryAccount.paymentProvider.name:
+                  type: string
+                  description: Name of financial institution. 35 characters maximum.
+                beneficiaryAccount.paymentProvider.swift:
+                  type: string
+                  description: International SWIFT code of the payment provider
+                beneficiaryAccount.paymentProvider.routingNumber:
+                  type: string
+                  description: Routing Number (9 digits)"
+                beneficiaryAccount.paymentProvider.country:
+                  type: string
+                  description: 2-letter ISO country code of the beneficiary financial institution
+                beneficiary.name:
+                  type: string
+                  description: Customer full legal name
+                beneficiary.email:
+                  type: string
+                  description: Customer email address
+                beneficiary.dateOfBirth:
+                  type: string
+                  description: Customer date of birth
+                beneficiary.taxId:
+                  type: string
+                  description: Customer tax ID (e.g. SSN [US], SIN [CA])
+                beneficiary.address.address1:
+                  type: string
+                  description: Street address of the beneficiary financial institution
+                beneficiary.address.address2:
+                  type: string
+                  description: Street address line 2 of the beneficiary financial institution (if applicable)
+                beneficiary.address.city:
+                  type: string
+                  description: City or Locality of the beneficiary financial institution
+                beneficiary.address.state:
+                  type: string
+                  description: State or Province of the beneficiary financial institution
+                beneficiary.address.zip:
+                  type: string
+                  description: ZIP or postal code of the beneficiary financial institution
+                beneficiary.address.country:
+                  type: string
+                  description: 2 character ISO Country code of the beneficiary financial institution
+                metadata.remittance.withdrawalMethod:
+                  $ref: '#/components/schemas/TransactionsTransactionIdCapturePostRequestBodyContentApplicationXWwwFormUrlencodedSchemaMetadataRemittanceWithdrawalMethod'
+                  description: The method by which the recipient will receive the funds.
+                interactionId:
+                  type: string
+                  description: Optional interaction ID parameter for Preauthorization and Capture APIs, inclusion of which signifies consumer interaction tied to data obtained from getTrustlyInteraction function. If not specified, Trustly assumes the consumer is present in session. Set to "consumerNotPresent" to signify that the transaction is merchant-initiated and the consumer is not present.
+              required:
+              - merchantReference
+              - amount
+              - splitToken
+  /transactions/{transactionId}/deposit:
+    post:
+      operationId: post-transactions-deposit
+      summary: Deposit transaction
+      description: 'Deposit sends money amounts (minimum of 0.99) to a customer bank account of a previously authorized Disbursement or Deferred transaction.
+
+
+        This operation creates a new transaction called a Deposit transaction. It is linked to the disbursement payment.
+
+
+        You can create multiple Deposit transactions against a single Disbursement or Deferred Authorization so long as the amount doesn''t exceed the total of the Authorization.
+
+
+        Ensure you also implement an Event Notification Handler to get transaction status updates.'
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Authorization Transaction ID retrieved from a Trustly Deferred or Disbursement Authorization.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  description: A specific merchant reference for this deposit. For example, this could be a merchant order number or the same merchant reference value used in the original establish call.
+                amount:
+                  type: number
+                  format: double
+                  description: The amount to be sent. (maximum of 10 characters with support for 2 decimal places)
+                instantPayoutRequest:
+                  type: boolean
+                  description: Whether instant payout for the deposit will be attempted.
+                externalTier:
+                  type: string
+                  description: The merchant's tier associated with the customer (e.g. vip).
+              required:
+              - merchantReference
+  /establish:
+    post:
+      operationId: post-establish
+      summary: Establish a new transaction for authorization
+      description: "This endpoint creates a new unauthorized transaction and returns a URL to be provided for a user to authorize the transaction. After the user has authorized the transaction with a bank, the transaction can be used with other Trustly APIs to retrieve account data or process payments.\n\nFor more details and descriptions of the fields supported by this endpoint see [Establish Data object](doc:features/establish-data-object).\n\n> **Note for Money Transfer** \n> If your application is configured for \"Money Transfer\" many properties in the `customer`, `beneficiary` and `beneficiaryAccount` objects will be required. \n> See [Send money](/integrate/send-money) for more details."
+      tags:
+      - transactions
+      parameters:
+      - name: createTransaction
+        in: query
+        description: If true, Trustly will return a transactionId that can be used with other API's. Either createTransaction or notify is required.
+        required: false
+        schema:
+          type: boolean
+      - name: notify
+        in: query
+        description: If true, Trustly will notify the User via SMS or Email with a URL that can be used to complete the transaction. Either createTransaction or notify is required.
+        required: false
+        schema:
+          type: boolean
+      - name: channel
+        in: query
+        description: 'Comma separated list of notification channels. Currently only sms and email are supported. Example: sms,email will send a notification via SMS and email to the User. Required if notify is true.'
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstablishData'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantId:
+                  type: string
+                  description: Your Trustly-provided Merchant ID.
+                accessId:
+                  type: string
+                  description: Your Trustly-provided client application access ID.
+                amount:
+                  type: string
+                  description: The amount of the transaction. This represents the maximum amount of the transactions that can be processed with the Authorization. If the amount is 0.00, there will be no upper bound on the transaction. (10 characters with support for 2 decimal places)
+                currency:
+                  $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaCurrency'
+                  description: 3-letter ISO Currency Code.
+                description:
+                  type: string
+                  description: A summary description of the order. Do not pass Consumer PII (name, email address, etc) in this field.
+                returnUrl:
+                  type: string
+                  description: The URL where the user should be redirected to when the user successfully authorizes the transaction (must be a valid URL or function).
+                cancelUrl:
+                  type: string
+                  description: The URL where the user should be redirected to if the user exits or the transaction is canceled (must be a valid URL or function).
+                notificationUrl:
+                  type: string
+                  description: Notification URL to use for notifications associated with this transaction. This overrides the notification URL configured by Trustly during onboarding.
+                paymentType:
+                  $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaPaymentType'
+                  description: "Specifies the type of transaction to create. Possible values are Instant, Deferred, Disbursement, Recurring, Verification, and Retrieval. Default is Retrieval.\n\n **Note:** If your application is configured for \"Money Transfer\" and utilizes the \"Instant\" `paymentType` several properties under `customer`, `beneficiary` and `beneficiaryAccount` will be required. \n> See [Send money](/integrate/send-money) for more details."
+                requestSignature:
+                  type: string
+                  description: Request Signature used to secure the request.
+                displayAmount:
+                  type: number
+                  format: double
+                  description: Optionally displays the provided transaction amount to the user throughout the Lightbox experience.
+                merchantReference:
+                  type: string
+                  description: A unique identifier that you create to represent the Transaction in the Trustly system.
+                customer:
+                  $ref: '#/components/schemas/Customer'
+                account:
+                  $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaAccount'
+                  description: Account information. Required if paymentType is Verification and a transactionId is not included.
+                beneficiary:
+                  $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaBeneficiary'
+                beneficiaryAccount:
+                  $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaBeneficiaryAccount'
+                  description: 'Financial institution account associated with the ultimate beneficiary of a transaction. Required when using `paymentType: Instant` for [Money Transfer](/integrate/send-money)'
+                kycType:
+                  type: string
+                  description: Specifies the KYC (Know Your Customer) type. This field is optional and can only be used by merchants configured for [Trustly ID](/integrate/retrieve-data/trustly-id).
+                metadata:
+                  $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaMetadata'
+                  description: Provide additional use case-specific properties in this object.
+              required:
+              - merchantId
+              - accessId
+              - currency
+              - returnUrl
+              - cancelUrl
+              - requestSignature
+              - merchantReference
+  /transactions:
+    get:
+      operationId: list-transactions
+      summary: Get transactions
+      description: Returns a list of transactions. It can be paged and filtered by appending arguments to the query string of the request.
+      tags:
+      - transactions
+      parameters:
+      - name: transactionType
+        in: query
+        description: Returns transactions of this Transaction Type. It is possible to filter by multiple values by repeating this argument.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: transactionStatus
+        in: query
+        description: Returns transactions that currently have this Transaction Status. It is possible to filter by multiple values by repeating this argument.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: originalTransactionId
+        in: query
+        description: Returns transactions that belongs to this original transaction identifier.
+        required: false
+        schema:
+          type: string
+      - name: payment.paymentId
+        in: query
+        description: Returns transactions of the payment specified by this payment ID.
+        required: false
+        schema:
+          type: string
+      - name: payment.paymentType
+        in: query
+        description: Returns transactions of the payments of this Payment Type. It is possible to filter by multiple values by repeating this argument.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: payment.merchantReference
+        in: query
+        description: Returns transactions of the payments associated with this merchant reference.
+        required: false
+        schema:
+          type: string
+      - name: payment.verification.status
+        in: query
+        description: Returns transactions of the payments at this payment Verification Status.
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: paymentProviderTransaction.ppTrxStatusCode
+        in: query
+        description: Returns transactions of the payment specified by this payment provider status code.
+        required: false
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        description: Returns transactions by this order field
+        required: false
+        schema:
+          type: string
+      - name: sortOrder
+        in: query
+        description: Returns transactions by this sort order
+        required: false
+        schema:
+          type: string
+      - name: startIndex
+        in: query
+        description: Returns transactions from that offset
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Returns the maximum number of transactions specified by this field
+        required: false
+        schema:
+          type: string
+      - name: amount.min
+        in: query
+        description: Returns transactions for that minimum amount.
+        required: false
+        schema:
+          type: string
+      - name: amount.max
+        in: query
+        description: Returns transactions for that maximum amount.
+        required: false
+        schema:
+          type: string
+      - name: paid.min
+        in: query
+        description: Returns transactions for that minimum paid.
+        required: false
+        schema:
+          type: string
+      - name: paid.max
+        in: query
+        description: Returns transactions for that maximum paid.
+        required: false
+        schema:
+          type: string
+      - name: refunded.min
+        in: query
+        description: Returns transactions with this minimum refund amount.
+        required: false
+        schema:
+          type: string
+      - name: refunded.max
+        in: query
+        description: Returns transactions with this maximum refund amount.
+        required: false
+        schema:
+          type: string
+      - name: createdAt.start
+        in: query
+        description: Returns transactions after this creation date
+        required: false
+        schema:
+          type: string
+      - name: createdAt.end
+        in: query
+        description: Returns transactions before this creation date
+        required: false
+        schema:
+          type: string
+      - name: updatedAt.start
+        in: query
+        description: Returns transactions after this update date
+        required: false
+        schema:
+          type: string
+      - name: updatedAt.end
+        in: query
+        description: Returns transactions before this update date
+        required: false
+        schema:
+          type: string
+      - name: processedAt.start
+        in: query
+        description: Returns transactions after this processing date
+        required: false
+        schema:
+          type: string
+      - name: processedAt.end
+        in: query
+        description: Returns transactions before this processing date
+        required: false
+        schema:
+          type: string
+      - name: completedAt.start
+        in: query
+        description: Returns transactions after this completion date
+        required: false
+        schema:
+          type: string
+      - name: completedAt.end
+        in: query
+        description: Returns transactions before this completion date
+        required: false
+        schema:
+          type: string
+      - name: paymentProviderTransaction.paymentProviderTransactionId
+        in: query
+        description: Returns transactions of the payment specified by this payment provider id.
+        required: false
+        schema:
+          type: string
+      - name: payment.description
+        in: query
+        description: Returns transactions with this payment description
+        required: false
+        schema:
+          type: string
+      - name: payment.fingerprint
+        in: query
+        description: Returns transactions with this payment fingerprint
+        required: false
+        schema:
+          type: string
+      - name: payment.merchant.merchantId
+        in: query
+        description: Returns transactions of the payment specified by this merchant identification.
+        required: false
+        schema:
+          type: string
+      - name: payment.paymentProvider.paymentProviderId
+        in: query
+        description: Returns transactions by this payment provider identification.
+        required: false
+        schema:
+          type: string
+      - name: payment.authorization.status
+        in: query
+        description: Returns transactions of the payments at this payment Authorization Status.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: payment.fiAccount.providerId
+        in: query
+        description: Returns transactions of the payment specified by this payment provider identification.
+        required: false
+        schema:
+          type: string
+      - name: payment.fiAccount.accountNumber
+        in: query
+        description: Returns transactions of the payment specified by account number.
+        required: false
+        schema:
+          type: string
+      - name: payment.fiAccount.routingNumber
+        in: query
+        description: Returns transactions of the payment specified by routing number.
+        required: false
+        schema:
+          type: string
+      - name: payment.fiAccount.verified
+        in: query
+        description: Returns transactions of the payment if account is verified.
+        required: false
+        schema:
+          type: boolean
+      - name: ipAddr
+        in: query
+        description: Returns transactions with this IP address
+        required: false
+        schema:
+          type: string
+      - name: routingNumber
+        in: query
+        description: Returns transactions with this routing number
+        required: false
+        schema:
+          type: string
+      - name: accountNumber
+        in: query
+        description: Returns transactions with this account number
+        required: false
+        schema:
+          type: string
+      - name: customerName
+        in: query
+        description: Returns transactions with this customer name
+        required: false
+        schema:
+          type: string
+      - name: payment.customer.name
+        in: query
+        description: Returns transactions of the payment specified by customer name.
+        required: false
+        schema:
+          type: string
+      - name: payment.customer.externalId
+        in: query
+        description: Returns transactions of the payment specified by customer external identification.
+        required: false
+        schema:
+          type: string
+      - name: ignoreUserPortalTransactions
+        in: query
+        description: Returns transactions bypassing the portal user.
+        required: false
+        schema:
+          type: boolean
+      - name: payment.paymentProvider.framework
+        in: query
+        description: Returns transactions of the payment provider specified by framework.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions_list-transactions_Response_200'
+  /transactions/{transactionId}/capture/preAuth:
+    post:
+      operationId: post-transactions-transactionId-capture-preauth
+      summary: Preauthorize transaction
+      description: The Preauthorize API allows the merchant to pre-authorize one or more captures up to the total pre-authorized amount on a pre-authorized period interval in hours. Captures after the pre-authorized period interval are treated as normal Captures (will need to pass the full balance and risk analysis to be guaranteed).
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  description: A specific merchant reference for this preauthorization. For example, this could be a merchant order number or the same merchant reference value used in the original establish call.
+                period:
+                  type: integer
+                  default: 0
+                  description: Number of hours the preauthorization will be valid for.
+                amount:
+                  type: string
+                  description: The amount to be authorized. (maximum of 10 characters with support for 2 decimal places). Required if the bank authorization was created with an amount of 0.00. If not specified, then the full amount of the bank authorization will be used.
+                splitToken:
+                  type: string
+                  description: Token received on the Authorize event.
+                externalTier:
+                  type: string
+                  description: The merchant's tier associated with the customer (e.g. vip).
+                metadata.remittance.withdrawalMethod:
+                  $ref: '#/components/schemas/TransactionsTransactionIdCapturePreAuthPostRequestBodyContentApplicationXWwwFormUrlencodedSchemaMetadataRemittanceWithdrawalMethod'
+                  description: The method by which the recipient will receive the funds.
+                interactionId:
+                  type: string
+                  description: Optional interaction ID parameter for Preauthorization and Capture APIs, inclusion of which signifies consumer interaction tied to data obtained from getTrustlyInteraction function. If not specified, Trustly assumes the consumer is present in session. Set to "consumerNotPresent" to signify that the transaction is merchant-initiated and the consumer is not present.
+              required:
+              - merchantReference
+              - period
+              - amount
+  /transactions/{transactionId}/reclaim:
+    post:
+      operationId: post-transactions-transactionId-reclaim
+      summary: Reclaim transaction
+      description: 'Reclaims a previously completed Deposit transaction (minimum of 0.99). You can optionally reclaim partially. You can do so as many times as you wish until the entire deposited amount has been reclaimed.
+
+
+        A Deposit transaction can only be reclaimed after the transaction has been processed and completed.
+
+
+        Ensure you also implement an [event notification](/integrate/core-concepts/webhooks-and-events) handler to get transaction status updates.'
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Deposit Transaction ID retrieved from a Trustly Deposit transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  description: A specific merchant reference for this reclaim. For example, this could be a merchant order number or the same merchant reference value used in the original establish call.
+                amount:
+                  type: string
+                  description: The amount to be reclaimed which can be less or equal than the current balance of the deposit transaction being reclaimed. If the value is omitted the remaining balance is reclaimed. (maximum of 10 characters with support for 2 decimal places)
+              required:
+              - amount
+  /transactions/{transactionId}/refresh:
+    post:
+      operationId: post-transactions-refresh
+      summary: Refresh a transaction
+      description: Refresh allows for data associated with a transaction to be updated to the most recent available.
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions_post-transactions-refresh_Response_200'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                splitToken:
+                  type: string
+                  description: 'Token received from the Authorize event. Note: string value must be URL encoded.'
+              required:
+              - splitToken
+  /transactions/{transactionId}/refund:
+    post:
+      operationId: post-transactions-refund
+      summary: Refund transaction
+      description: 'Refunds a previously completed Capture or Instant transaction (minimum of 0.99). You can optionally refund partially. You can do so as many times as you wish until the entire collected amount has been refunded.
+
+
+        A *Capture* or *Pay* transaction can only be refunded after the bank money collection has been processed and completed.
+
+
+        Ensure you also implement an Event Notification Handler to get transaction status updates.'
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Capture Transaction ID retrieved from a Trustly Capture transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  description: A specific merchant reference for this refund. For example, this could be a merchant order number or the same merchant reference value used in the original establish call.
+                amount:
+                  type: string
+                  description: The amount to be refunded which can be less or equal than the current balance of the transaction being refunded. If the value is omitted the remaining balance is refunded. (maximum of 10 characters with support for 2 decimal places)
+  /transactions/{transactionId}:
+    get:
+      operationId: get-transaction
+      summary: Retrieve a transaction
+      description: This endpoint allows you to retrieve comprehensive details about a transaction using its unique identifier `transactionId`. The response includes key transaction information, such as the transaction status, as well as amounts, and account details for payment or authorization transactions. This endpoint is useful for checking the current state of a transaction or verifying transaction information after processing.
+      tags:
+      - transactions
+      parameters:
+      - name: transactionId
+        in: path
+        description: Transaction ID retrieved from Trustly.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+components:
+  schemas:
+    Verification:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/VerificationStatus'
+          description: "Verification Status:\n  * `1`: Automatic - Payment verification followed Trustly internal rules.\n  * `2`: ToVerify\t- Payment transaction is held (status = OnHold) for further investigation and approval by the merchant.\n  * `3`: Verified - Payment was verified and approved by the merchant or Trustly (see Verification Mode).\n  * `4`: Refused - Payment was denied by the merchant or Trustly after verification.\n"
+        mode:
+          $ref: '#/components/schemas/VerificationMode'
+          description: "Verification Mode:\n  * `1`: VerifiedByMerchant\n  * `2`: ApprovedByMerchant\n  * `3`: VerifiedByTrustly\n  * `4`: AmountAuthorizedByMerchant\n"
+        verifyCustomer:
+          type: boolean
+          description: If true, the Customer information (name and zip code) was verified against information provided by the User's bank.
+      title: Verification
+    EstablishPostRequestBodyContentApplicationJsonSchemaCurrency:
+      type: string
+      enum:
+      - USD
+      - CAD
+      description: 3-letter ISO Currency Code.
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaCurrency
+    TransactionsTransactionIdRefreshPostResponsesContentApplicationJsonSchemaRefresh:
+      type: object
+      properties:
+        processId:
+          type: string
+      required:
+      - processId
+      title: TransactionsTransactionIdRefreshPostResponsesContentApplicationJsonSchemaRefresh
+    CustomerCustomData:
+      type: object
+      properties: {}
+      description: Object for sending merchant-specific custom data.
+      title: CustomerCustomData
+    PaymentSystem:
+      type: string
+      enum:
+      - '-1'
+      - '1'
+      - '2'
+      description: "Financial Institution Account Type:\n  * `-1`: None\n  * `1`: PayWithMyBank\n  * `2`: TrustlyAB"
+      title: PaymentSystem
+    Transactions_post-transactions-refresh_Response_200:
+      type: object
+      properties:
+        refresh:
+          $ref: '#/components/schemas/TransactionsTransactionIdRefreshPostResponsesContentApplicationJsonSchemaRefresh'
+      required:
+      - refresh
+      title: Transactions_post-transactions-refresh_Response_200
+    PaymentMerchant:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Unique Trustly Merchant ID.
+        name:
+          type: string
+          description: Merchants name.
+      title: PaymentMerchant
+    TransactionTransactionType:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '10'
+      description: Type of transaction record. See [Transaction Types](/integrate/api-fundamentals/status-codes-and-type-definitions#transaction-types)
+      title: TransactionTransactionType
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
+    EstablishPostRequestBodyContentApplicationJsonSchemaMetadataFinishButtonLabelType:
+      type: string
+      enum:
+      - pay
+      - deposit
+      - withdraw
+      description: Modify the final button label of the Trustly UI. The default label is "Continue", by passing a supported alternative in this property the button label can be changed to "Pay Now", "Deposit" or "Withdraw".
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaMetadataFinishButtonLabelType
+    DriverLicense:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Driver License number.
+        state:
+          type: string
+          description: 2 character ISO State code.
+      required:
+      - number
+      - state
+      title: DriverLicense
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
+    EstablishDataCurrency:
+      type: string
+      enum:
+      - USD
+      description: 3-letter ISO Currency Code. Currently only USD is supported.
+      title: EstablishDataCurrency
+    FinancialInstitutionAccountVerificationScore:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+      title: FinancialInstitutionAccountVerificationScore
+    TransactionStatus:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '10'
+      - '11'
+      - '12'
+      - '13'
+      - '14'
+      description: Status code of the Payment Provider Transaction record. See [Transaction Types](/integrate/api-fundamentals/status-codes-and-type-definitions#transaction-types)
+      title: TransactionStatus
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the Customer
+        taxId:
+          type: string
+          description: Customer tax ID (e.g. SSN [US], SIN [CA]). *May be required depending on industry and location.*
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: Customer phone number.
+        email:
+          type: string
+          description: Customer email address.
+        dateOfBirth:
+          type: string
+          description: Customer date of birth.
+        createdAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        customerId:
+          type: string
+          description: A unique Trustly customer identifier.
+        externalId:
+          type: string
+          description: A unique merchant customer identifier.
+        merchantId:
+          type: string
+          description: A unique Trustly merchant identifier.
+        enrollDate:
+          type: integer
+          description: Date of the user's first transaction in your system, regardless of payment method used as a UNIX timestamp.
+        vip:
+          type: string
+          description: Range that determines how low-risk the customer represents to the merchant
+        currency:
+          type: string
+          description: Customer currency.
+        balance:
+          type: string
+          description: Customer account balance (not associated with a financial institution account).
+        organizationNumber:
+          type: string
+          description: Organization number for business accounts
+        externalTier:
+          type: string
+          description: It should describe the customer''s rank to the merchant (e.g. Gold, Diamond, 4 stars, etc.)
+        personId:
+          type: string
+          description: Unique customer identity throughout different banks.
+        customData:
+          $ref: '#/components/schemas/CustomerCustomData'
+          description: Object for sending merchant-specific custom data.
+        driverLicense:
+          $ref: '#/components/schemas/DriverLicense'
+        nationalId:
+          type: string
+          description: Customer National ID
+      required:
+      - name
+      - address
+      - phone
+      - email
+      description: The Trustly customer object, containing identification details and contact information.
+      title: Customer
+    VerificationStatus:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      description: "Verification Status:\n  * `1`: Automatic - Payment verification followed Trustly internal rules.\n  * `2`: ToVerify\t- Payment transaction is held (status = OnHold) for further investigation and approval by the merchant.\n  * `3`: Verified - Payment was verified and approved by the merchant or Trustly (see Verification Mode).\n  * `4`: Refused - Payment was denied by the merchant or Trustly after verification.\n"
+      title: VerificationStatus
+    PaymentCurrency:
+      type: string
+      enum:
+      - USD
+      description: 3-letter ISO Currency Code. Currently only USD is supported.
+      title: PaymentCurrency
+    TrustlyABRequest:
+      type: object
+      properties:
+        successURL:
+          type: string
+        failURL:
+          type: string
+        uRLTarget:
+          type: string
+        callbackURL:
+          type: string
+        notificationURL:
+          type: string
+      title: TrustlyABRequest
+    Transaction:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: A unique transaction identifier generated by Trustly (15 character max).
+        transactionType:
+          $ref: '#/components/schemas/TransactionTransactionType'
+          description: Type of transaction record. See [Transaction Types](/integrate/api-fundamentals/status-codes-and-type-definitions#transaction-types)
+        payment:
+          $ref: '#/components/schemas/Payment'
+        currency:
+          $ref: '#/components/schemas/TransactionCurrency'
+          description: 3-letter ISO Currency Code. Currently only USD is supported.
+        amount:
+          type: string
+          description: The amount of the transaction. (10 characters with support for 2 decimal places)
+        pending:
+          type: string
+          description: The total amount that is still pending completion. (10 characters with support for 2 decimal places)
+        paid:
+          type: string
+          description: The total amount that was already paid. (10 characters with support for 2 decimal places)
+        refunded:
+          type: string
+          description: The total amount that was refunded. (10 characters with support for 2 decimal places)
+        reversed:
+          type: string
+          description: The total amount that was reversed. (10 characters with support for 2 decimal places)
+        balance:
+          type: string
+          description: The balance of the amount paid, minus the amount reversed and/or refunded. (10 characters with support for 2 decimal places)
+        paymentProviderTransaction:
+          $ref: '#/components/schemas/PaymentProviderTransaction'
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+          description: Status code of the Payment Provider Transaction record. See [Transaction Types](/integrate/api-fundamentals/status-codes-and-type-definitions#transaction-types)
+        statusMessage:
+          type: string
+          description: A descriptive status message. (120 characters)
+        ip:
+          type: string
+          description: The client IP address in IPv4 or IPv6 format.
+        createdAt:
+          type: integer
+          description: The date and time the transaction was created as a UNIX timestamp.
+        processedAt:
+          type: integer
+          description: The date and time the transaction was processed as a UNIX timestamp.
+        completedAt:
+          type: integer
+          description: The date and time the transaction was completed as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The date and time the transaction was last updated as a UNIX timestamp.
+        ppTrxId:
+          type: string
+          description: internal use only
+        merchantReference:
+          type: string
+          description: Merchants internal reference id for the transaction.
+        expiredAt:
+          type: integer
+          description: The date and time the preauthorization will expire as a UNIX timestamp.
+        recordVersion:
+          type: number
+          format: double
+          description: The current record version.
+        originalTransactionId:
+          type: string
+        fee:
+          type: string
+        timeZone:
+          type: string
+        representmentScheduledAt:
+          type: number
+          format: double
+        paymentProcessorType:
+          type: string
+        statusCode:
+          type: string
+        preAuthorized:
+          type: boolean
+      required:
+      - transactionId
+      - transactionType
+      - payment
+      - currency
+      - amount
+      - pending
+      - paid
+      - refunded
+      - reversed
+      - balance
+      - paymentProviderTransaction
+      - status
+      - statusMessage
+      - ip
+      - createdAt
+      - processedAt
+      - completedAt
+      - updatedAt
+      - merchantReference
+      - recordVersion
+      description: A Trustly transaction object
+      title: Transaction
+    EstablishPostRequestBodyContentApplicationJsonSchemaMetadataClc:
+      type: object
+      properties:
+        propertyId:
+          type: number
+          format: double
+          description: ID number for property or location
+        machineId:
+          type: number
+          format: double
+          description: ID number specific to an associated Electronic Wagering System
+        qrTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp of QR code generation
+        playerNumber:
+          type: number
+          format: double
+          description: Player tracking number
+      description: Properties relating to Trustly In-Person configuration. Required for Trustly In-Person apps.
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaMetadataClc
+    Attribute:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      title: Attribute
+    EstablishPostRequestBodyContentApplicationJsonSchemaBeneficiary:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the Customer
+        taxId:
+          type: string
+          description: Customer tax ID (e.g. SSN [US], SIN [CA]). *May be required depending on industry and location.*
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: Customer phone number.
+        email:
+          type: string
+          description: Customer email address.
+        dateOfBirth:
+          type: string
+          description: Customer date of birth.
+        createdAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+      description: 'The ultimate beneficiary of this payment. Required when using `paymentType: Instant` for [Money Transfer](/integrate/send-money)'
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaBeneficiary
+    AccountCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: AccountCountry
+    ? TransactionsTransactionIdCapturePreAuthPostRequestBodyContentApplicationXWwwFormUrlencodedSchemaMetadataRemittanceWithdrawalMethod
+    : type: string
+      enum:
+      - BankDeposit
+      - Cash
+      - DebitCard
+      - DigitalWallet
+      - HomeDelivery
+      description: The method by which the recipient will receive the funds.
+      title: TransactionsTransactionIdCapturePreAuthPostRequestBodyContentApplicationXWwwFormUrlencodedSchemaMetadataRemittanceWithdrawalMethod
+    Transactions_list-transactions_Response_200:
+      type: object
+      properties:
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+      title: Transactions_list-transactions_Response_200
+    EstablishDataKycType:
+      type: string
+      enum:
+      - OnlineBanking
+      description: Specifies the KYC (Know Your Customer) type as number. The possible value is 1 (OnlineBanking). This field is optional and can only be used by merchants configured for [Trustly ID](/integrate/retrieve-data/trustly-id).
+      title: EstablishDataKycType
+    EstablishPostRequestBodyContentApplicationJsonSchemaMetadataIntegrationContext:
+      type: string
+      enum:
+      - InAppBrowser
+      - InAppBrowserNotify
+      - ExternalBrowser
+      description: Configuration required for mobile app compatibility with OAuth bank login flows. More details can be found in the [OAuth and Mobile apps guide](doc:oauth-guide).
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaMetadataIntegrationContext
+    VerificationMode:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      description: "Verification Mode:\n  * `1`: VerifiedByMerchant\n  * `2`: ApprovedByMerchant\n  * `3`: VerifiedByTrustly\n  * `4`: AmountAuthorizedByMerchant\n"
+      title: VerificationMode
+    PaymentProviderSubtype:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Payment Provider Subtype:\n  * `1000`: EasyOnline\n  * `2000`: MEC\n  * `2001`: MCD"
+      title: PaymentProviderSubtype
+    PaymentProvider:
+      type: object
+      properties:
+        paymentProviderId:
+          type: string
+          description: A unique identifier for the Payment Provider.
+        type:
+          type: number
+          format: double
+        name:
+          type: string
+          description: Name of the payment provider
+        instantPayoutAvailable:
+          type: boolean
+          description: Whether payment provider supports instant payout.
+        subType:
+          $ref: '#/components/schemas/PaymentProviderSubType'
+          description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+        swift:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        country:
+          $ref: '#/components/schemas/PaymentProviderCountry'
+          description: 2-letter ISO country code of the financial institution
+        instantPayment:
+          type: boolean
+      required:
+      - name
+      description: Details of the Financial institution
+      title: PaymentProvider
+    EstablishPostRequestBodyContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        lang:
+          type: string
+          description: Display language for text in the Trustly UI using the [ISO 639 Language Code](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) format (e.g. `de_DE` or `fr_CA`). Defaults to `en_US` if not provided.
+        finishButtonLabelType:
+          $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaMetadataFinishButtonLabelType'
+          description: Modify the final button label of the Trustly UI. The default label is "Continue", by passing a supported alternative in this property the button label can be changed to "Pay Now", "Deposit" or "Withdraw".
+        integrationContext:
+          $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaMetadataIntegrationContext'
+          description: Configuration required for mobile app compatibility with OAuth bank login flows. More details can be found in the [OAuth and Mobile apps guide](doc:oauth-guide).
+        urlScheme:
+          type: string
+          description: The deep link url associated with your mobile application. When users are directed to an external bank login or bank application on success or failure they will be redirected to this url. More details can be found in the [OAuth and Mobile apps guide](doc:oauth-guide).
+        clc:
+          $ref: '#/components/schemas/EstablishPostRequestBodyContentApplicationJsonSchemaMetadataClc'
+          description: Properties relating to Trustly In-Person configuration. Required for Trustly In-Person apps.
+      description: Provide additional use case-specific properties in this object.
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaMetadata
+    PaymentProviderTransactionPaymentProcessor:
+      type: object
+      properties:
+        paymentProcessorId:
+          type: string
+        type:
+          type: integer
+        name:
+          type: string
+        shortName:
+          type: string
+        url:
+          type: string
+        active:
+          type: string
+      title: PaymentProviderTransactionPaymentProcessor
+    PaymentCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: PaymentCountry
+    PaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-letter ISO country code of the financial institution
+      title: PaymentProviderCountry
+    FinancialInstitutionAccountVerification:
+      type: object
+      properties:
+        verified:
+          type: boolean
+          description: true if the account is verified; false otherwise.
+        type:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationType'
+          description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+        hasEnoughFunds:
+          type: boolean
+          description: If true, there is enough balance in account.
+        verificationDate:
+          type: integer
+          description: "The date and time the verification was completed \n as a UNIX timestamp."
+        score:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationScore'
+          description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+        thirdPartyScore:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationThirdPartyScore'
+          description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
+        numberOfTries:
+          type: number
+          format: double
+          description: Number of tries allowed.
+        numberOfAttemptsLeft:
+          type: number
+          format: double
+          description: Number of remaining attempts.
+      required:
+      - verified
+      - type
+      - hasEnoughFunds
+      - verificationDate
+      title: FinancialInstitutionAccountVerification
+    FinancialInstitutionAccountVerificationType:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+      title: FinancialInstitutionAccountVerificationType
+    RecurrenceFrequencyUnitType:
+      type: string
+      enum:
+      - Day
+      - Week
+      - Month
+      - Year
+      description: Frequency Unit Type
+      title: RecurrenceFrequencyUnitType
+    EstablishPostRequestBodyContentApplicationJsonSchemaPaymentType:
+      type: string
+      enum:
+      - Retrieval
+      - Deferred
+      - Disbursement
+      - Instant
+      - Recurring
+      - Verification
+      description: "Specifies the type of transaction to create. Possible values are Instant, Deferred, Disbursement, Recurring, Verification, and Retrieval. Default is Retrieval.\n\n **Note:** If your application is configured for \"Money Transfer\" and utilizes the \"Instant\" `paymentType` several properties under `customer`, `beneficiary` and `beneficiaryAccount` will be required. \n> See [Send money](/integrate/send-money) for more details."
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaPaymentType
+    PaymentAuth:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Authorization token.
+        status:
+          type: integer
+          description: See Authorization Status Values.
+        message:
+          type: string
+          description: Authorization message.
+      title: PaymentAuth
+    Recurrence:
+      type: object
+      properties:
+        startDate:
+          type: string
+          format: date-time
+          description: Recurring payment start date as a UNIX timestamp.
+        endDate:
+          type: string
+          format: date-time
+          description: Recurring payment end date as a UNIX timestamp.
+        nextOccurrence:
+          type: string
+          format: date-time
+          description: When the next capture will be issued if using automatic captures as a UNIX timestamp.
+        recurringAmount:
+          type: string
+          description: Recurring payment amount. (maximum of 10 characters with support for 2 decimal places)
+        debtSettlement:
+          type: string
+          description: Any debt amount settlement done outside of the Trustly like discounts or when consumers pays one recurring debt using another payment method like traditional checks or credit cards. (maximum of 10 characters with support for 2 decimal places)
+        frequency:
+          type: integer
+          default: 1
+          description: 'How many payments per frequencyUnit. Defaults to 1. Example: To define 2 recurring payments every 3 months set: frequency=2, frequencyUnit=3 and frequencyUnitType=3.'
+        frequencyUnit:
+          type: number
+          format: double
+          description: Defines with frequencyUnitType the interval of the frequency of payments.
+        frequencyUnitType:
+          $ref: '#/components/schemas/RecurrenceFrequencyUnitType'
+          description: Frequency Unit Type
+        automaticCapture:
+          type: boolean
+          description: If true, payment captures are issued automatically.
+        recurrenceId:
+          type: string
+      description: Recurring payment options
+      title: Recurrence
+    TransactionCurrency:
+      type: string
+      enum:
+      - USD
+      description: 3-letter ISO Currency Code. Currently only USD is supported.
+      title: TransactionCurrency
+    PaymentProviderTransaction:
+      type: object
+      properties:
+        paymentProviderTransactionId:
+          type: string
+          description: Unique payment provider transaction identifier.
+        status:
+          type: string
+          description: See Payment Provider Transaction Status Codes.
+        statusMessage:
+          type: string
+          description: Payment provider transaction status message.
+        signature:
+          type: string
+        statusDescription:
+          type: string
+        paymentProcessor:
+          $ref: '#/components/schemas/PaymentProviderTransactionPaymentProcessor'
+        thirdPartyDeclineCode:
+          type: string
+        clearingHouse:
+          type: string
+        instantSettle:
+          type: boolean
+          description: Whether instant settlement was used for transaction.
+      description: Payment Provider Transaction
+      title: PaymentProviderTransaction
+    ? TransactionsTransactionIdCapturePostRequestBodyContentApplicationXWwwFormUrlencodedSchemaMetadataRemittanceWithdrawalMethod
+    : type: string
+      enum:
+      - BankDeposit
+      - Cash
+      - DebitCard
+      - DigitalWallet
+      - HomeDelivery
+      description: The method by which the recipient will receive the funds.
+      title: TransactionsTransactionIdCapturePostRequestBodyContentApplicationXWwwFormUrlencodedSchemaMetadataRemittanceWithdrawalMethod
+    PaymentPaymentType:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      description: "Financial Institution Account Type:\n * `1`: Instant -\tInstant payment. The debit instruction is automatically initiated with that day's batch after consumer authorization.\n * `2`: Deferred - Deferred payment. Payment is authorized but the capture operation must be called to initiate the debit. You can start to initiate multiple captures that are less than or equal to the original transaction authorization amount.\n * `3`: Recurring - Recurring payment. Same as deferred but associated to a payment agreement between consumer and merchant that defines how much and when the capture can be started.\n * `4`: Disbursement - Disbursement payment. This payment type can only be used for disbursements.\n * `5`: Verification - This payment type is used to verify the customer financial institution account as the payments will be done outside of the Trustly system.\n * `6`: Retrieval\tData retrieval. This payment type is used to retrieve account and user information from Trustly without an associated payment request. This payment type is not enabled by default. Contact Trustly if you need this feature."
+      title: PaymentPaymentType
+    EstablishPostRequestBodyContentApplicationJsonSchemaBeneficiaryAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: number
+          format: double
+        iban:
+          type: string
+          description: International Bank Account Number (IBAN)
+        paymentProvider:
+          $ref: '#/components/schemas/PaymentProvider'
+      description: 'Financial institution account associated with the ultimate beneficiary of a transaction. Required when using `paymentType: Instant` for [Money Transfer](/integrate/send-money)'
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaBeneficiaryAccount
+    EstablishPostRequestBodyContentApplicationJsonSchemaAccount:
+      type: object
+      properties:
+        routingNumber:
+          type: string
+          description: Bank Routing Number
+        accountNumber:
+          type: string
+          description: Bank Account Number
+        type:
+          type: string
+          description: Financial Institution Account Type
+      description: Account information. Required if paymentType is Verification and a transactionId is not included.
+      title: EstablishPostRequestBodyContentApplicationJsonSchemaAccount
+    FinancialInstitutionAccountVerificationThirdPartyScore:
+      type: string
+      enum:
+      - '0'
+      - '100'
+      - '200'
+      - '300'
+      - '400'
+      - '500'
+      - '600'
+      - '700'
+      - '800'
+      - '900'
+      - '999'
+      description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
+      title: FinancialInstitutionAccountVerificationThirdPartyScore
+    Account:
+      type: object
+      properties:
+        providerId:
+          type: string
+          description: Payment provider ID.
+        paymentProvider:
+          $ref: '#/components/schemas/PaymentProvider'
+        country:
+          $ref: '#/components/schemas/AccountCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        name:
+          type: string
+          description: A description to identify a specific account (e.g. Test checking account)
+        type:
+          type: number
+          format: double
+          description: See Financial Institution Account Type Values.
+        profile:
+          type: number
+          format: double
+          description: See Financial Institution Account Profile Values
+        accountNumber:
+          type: string
+          description: Bank Account Number or VAN if `virtualAccountRoutingPair` is equal to `true`.
+        iban:
+          type: string
+          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
+        verified:
+          type: boolean
+          description: Indicates if the account is verified or not.
+        verification:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerification'
+        source:
+          type: number
+          format: double
+        routingNumber:
+          type: string
+          description: Bank Routing Number
+        token:
+          type: string
+          description: The Account Token
+        accountNumberLastFour:
+          type: string
+          description: The last 4 digits of the real account number.
+        virtualAccountRoutingPair:
+          type: boolean
+          description: Indicates if account is using virtual/tokenized account and routing numbers (VANs/TANs) or not.
+      title: Account
+    Payment:
+      type: object
+      properties:
+        paymentId:
+          type: string
+          description: A unique payment identifier generated by Trustly (15 character max).
+        paymentType:
+          $ref: '#/components/schemas/PaymentPaymentType'
+          description: "Financial Institution Account Type:\n * `1`: Instant -\tInstant payment. The debit instruction is automatically initiated with that day's batch after consumer authorization.\n * `2`: Deferred - Deferred payment. Payment is authorized but the capture operation must be called to initiate the debit. You can start to initiate multiple captures that are less than or equal to the original transaction authorization amount.\n * `3`: Recurring - Recurring payment. Same as deferred but associated to a payment agreement between consumer and merchant that defines how much and when the capture can be started.\n * `4`: Disbursement - Disbursement payment. This payment type can only be used for disbursements.\n * `5`: Verification - This payment type is used to verify the customer financial institution account as the payments will be done outside of the Trustly system.\n * `6`: Retrieval\tData retrieval. This payment type is used to retrieve account and user information from Trustly without an associated payment request. This payment type is not enabled by default. Contact Trustly if you need this feature."
+        merchant:
+          $ref: '#/components/schemas/PaymentMerchant'
+        merchantReference:
+          type: string
+          description: 'An external reference from the merchant. Ex: Order identifier from merchant e-commerce application.'
+        merchantId:
+          type: string
+          description: Your Trustly Merchant Id. It will be provided to you.
+        fingerprint:
+          type: string
+          description: Internal use only
+        verification:
+          $ref: '#/components/schemas/Verification'
+        account:
+          $ref: '#/components/schemas/Account'
+        description:
+          type: string
+          description: A summary description of the order.
+        returnUrl:
+          type: string
+          description: Return URL provided with the bank authorization.
+        cancelUrl:
+          type: string
+          description: Cancel URL provided with the bank authorization.
+        currency:
+          $ref: '#/components/schemas/PaymentCurrency'
+          description: 3-letter ISO Currency Code. Currently only USD is supported.
+        amount:
+          type: string
+          description: "\tThe total amount of the order, including tax and shipping. If transactionType is Recurring, this is the Setup Fee Amount."
+        paymentProvider:
+          $ref: '#/components/schemas/PaymentProvider'
+        allowedPaymentProviderType:
+          type: array
+          items:
+            type: integer
+        auth:
+          $ref: '#/components/schemas/PaymentAuth'
+        authorization:
+          type: string
+          description: Authorization token.
+        authorizationStatus:
+          type: number
+          format: double
+          description: Status of the related bank authorization. See Transaction Status Values.
+        authorizationStatusMessage:
+          type: string
+          description: Status message of the related bank authorization.
+        pending:
+          type: string
+          description: The total amount that is still pending completion. (10 characters with support for 2 decimal places)
+        paid:
+          type: string
+          description: The total amount that was already paid. (10 characters with support for 2 decimal places)
+        refunded:
+          type: string
+          description: The total amount that was refunded. (10 characters with support for 2 decimal places)
+        reversed:
+          type: string
+          description: The total amount that was reversed. (10 characters with support for 2 decimal places)
+        balance:
+          type: string
+          description: The balance of the amount paid, minus the amount reversed and/or refunded. (10 characters with support for 2 decimal places)
+        createdAt:
+          type: integer
+          description: The date and time the transaction was created as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The date and time the transaction was last updated as a UNIX timestamp.
+        recordVersion:
+          type: number
+          format: double
+          description: The current record version.
+        paymentFlow:
+          type: number
+          format: double
+          description: internal use only
+        customer:
+          $ref: '#/components/schemas/Customer'
+        address:
+          $ref: '#/components/schemas/Address'
+        recurrence:
+          $ref: '#/components/schemas/Recurrence'
+        system:
+          $ref: '#/components/schemas/PaymentSystem'
+          description: "Financial Institution Account Type:\n  * `-1`: None\n  * `1`: PayWithMyBank\n  * `2`: TrustlyAB"
+        country:
+          $ref: '#/components/schemas/PaymentCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        paymentProviderSubtype:
+          $ref: '#/components/schemas/PaymentProviderSubtype'
+      required:
+      - paymentId
+      - paymentType
+      - merchant
+      - merchantReference
+      - merchantId
+      - fingerprint
+      - verification
+      - account
+      - currency
+      - amount
+      - paymentProvider
+      - allowedPaymentProviderType
+      - auth
+      - authorization
+      - authorizationStatus
+      - authorizationStatusMessage
+      - pending
+      - paid
+      - refunded
+      - reversed
+      - balance
+      - createdAt
+      - updatedAt
+      - recordVersion
+      - paymentFlow
+      description: A Trustly Payment
+      title: Payment
+    EstablishData:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Your Merchant ID.
+        paymentType:
+          type: number
+          format: double
+          description: The Payment Type of the transaction to create. Currently only Disbursement, Deferred, and Instant are supported.
+        returnUrl:
+          type: string
+          description: Return URL to use when the transaction is completed.
+        cancelUrl:
+          type: string
+          description: Cancel URL to use if the user cancels the transaction.
+        notificationUrl:
+          type: string
+          description: Notification URL to use for notifications associated with this transaction. This overrides the notification URL configured at the merchant level.
+        data:
+          type: string
+        accessId:
+          type: string
+          description: Your client application access id. It will be provided to you.
+        requestSignature:
+          type: string
+          description: Request Signature that can be validated to verify the response authenticity.
+        transactionId:
+          type: string
+          description: Transaction ID retrieved from Trustly.
+        merchantReference:
+          type: string
+          description: 'An external reference from the merchant. Ex: Order identifier from merchant e-commerce application.'
+        description:
+          type: string
+          description: Merchant order description
+        currency:
+          $ref: '#/components/schemas/EstablishDataCurrency'
+          description: 3-letter ISO Currency Code. Currently only USD is supported.
+        kycType:
+          $ref: '#/components/schemas/EstablishDataKycType'
+          description: Specifies the KYC (Know Your Customer) type as number. The possible value is 1 (OnlineBanking). This field is optional and can only be used by merchants configured for [Trustly ID](/integrate/retrieve-data/trustly-id).
+        amount:
+          type: string
+          description: The amount of the transaction. This represents the maximum amount of the transactions that can be processed with the Authorization. If the amount is 0.00, there will be no upper bound on the transaction. (10 characters with support for 2 decimal places)
+        verification:
+          $ref: '#/components/schemas/Verification'
+        customer:
+          $ref: '#/components/schemas/Customer'
+        account:
+          $ref: '#/components/schemas/Account'
+        metadata:
+          $ref: '#/components/schemas/Attribute'
+        trustlyABRequest:
+          $ref: '#/components/schemas/TrustlyABRequest'
+        url:
+          type: string
+      required:
+      - url
+      description: '`establishData` is required to establish a new user authorization or to launch the Trustly UI for any other reason'
+      title: EstablishData
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

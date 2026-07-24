@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: accountData verifyCustomer API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: verifyCustomer
+paths:
+  /transactions/{transactionId}/payment/customer/verify:
+    get:
+      operationId: get-verify-customer
+      summary: Get customer verification data
+      description: Retrieves verification results for a given transaction. Returns a match result for each attribute compared.
+      tags:
+      - verifyCustomer
+      parameters:
+      - name: transactionId
+        in: path
+        description: The unique identifier of the transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verify Customer_get-verify-customer_Response_200'
+        '400':
+          description: One or more required fields are missing from the request object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-verify-customerRequestBadRequestError'
+        '401':
+          description: Access not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-verify-customerRequestUnauthorizedError'
+components:
+  schemas:
+    VerifyCustomerMatch:
+      type: object
+      properties:
+        attribute:
+          type: string
+          description: The customer attribute that was compared. For example, customer.name or customer.address.zip.
+        result:
+          $ref: '#/components/schemas/VerifyCustomerMatchResult'
+          description: 'The result of the comparison:
+
+            * `-1`: Inconclusive
+
+            * `0`: NoMatch
+
+            * `1`: PartialMatch
+
+            * `2`: Match'
+        source:
+          $ref: '#/components/schemas/VerifyCustomerMatchSource'
+          description: 'The data source used for comparison:
+
+            * `1`: Profile
+
+            * `2`: SelectedAccount
+
+            * `3`: OtherAccounts
+
+            * `4`: TrustlyUser'
+      title: VerifyCustomerMatch
+    Get-verify-customerRequestUnauthorizedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseException'
+      required:
+      - errors
+      title: Get-verify-customerRequestUnauthorizedError
+    Get-verify-customerRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseException'
+      required:
+      - errors
+      title: Get-verify-customerRequestBadRequestError
+    VerifyCustomerMatchResult:
+      type: string
+      enum:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      description: 'The result of the comparison:
+
+        * `-1`: Inconclusive
+
+        * `0`: NoMatch
+
+        * `1`: PartialMatch
+
+        * `2`: Match'
+      title: VerifyCustomerMatchResult
+    Verify Customer_get-verify-customer_Response_200:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/VerifyCustomerMatch'
+      title: Verify Customer_get-verify-customer_Response_200
+    BaseException:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: integer
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: integer
+      title: BaseException
+    VerifyCustomerMatchSource:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      description: 'The data source used for comparison:
+
+        * `1`: Profile
+
+        * `2`: SelectedAccount
+
+        * `3`: OtherAccounts
+
+        * `4`: TrustlyUser'
+      title: VerifyCustomerMatchSource
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

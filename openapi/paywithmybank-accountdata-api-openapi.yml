@@ -1,0 +1,752 @@
+openapi: 3.1.0
+info:
+  title: accountData API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: accountData
+paths:
+  /transactions/{transactionId}/accountSummary:
+    get:
+      operationId: get-transaction-account-summary
+      summary: Get account activity summary
+      description: 'Returns summarized and aggregated information about an account such as deposits, withdrawals and balances for various time periods.
+
+
+        **Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.'
+      tags:
+      - accountData
+      parameters:
+      - name: transactionId
+        in: path
+        description: Transaction ID retrieved from a Trustly Authorization transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account Data_get-transaction-account-summary_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transaction-account-summaryRequestBadRequestError'
+  /transactions/{transactionId}/payment/paymentProvider/account/balance:
+    get:
+      operationId: get-transactions-account-balance
+      summary: Get account balance
+      description: 'Retrieves the details of an Account that was authorized for a Transaction. You need only supply the unique transactionId that was returned as part of a bank authorization.
+
+
+        This is a restricted API and must be approved for usage by the Trustly Compliance team.
+
+
+        **Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.
+
+
+        **Note for International Financial Institutions**</br>In some geographies the `Account` object in the response for this API may contain additional properties. For example, the `taxId` returned for accounts from Brazilian institutions.'
+      tags:
+      - accountData
+      parameters:
+      - name: transactionId
+        in: path
+        description: Transaction ID retrieved from a Trustly Authorization transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account Data_get-transactions-account-balance_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-transactions-account-balanceRequestBadRequestError'
+  /transactions/{transactionId}/payment/paymentProvider/user:
+    get:
+      operationId: get-user
+      summary: Get account users
+      description: 'This endpoint retrieves users'' information from an Authorized Bank transaction.
+
+
+        **Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.'
+      tags:
+      - accountData
+      parameters:
+      - name: transactionId
+        in: path
+        description: Transaction ID retrieved from a Trustly Authorization transaction.
+        required: true
+        schema:
+          type: string
+      - name: expand
+        in: query
+        description: A field in the API response to be expanded in order for more details to be provided (e.g. customer.segmentedName).
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderUserGetParametersExpandSchemaItems'
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FIUser'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-userRequestBadRequestError'
+  /transactions/{transactionId}/payment/paymentProvider/accounts:
+    get:
+      operationId: list-selected-accounts
+      summary: List all accounts
+      description: 'Returns a list of all user-selected accounts associated with a given authorization transaction.
+
+
+        **Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.'
+      tags:
+      - accountData
+      parameters:
+      - name: transactionId
+        in: path
+        description: Transaction ID retrieved from a Trustly Authorization transaction.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account Data_list-selected-accounts_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/List-selected-accountsRequestBadRequestError'
+components:
+  schemas:
+    SchemasPaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: SchemasPaymentProviderSubType
+    TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaErrorsItems:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: number
+          format: double
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: number
+          format: double
+      required:
+      - domain
+      - code
+      - location
+      - message
+      - occurredAt
+      title: TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaErrorsItems
+    FIUser:
+      type: object
+      properties:
+        fingerprint:
+          type: string
+          description: Internal use only.
+        paymentProvider:
+          $ref: '#/components/schemas/schemas-PaymentProvider'
+        name:
+          type: array
+          items:
+            description: Any type
+          description: Array of User Name's associated with the Bank Account.
+        address:
+          type: array
+          items:
+            $ref: '#/components/schemas/components-schemas-Address'
+          description: Array of Addresses associated with the Bank Account. See Address Object.
+        phone:
+          type: array
+          items:
+            description: Any type
+          description: Array of Phone Numbers associated with the Bank Account.
+        email:
+          type: array
+          items:
+            description: Any type
+          description: Array of Email Addresses associated with the Bank Account.
+        createdAt:
+          type: integer
+          description: Timestamp representing the time the User Object was created.
+        updatedAt:
+          type: integer
+          description: Timestamp representing the time the User Object was last updated.
+        segmentedName:
+          $ref: '#/components/schemas/SegmentedName'
+      description: Financial Institution User
+      title: FIUser
+    FinancialInstitutionAccountVerificationScore:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+      title: FinancialInstitutionAccountVerificationScore
+    TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaSummaryItemsAggregationsItems:
+      type: object
+      properties:
+        days:
+          type: integer
+        activityEarliestDate:
+          type: integer
+        activityLatestDate:
+          type: integer
+        balanceMax:
+          type: string
+        balanceMin:
+          type: string
+        balanceAvg:
+          type: string
+        depositCount:
+          type: integer
+        depositAmountTotal:
+          type: string
+        depositAmountMax:
+          type: string
+        withdrawalCount:
+          type: integer
+        withdrawalAmountTotal:
+          type: string
+        withdrawalAmountMax:
+          type: string
+        overdraftCount:
+          type: integer
+        overdraftAmountTotal:
+          type: string
+        nsfCount:
+          type: integer
+        nsfFeeAmountTotal:
+          type: string
+      title: TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaSummaryItemsAggregationsItems
+    TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalance:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalanceAccount'
+        currency:
+          type: string
+        amount:
+          type: string
+      required:
+      - account
+      - currency
+      title: TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalance
+    List-selected-accountsRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderAccountsGetResponsesContentApplicationJsonSchemaErrorsItems'
+      required:
+      - errors
+      title: List-selected-accountsRequestBadRequestError
+    TransactionsTransactionIdPaymentPaymentProviderUserGetResponsesContentApplicationJsonSchemaErrorsItems:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: number
+          format: double
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: number
+          format: double
+      required:
+      - domain
+      - code
+      - location
+      - message
+      - occurredAt
+      title: TransactionsTransactionIdPaymentPaymentProviderUserGetResponsesContentApplicationJsonSchemaErrorsItems
+    ComponentsSchemasAddressCountry:
+      type: string
+      enum:
+      - US
+      description: 2 character ISO Country code. Currently only the US is supported.
+      title: ComponentsSchemasAddressCountry
+    Get-transactions-account-balanceRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaErrorsItems'
+      required:
+      - errors
+      title: Get-transactions-account-balanceRequestBadRequestError
+    TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaErrorsItems:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: number
+          format: double
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: number
+          format: double
+      required:
+      - domain
+      - code
+      - location
+      - message
+      - occurredAt
+      title: TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaErrorsItems
+    schemas-PaymentProvider:
+      type: object
+      properties:
+        paymentProviderId:
+          type: string
+          description: A unique identifier for the Payment Provider.
+        type:
+          type: number
+          format: double
+        name:
+          type: string
+          description: Payment Provider name.
+        instantPayoutAvailable:
+          type: boolean
+          description: Whether payment provider supports instant payout.
+        subType:
+          $ref: '#/components/schemas/SchemasPaymentProviderSubType'
+          description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+        swift:
+          type: string
+        address:
+          $ref: '#/components/schemas/components-schemas-Address'
+        country:
+          $ref: '#/components/schemas/SchemasPaymentProviderCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        instantPayment:
+          type: boolean
+      required:
+      - paymentProviderId
+      - type
+      - name
+      - instantPayoutAvailable
+      title: schemas-PaymentProvider
+    TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalanceAccount:
+      type: object
+      properties:
+        providerId:
+          type: string
+          description: Payment provider ID.
+        paymentProvider:
+          $ref: '#/components/schemas/schemas-PaymentProvider'
+        nameOnAccount:
+          type: string
+          description: Account owner name.
+        country:
+          $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalanceAccountCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        name:
+          type: string
+          description: A description to identify an specific account (e.g. "Test checking account")
+        type:
+          type: number
+          format: double
+          description: See Financial Institution Account Type Values.
+        profile:
+          type: number
+          format: double
+          description: See Financial Institution Account Profile Values
+        accountNumber:
+          type: string
+          description: Bank Account Number or VAN if `virtualAccountRoutingPair` is equal to `true`.
+        iban:
+          type: string
+          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
+        verified:
+          type: boolean
+          description: Indicates if the account is verified or not.
+        verification:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerification'
+        source:
+          type: number
+          format: double
+        routingNumber:
+          type: string
+          description: Bank Routing Number.
+        token:
+          type: string
+          description: The Account Token.
+        accountNumberLastFour:
+          type: string
+          description: The last 4 digits of the real account number.
+        virtualAccountRoutingPair:
+          type: boolean
+          description: Indicates if account is using virtual/tokenized account and routing numbers (VANs/TANs) or not.
+        taxId:
+          type: string
+          description: (Only Brazilian Accounts) Personal or business taxpayer identifier.
+      title: TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalanceAccount
+    TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaSummaryItems:
+      type: object
+      properties:
+        selectedAccount:
+          type: boolean
+        currency:
+          type: string
+        nameOnAccount:
+          type: string
+        accountNumber:
+          type: string
+        routingNumber:
+          type: string
+        aggregations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaSummaryItemsAggregationsItems'
+      title: TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaSummaryItems
+    SegmentedName:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of a given full name.
+        firstName:
+          type: string
+          description: The first name of a given full name.
+        middleName:
+          type: array
+          items:
+            type: string
+          description: The list of middle names of a given full name.
+        lastName:
+          type: string
+          description: The last name of a given full name.
+        suffix:
+          type: string
+          description: The suffix of a given full name.
+      description: The segmented version of a given name.
+      title: SegmentedName
+    TransactionsTransactionIdPaymentPaymentProviderUserGetParametersExpandSchemaItems:
+      type: string
+      enum:
+      - customer.segmentedName
+      - names
+      - contact
+      - account.paymentProvider.routinginfo
+      - account.paymentProvider.address
+      title: TransactionsTransactionIdPaymentPaymentProviderUserGetParametersExpandSchemaItems
+    Account Data_list-selected-accounts_Response_200:
+      type: object
+      properties:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/schemas-Account'
+      required:
+      - accounts
+      title: Account Data_list-selected-accounts_Response_200
+    schemas-Account:
+      type: object
+      properties:
+        providerId:
+          type: string
+          description: Payment provider ID.
+        paymentProvider:
+          $ref: '#/components/schemas/schemas-PaymentProvider'
+        nameOnAccount:
+          type: string
+          description: Account owner name.
+        country:
+          $ref: '#/components/schemas/SchemasAccountCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        name:
+          type: string
+          description: A description to identify an specific account (e.g. "Test checking account")
+        type:
+          type: number
+          format: double
+          description: See Financial Institution Account Type Values.
+        profile:
+          type: number
+          format: double
+          description: See Financial Institution Account Profile Values
+        accountNumber:
+          type: string
+          description: Bank Account Number or VAN if `virtualAccountRoutingPair` is equal to `true`.
+        iban:
+          type: string
+          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
+        verified:
+          type: boolean
+          description: Indicates if the account is verified or not.
+        verification:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerification'
+        source:
+          type: number
+          format: double
+        routingNumber:
+          type: string
+          description: Bank Routing Number.
+        token:
+          type: string
+          description: The Account Token.
+        accountNumberLastFour:
+          type: string
+          description: The last 4 digits of the real account number.
+        virtualAccountRoutingPair:
+          type: boolean
+          description: Indicates if account is using virtual/tokenized account and routing numbers (VANs/TANs) or not.
+      title: schemas-Account
+    FinancialInstitutionAccountVerification:
+      type: object
+      properties:
+        verified:
+          type: boolean
+          description: true if the account is verified; false otherwise.
+        type:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationType'
+          description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+        hasEnoughFunds:
+          type: boolean
+          description: If true, there is enough balance in account.
+        verificationDate:
+          type: integer
+          description: "The date and time the verification was completed \n as a UNIX timestamp."
+        score:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationScore'
+          description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+        thirdPartyScore:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerificationThirdPartyScore'
+          description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
+        numberOfTries:
+          type: number
+          format: double
+          description: Number of tries allowed.
+        numberOfAttemptsLeft:
+          type: number
+          format: double
+          description: Number of remaining attempts.
+      required:
+      - verified
+      - type
+      - hasEnoughFunds
+      - verificationDate
+      title: FinancialInstitutionAccountVerification
+    FinancialInstitutionAccountVerificationType:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+      title: FinancialInstitutionAccountVerificationType
+    Account Data_get-transactions-account-balance_Response_200:
+      type: object
+      properties:
+        accountBalance:
+          $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalance'
+      required:
+      - accountBalance
+      title: Account Data_get-transactions-account-balance_Response_200
+    Account Data_get-transaction-account-summary_Response_200:
+      type: object
+      properties:
+        customerId:
+          type: string
+        lastUpdated:
+          type: integer
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaSummaryItems'
+      title: Account Data_get-transaction-account-summary_Response_200
+    Get-userRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdPaymentPaymentProviderUserGetResponsesContentApplicationJsonSchemaErrorsItems'
+      required:
+      - errors
+      title: Get-userRequestBadRequestError
+    components-schemas-Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address Line 1.
+        city:
+          type: string
+          description: Address City.
+        state:
+          type: string
+          description: 2 character ISO State code.
+        zip:
+          type: string
+          description: 5 character US Zip Code.
+        country:
+          $ref: '#/components/schemas/ComponentsSchemasAddressCountry'
+          description: 2 character ISO Country code. Currently only the US is supported.
+        address2:
+          type: string
+          description: Address Line 2.
+      required:
+      - country
+      title: components-schemas-Address
+    ? TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalanceAccountCountry
+    : type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: TransactionsTransactionIdPaymentPaymentProviderAccountBalanceGetResponsesContentApplicationJsonSchemaAccountBalanceAccountCountry
+    TransactionsTransactionIdPaymentPaymentProviderAccountsGetResponsesContentApplicationJsonSchemaErrorsItems:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: number
+          format: double
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: number
+          format: double
+      required:
+      - domain
+      - code
+      - location
+      - message
+      - occurredAt
+      title: TransactionsTransactionIdPaymentPaymentProviderAccountsGetResponsesContentApplicationJsonSchemaErrorsItems
+    Get-transaction-account-summaryRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsTransactionIdAccountSummaryGetResponsesContentApplicationJsonSchemaErrorsItems'
+      required:
+      - errors
+      title: Get-transaction-account-summaryRequestBadRequestError
+    SchemasPaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: SchemasPaymentProviderCountry
+    SchemasAccountCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: SchemasAccountCountry
+    FinancialInstitutionAccountVerificationThirdPartyScore:
+      type: string
+      enum:
+      - '0'
+      - '100'
+      - '200'
+      - '300'
+      - '400'
+      - '500'
+      - '600'
+      - '700'
+      - '800'
+      - '900'
+      - '999'
+      description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
+      title: FinancialInstitutionAccountVerificationThirdPartyScore
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

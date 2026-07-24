@@ -1,0 +1,283 @@
+openapi: 3.1.0
+info:
+  title: accountData customers API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: customers
+paths:
+  /customers:
+    post:
+      operationId: post-customers
+      summary: Create or Update a Customer
+      description: 'Creates a new customer record in the merchant account. In cases when the customer was not created at the time an Authorization was established, use this endpoint to register customer details, such as name, email, and optional metadata, to support your integration.
+
+
+        If an existing `customerId` or `externalId` is provided, the specified customer will be updated with any new or updated properties. To remove properties of an existing customer, set the property to `null`. Before using this endpoint, it may be helpful to call [Get Customer by ID](ref:get-customers-customerid) to obtain the relevant customer object.'
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: query
+        description: The externalId that was passed when the Customer record was created.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customers_post-customers_Response_200'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+    get:
+      operationId: get-customers
+      summary: Get Customers
+      description: "Retrieves a list of customers associated with the merchant account. Use this endpoint to view customer details relevant to your integration. \n\n Results can be filtered by either the `externalId` or `customerId` properties in order to retrieve the details of a single customer using the unique `externalId` that was provided during customer creation. Other filtering and paging capabilities are not supported at this time."
+      tags:
+      - customers
+      parameters:
+      - name: externalId
+        in: query
+        description: The externalId that was passed when the Customer record was created.
+        required: false
+        schema:
+          type: string
+      - name: customerId
+        in: query
+        description: The identifier of the Customer to be retrieved.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customers_get-customers_Response_200'
+  /customers/{customerId}:
+    get:
+      operationId: get-customers-customerId
+      summary: Get Customer by ID
+      description: Retrieves the details of a Customer using the unique `customerId` that was returned upon customer creation.
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        description: The identifier of the Customer to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customers_get-customers-customerId_Response_200'
+    post:
+      operationId: post-customers-customerId
+      summary: Update Customer by ID
+      description: Updates the specified Customer by setting the values of the parameters on the customer object passed. Before calling this endpoint, it may be beneficial to call [Get Customer by ID](/api-reference/api/customers/get-customers-customer-id) to obtain a Customer Object. Change the desired fields in the Customer object and then modify the object before calling the update endpoint with the modified object.
+      tags:
+      - customers
+      parameters:
+      - name: customerId
+        in: path
+        description: The identifier of the Customer to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customers_post-customers-customerId_Response_200'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+components:
+  schemas:
+    Customers_get-customers-customerId_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers-customerId_Response_200
+    Customers_get-customers_Response_200:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers_Response_200
+    Customers_post-customers_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_post-customers_Response_200
+    CustomerCustomData:
+      type: object
+      properties: {}
+      description: Object for sending merchant-specific custom data.
+      title: CustomerCustomData
+    Customers_post-customers-customerId_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_post-customers-customerId_Response_200
+    Customer:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Full name of the Customer
+        taxId:
+          type: string
+          description: Customer tax ID (e.g. SSN [US], SIN [CA]). *May be required depending on industry and location.*
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+          description: Customer phone number.
+        email:
+          type: string
+          description: Customer email address.
+        dateOfBirth:
+          type: string
+          description: Customer date of birth.
+        createdAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        updatedAt:
+          type: integer
+          description: The record created date and time as a UNIX timestamp.
+        customerId:
+          type: string
+          description: A unique Trustly customer identifier.
+        externalId:
+          type: string
+          description: A unique merchant customer identifier.
+        merchantId:
+          type: string
+          description: A unique Trustly merchant identifier.
+        enrollDate:
+          type: integer
+          description: Date of the user's first transaction in your system, regardless of payment method used as a UNIX timestamp.
+        vip:
+          type: string
+          description: Range that determines how low-risk the customer represents to the merchant
+        currency:
+          type: string
+          description: Customer currency.
+        balance:
+          type: string
+          description: Customer account balance (not associated with a financial institution account).
+        organizationNumber:
+          type: string
+          description: Organization number for business accounts
+        externalTier:
+          type: string
+          description: It should describe the customer''s rank to the merchant (e.g. Gold, Diamond, 4 stars, etc.)
+        personId:
+          type: string
+          description: Unique customer identity throughout different banks.
+        customData:
+          $ref: '#/components/schemas/CustomerCustomData'
+          description: Object for sending merchant-specific custom data.
+        driverLicense:
+          $ref: '#/components/schemas/DriverLicense'
+        nationalId:
+          type: string
+          description: Customer National ID
+      required:
+      - name
+      - address
+      - phone
+      - email
+      description: The Trustly customer object, containing identification details and contact information.
+      title: Customer
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
+    DriverLicense:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Driver License number.
+        state:
+          type: string
+          description: 2 character ISO State code.
+      required:
+      - number
+      - state
+      title: DriverLicense
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''

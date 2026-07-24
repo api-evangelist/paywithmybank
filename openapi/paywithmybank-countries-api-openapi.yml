@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: accountData countries API
+  version: 1.0.0
+servers:
+- url: https://sandbox.trustly.one/api/v1
+  description: Sandbox
+tags:
+- name: countries
+paths:
+  /countries:
+    get:
+      operationId: get-countries
+      summary: List countries
+      description: Returns a list of all available products by country.
+      tags:
+      - countries
+      parameters:
+      - name: country
+        in: query
+        description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+        required: false
+        schema:
+          $ref: '#/components/schemas/CountriesGetParametersCountry'
+      - name: paymentType
+        in: query
+        description: Returns the countries that support this Payment Type.
+        required: false
+        schema:
+          type: string
+      - name: paymentProvider.subType
+        in: query
+        description: Returns the countries that support this Payment Provider SubType
+        required: false
+        schema:
+          type: string
+      - name: enabled
+        in: query
+        description: If true, returns all countries that are currently supported. Default value is true.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Countries_get-countries_Response_200'
+        '400':
+          description: One of the request parameters is invalid (sending an invalid amount format string for example).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-countriesRequestBadRequestError'
+components:
+  schemas:
+    PaymentType:
+      type: string
+      enum:
+      - instant
+      - deferred
+      - recurring
+      - disbursement
+      - verification
+      - retrieval
+      description: "Payment Type:\n  * `instant`: Instant payment. The debit instruction is automatically initiated with that day''s batch after consumer authorization.\n  * `deferred`: Deferred payment. Payment is authorized but the capture operation must be called to initiate the debit. You can start to initiate multiple captures that are less than or equal to the original transaction authorization amount.\n  * `recurring`: Recurring payment. Same as deferred but associated to a payment agreement between consumer and merchant that defines how much and when the capture can be started.\n  * `disbursement`: Disbursement payment. This payment type can only be used for disbursements.\n  * `verification`: This payment type is used to verify the customer financial institution account as the payments will be done outside of the Trustly system.\n  * `retrieval`: Data retrieval. This payment type is used to retrieve account and user information from Trustly without an associated payment request. This payment type is not enabled by default. Contact Trustly if you need this feature."
+      title: PaymentType
+    Get-countriesRequestBadRequestError:
+      type: object
+      properties:
+        message:
+          type: string
+      title: Get-countriesRequestBadRequestError
+    CountriesGetParametersCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      title: CountriesGetParametersCountry
+    PaymentProviderSubtype:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Payment Provider Subtype:\n  * `1000`: EasyOnline\n  * `2000`: MEC\n  * `2001`: MCD"
+      title: PaymentProviderSubtype
+    Countries_get-countries_Response_200:
+      type: object
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+      title: Countries_get-countries_Response_200
+    Country:
+      type: object
+      properties:
+        numericCode:
+          type: integer
+          description: Number Country numeric code defined in ISO 3166-1
+        alpha2Code:
+          type: string
+          description: Country alpha2 code defined in ISO 3166-1
+        alpha3Code:
+          type: string
+          description: Country alpha3 code defined in ISO 3166-1
+        name:
+          type: string
+          description: Country name
+        currencies:
+          type: array
+          items:
+            type: string
+          description: Array of currencies supported by country
+        paymentTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentType'
+          description: Array of payment types supported by country
+        paymentProviderSubtypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProviderSubtype'
+          description: 'Array of Payment Provider Subtypes values supported by country '
+        enabled:
+          type: boolean
+          description: Indicates if the country is currently supported
+      title: Country
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: ''
