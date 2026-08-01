@@ -1,0 +1,34 @@
+{
+  "provider": "paywithmybank",
+  "sources": [
+    "paywithmybank-accountdata-api-openapi.yml",
+    "paywithmybank-accounts-api-openapi.yml",
+    "paywithmybank-countries-api-openapi.yml",
+    "paywithmybank-customers-api-openapi.yml",
+    "paywithmybank-disputemanagement-api-openapi.yml",
+    "paywithmybank-identity-api-openapi.yml",
+    "paywithmybank-networkcheckapi-api-openapi.yml",
+    "paywithmybank-paymentproviders-api-openapi.yml",
+    "paywithmybank-payments-api-openapi.yml",
+    "paywithmybank-transactions-api-openapi.yml",
+    "paywithmybank-verifycustomer-api-openapi.yml"
+  ],
+  "outputs": [
+    "paywithmybank-accountdata-api-openapi.yml",
+    "paywithmybank-accounts-api-openapi.yml",
+    "paywithmybank-countries-api-openapi.yml",
+    "paywithmybank-customers-api-openapi.yml",
+    "paywithmybank-disputemanagement-api-openapi.yml",
+    "paywithmybank-identity-api-openapi.yml",
+    "paywithmybank-networkcheckapi-api-openapi.yml",
+    "paywithmybank-paymentproviders-api-openapi.yml",
+    "paywithmybank-payments-api-openapi.yml",
+    "paywithmybank-transactions-api-openapi.yml",
+    "paywithmybank-verifycustomer-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

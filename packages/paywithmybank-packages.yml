@@ -1,0 +1,31 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/TrustlyInc
+note: >-
+  First-party client SDKs published by Trustly (PayWithMyBank) on the TrustlyInc
+  GitHub organization. Public package-registry coordinates (npm/CocoaPods/Maven)
+  could not be verified from a registry, so libraries are catalogued by their
+  canonical source repository. The server-side integration is HTTP Basic + the
+  client-side trustly.js Lightbox loader (see components/).
+packages:
+  - language: swift
+    platform: ios
+    registry: github
+    name: trustly-ios
+    url: https://github.com/TrustlyInc/trustly-ios
+    description: Trustly SDK for Apple iOS platforms.
+    official: true
+  - language: kotlin
+    platform: android
+    registry: github
+    name: trustly-android
+    url: https://github.com/TrustlyInc/trustly-android
+    description: Trustly SDK for Android mobile apps.
+    official: true
+  - language: typescript
+    platform: react-native
+    registry: github
+    name: trustly-react-native
+    url: https://github.com/TrustlyInc/trustly-react-native
+    description: Trustly SDK for React Native apps.
+    official: true

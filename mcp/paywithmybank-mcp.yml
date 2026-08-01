@@ -1,0 +1,15 @@
+generated: '2026-07-20'
+method: searched
+status: published
+source: https://amer.developers.trustly.com/llms.txt
+server:
+  name: trustly-amer
+  transport: http
+  url: https://amer.developers.trustly.com/_mcp/server
+  description: >-
+    Official hosted MCP server published by Trustly (PayWithMyBank) for AI client
+    integration (Claude Code, Cursor, etc.), advertised in the developer docs
+    llms.txt. Serves the AMER Trustly Payments API documentation surface to agents.
+note: >-
+  Documentation MCP server (docs/knowledge surface). Grounds against the same
+  Trustly Payments API captured in openapi/paywithmybank-openapi-original.yml.

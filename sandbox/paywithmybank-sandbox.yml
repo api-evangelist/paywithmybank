@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+source: https://amer.developers.trustly.com/api-reference/api
+note: >-
+  Trustly (PayWithMyBank) separates test and live traffic by host. No public
+  magic test card/bank values were found in the developer docs; test flows run
+  against the sandbox host with sandbox-provisioned merchant credentials.
+environments:
+  - name: sandbox
+    api_base_url: https://sandbox.trustly.one/api/v1
+    lightbox_loader: https://sandbox.trustly.one/start/scripts/trustly.js?accessId=YOUR_ACCESS_ID
+  - name: production
+    api_base_url: https://api.trustly.one/api/v1
+    lightbox_loader: https://trustly.one/start/scripts/trustly.js?accessId=YOUR_ACCESS_ID
+credentials:
+  note: >-
+    accessId + accessKey (HTTP Basic) are provisioned per environment in the
+    Trustly Merchant Portal (Settings > Developer Settings). Client-side calls
+    require a server-generated requestSignature.

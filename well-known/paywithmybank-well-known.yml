@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+hosts:
+  - host: https://amer.developers.trustly.com
+    documents:
+      - path: /.well-known/api-catalog
+        status: 200
+        file: paywithmybank-api-catalog.json
+        note: >-
+          RFC 9727 linkset advertising the OpenAPI service description at
+          /openapi/api.yaml (harvested to openapi/paywithmybank-openapi-original.yml).
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+  - host: https://api.trustly.one
+    documents:
+      - path: /.well-known/security.txt
+        status: 000
+        note: host did not respond to well-known probes
+  - host: https://sandbox.trustly.one
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: not a real document — Webflow catch-all returns HTML 200 for any path; not saved

@@ -1,0 +1,12 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/paywithmybank-openapi-original.yml
+skills:
+  - file: paywithmybank-accept-payment.md
+    name: Accept a Pay-by-Bank payment
+    api: openapi/paywithmybank-openapi-original.yml
+    operations: [post-establish, post-transactions-transactionId-capture, get-transaction]
+  - file: paywithmybank-refund-transaction.md
+    name: Refund a settled transaction
+    api: openapi/paywithmybank-openapi-original.yml
+    operations: [get-transaction, post-transactions-refund]

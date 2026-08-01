@@ -1,0 +1,37 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/paywithmybank-openapi-original.yml
+spec_type: Webhooks
+delivery: HTTP POST event notifications to a merchant-configured endpoint
+docs: https://amer.developers.trustly.com/api-reference/api/event-notifications
+events:
+- event: Authorize
+  operationId: subpackage_eventNotifications.Authorize
+  method: post
+- event: Completed
+  operationId: subpackage_eventNotifications.Completed
+  method: post
+- event: Data Ready
+  operationId: subpackage_eventNotifications.DataReady
+  method: post
+- event: Dispute
+  operationId: subpackage_eventNotifications.Dispute
+  method: post
+- event: Establish
+  operationId: subpackage_eventNotifications.Establish
+  method: post
+- event: Expired
+  operationId: subpackage_eventNotifications.Expired
+  method: post
+- event: Failed
+  operationId: subpackage_eventNotifications.Failed
+  method: post
+- event: Refresh
+  operationId: subpackage_eventNotifications.Refresh
+  method: post
+- event: Update
+  operationId: subpackage_eventNotifications.Update
+  method: post
+- event: Verify Customer
+  operationId: subpackage_eventNotifications.VerifyCustomer
+  method: post

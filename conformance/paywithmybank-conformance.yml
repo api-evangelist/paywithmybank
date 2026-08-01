@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/paywithmybank-openapi-original.yml
+standards:
+- id: oauth2
+  conforms: false
+- id: oidc
+  conforms: false
+- id: http-basic-auth
+  conforms: true
+  evidence: securityScheme HTTPBasic (type http, scheme basic)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use a custom BaseException envelope, not application/problem+json
+- id: idempotency
+  conforms: true
+  evidence: Idempotency-Key request header on write operations
+- id: openapi-3.1
+  conforms: true
+  evidence: 'openapi: 3.1.0'
+- id: psd2
+  conforms: false
+- id: json:api
+  conforms: false

@@ -1,0 +1,47 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/paywithmybank-openapi-original.yml
+note: Entity graph derived from OpenAPI tags, path structure, and id-reference fields.
+entities:
+- name: Transaction
+  id_field: transactionId
+  description: A Trustly payment authorization/transaction.
+  relationships:
+  - type: has_one
+    target: Payment
+    via: paymentId
+  - type: has_one
+    target: Customer
+    via: customerId
+  - type: has_many
+    target: Account
+    via: accounts
+- name: Payment
+  id_field: paymentId
+  description: A payment record retrievable across transactions.
+  relationships:
+  - type: belongs_to
+    target: Transaction
+    via: transactionId
+- name: Customer
+  id_field: customerId
+  description: A merchant customer record with cross-transaction data.
+  relationships:
+  - type: has_many
+    target: Transaction
+    via: customerId
+- name: Account
+  id_field: account
+  description: A tokenized/verified bank account used as a payment method.
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: customerId
+- name: PaymentProvider
+  id_field: paymentProvider
+  description: A connected bank / payment provider.
+  relationships: []
+- name: Country
+  id_field: country
+  description: Supported country.
+  relationships: []

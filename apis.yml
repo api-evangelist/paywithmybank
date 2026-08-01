@@ -1,8 +1,30 @@
 aid: paywithmybank
-name: paywithmybank
-description: paywithmybank is a company surfaced as a portfolio company of balderton-capital and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paywithmybank.png
+name: PayWithMyBank (Trustly)
+description: >-
+  PayWithMyBank is the U.S. "Pay by Bank" brand of Trustly, a global open-banking
+  payments provider that lets merchants accept payments directly from a consumer's
+  bank account as an alternative to cards. The paywithmybank.com domain now
+  redirects to Trustly, whose AMER developer platform exposes a REST Payments API
+  (OpenAPI 3.1) covering transactions (establish, capture, deposit, cancel,
+  reclaim, refund), payments retrieval, bank-account tokenization and verification,
+  customer records, identity (Trustly ID), account data, dispute recovery, and
+  asynchronous event notifications (webhooks). Authentication is HTTP Basic with a
+  provisioned accessId/accessKey plus a server-generated requestSignature for the
+  client-side Lightbox. Trustly operates the largest open-banking payments network
+  with 12,000+ connected banks across 30+ countries.
 url: https://raw.githubusercontent.com/api-evangelist/paywithmybank/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,10 +34,131 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Payments
+- Pay by Bank
+- Open Banking
+- ACH
+- Bank Transfers
+- Fintech
+- Identity Verification
+- Webhooks
+apis:
+- aid: paywithmybank:paywithmybank-accountdata-api
+  name: PayWithMyBank (Trustly) accountData API
+  description: The accountData API from PayWithMyBank (Trustly) — 4 operation(s) for accountdata.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - accountData
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-accountdata-api-openapi.yml
+- aid: paywithmybank:paywithmybank-accounts-api
+  name: PayWithMyBank (Trustly) accounts API
+  description: The accounts API from PayWithMyBank (Trustly) — 3 operation(s) for accounts.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-accounts-api-openapi.yml
+- aid: paywithmybank:paywithmybank-countries-api
+  name: PayWithMyBank (Trustly) countries API
+  description: The countries API from PayWithMyBank (Trustly) — 1 operation(s) for countries.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - countries
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-countries-api-openapi.yml
+- aid: paywithmybank:paywithmybank-customers-api
+  name: PayWithMyBank (Trustly) customers API
+  description: The customers API from PayWithMyBank (Trustly) — 2 operation(s) for customers.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - customers
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-customers-api-openapi.yml
+- aid: paywithmybank:paywithmybank-disputemanagement-api
+  name: PayWithMyBank (Trustly) disputeManagement API
+  description: >-
+    The disputeManagement API from PayWithMyBank (Trustly) — 1 operation(s) for disputemanagement.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - disputeManagement
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-disputemanagement-api-openapi.yml
+- aid: paywithmybank:paywithmybank-identity-api
+  name: PayWithMyBank (Trustly) identity API
+  description: The identity API from PayWithMyBank (Trustly) — 3 operation(s) for identity.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - identity
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-identity-api-openapi.yml
+- aid: paywithmybank:paywithmybank-networkcheckapi-api
+  name: PayWithMyBank (Trustly) networkCheckApi API
+  description: >-
+    The networkCheckApi API from PayWithMyBank (Trustly) — 1 operation(s) for networkcheckapi.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - networkCheckApi
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-networkcheckapi-api-openapi.yml
+- aid: paywithmybank:paywithmybank-paymentproviders-api
+  name: PayWithMyBank (Trustly) paymentProviders API
+  description: >-
+    The paymentProviders API from PayWithMyBank (Trustly) — 1 operation(s) for paymentproviders.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - paymentProviders
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-paymentproviders-api-openapi.yml
+- aid: paywithmybank:paywithmybank-payments-api
+  name: PayWithMyBank (Trustly) payments API
+  description: The payments API from PayWithMyBank (Trustly) — 2 operation(s) for payments.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - payments
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-payments-api-openapi.yml
+- aid: paywithmybank:paywithmybank-transactions-api
+  name: PayWithMyBank (Trustly) transactions API
+  description: The transactions API from PayWithMyBank (Trustly) — 10 operation(s) for transactions.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-transactions-api-openapi.yml
+- aid: paywithmybank:paywithmybank-verifycustomer-api
+  name: PayWithMyBank (Trustly) verifyCustomer API
+  description: The verifyCustomer API from PayWithMyBank (Trustly) — 1 operation(s) for verifycustomer.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - verifyCustomer
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-verifycustomer-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,4 +166,73 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.paywithmybank.com/
+  url: https://www.trustly.com/us
+- type: DeveloperPortal
+  url: https://amer.developers.trustly.com/
+- type: Documentation
+  url: https://amer.developers.trustly.com/payments/docs/get-started
+- type: APIReference
+  url: https://amer.developers.trustly.com/api-reference/api
+- type: GettingStarted
+  url: https://amer.developers.trustly.com/integrate/get-started/explore-solutions
+- type: Support
+  url: https://amer.developers.trustly.com/integrate/get-started/get-support
+- type: Blog
+  url: https://www.trustly.com/us/blog
+- type: GitHubOrganization
+  url: https://github.com/TrustlyInc
+- type: SignUp
+  url: https://trustly.one/merchant-portal/
+- type: Login
+  url: https://my.trustly.com/
+- type: TermsOfService
+  url: https://www.trustly.com/us/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.trustly.com/us/privacy-policy
+- type: OpenAPI
+  url: openapi/paywithmybank-openapi-original.yml
+- type: Authentication
+  url: authentication/paywithmybank-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/paywithmybank-agentic-access.yml
+- type: DomainSecurity
+  url: security/paywithmybank-domain-security.yml
+- type: Packages
+  url: packages/paywithmybank-packages.yml
+- type: SDKs
+  url: packages/paywithmybank-packages.yml
+- type: Components
+  url: components/paywithmybank-components.yml
+- type: MCPServer
+  url: mcp/paywithmybank-mcp.yml
+- type: LLMsTxt
+  url: llms/paywithmybank-llms.txt
+- type: WellKnown
+  url: well-known/paywithmybank-well-known.yml
+- type: APICatalog
+  url: well-known/paywithmybank-api-catalog.json
+- type: Conventions
+  url: conventions/paywithmybank-conventions.yml
+- type: Idempotency
+  url: conventions/paywithmybank-conventions.yml
+- type: ErrorCatalog
+  url: errors/paywithmybank-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/paywithmybank-lifecycle.yml
+- type: Conformance
+  url: conformance/paywithmybank-conformance.yml
+- type: DataModel
+  url: data-model/paywithmybank-data-model.yml
+- type: Sandbox
+  url: sandbox/paywithmybank-sandbox.yml
+- type: Webhooks
+  url: asyncapi/paywithmybank-webhooks.yml
+- type: Overlay
+  url: overlays/paywithmybank-api-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

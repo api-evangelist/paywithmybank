@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Trustly (PayWithMyBank) Payments API
+  version: 1.0.0
+extends: openapi/paywithmybank-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: paywithmybank
+    x-apievangelist-rating-round: local-v1
+    x-idempotency-header: Idempotency-Key
+    x-auth-style: http-basic
+- target: $.servers
+  update:
+  - url: https://api.trustly.one/api/v1
+    description: Production
+  - url: https://sandbox.trustly.one/api/v1
+    description: Sandbox

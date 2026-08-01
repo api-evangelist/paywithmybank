@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://amer.developers.trustly.com/api-reference/api
+environments:
+- name: sandbox
+  base_url: https://sandbox.trustly.one/api/v1
+- name: production
+  base_url: https://api.trustly.one/api/v1
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or Sunset/Deprecation header support found.
+status_page: null
+sla:
+  url: null
+deprecated_operations: []

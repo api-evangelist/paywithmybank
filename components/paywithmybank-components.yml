@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+source: https://amer.developers.trustly.com/integrate/accept-payments/integrate-client-sdk
+note: >-
+  Client-side embeddable checkout surface (Trustly.js Lightbox). Loaded via a
+  direct script tag with an accessId query parameter; calls additionally require a
+  server-generated requestSignature. Distinct from the mobile SDKs in packages/.
+families:
+  - name: Trustly.js (Lightbox)
+    loaders:
+      - env: sandbox
+        url: https://sandbox.trustly.one/start/scripts/trustly.js?accessId=YOUR_ACCESS_ID
+      - env: production
+        url: https://trustly.one/start/scripts/trustly.js?accessId=YOUR_ACCESS_ID
+    components:
+      - name: Trustly.establish()
+        description: Launches the full-page modal for checkout flows.
+      - name: Trustly.selectBankWidget()
+        description: Renders an inline widget displaying popular banks.
+    required_params:
+      - accessId
+      - merchantId
+      - requestSignature

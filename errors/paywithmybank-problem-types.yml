@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/paywithmybank-openapi-original.yml
+format: custom
+envelope:
+  schema: BaseException
+  fields:
+  - domain
+  - code
+  - location
+  - message
+  - occurredAt
+  note: Errors return a BaseException object; HTTP status conveys the class, numeric
+    `code` field conveys the specific error, `domain` groups it, `message` is human-readable.
+problems:
+- status: 400
+  title: Bad Request
+  description: Invalid parameters or missing required fields.
+- status: 401
+  title: Unauthorized
+  description: "Authentication failed \u2014 check accessId/accessKey HTTP Basic credentials."
+- status: 500
+  title: Internal Server Error
+  description: Unexpected server-side error.

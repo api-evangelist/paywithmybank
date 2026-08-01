@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/paywithmybank-openapi-original.yml
+docs: https://amer.developers.trustly.com/api-reference/api
+summary:
+  types:
+  - http
+  http_schemes:
+  - basic
+schemes:
+- name: HTTPBasic
+  type: http
+  scheme: basic
+  credentials: accessId (username) + accessKey (password), provisioned in the Trustly Merchant Portal (Settings > Developer Settings)
+  transport: HTTPS only
+  sources:
+  - openapi/paywithmybank-openapi-original.yml
+notes:
+- Optional field-level encryption is available for enhanced security.
+- Client-side Lightbox (trustly.js) calls require a server-generated requestSignature in addition to the accessId.
+- No OAuth2/OIDC surface; scopes/ is not applicable for this provider.

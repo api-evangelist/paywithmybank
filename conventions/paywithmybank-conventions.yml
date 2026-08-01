@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/paywithmybank-openapi-original.yml
+docs: https://amer.developers.trustly.com/api-reference/api
+authentication:
+  style: http-basic
+  credentials: accessId (username) + accessKey (password)
+  note: HTTP Basic over HTTPS. Client-side SDK calls additionally require a server-generated
+    requestSignature. Optional field-level encryption available.
+idempotency:
+  supported: true
+  header: Idempotency-Key
+  scope: per write operation
+  note: Write operations accept an Idempotency-Key request header so retries are safe.
+    Present across mutating operations in the OpenAPI.
+pagination:
+  supported: false
+  note: No explicit cursor/offset/limit pagination parameters declared; list endpoints
+    return collections.
+versioning:
+  scheme: uri-path
+  current: v1
+  note: Version pinned in base path /api/v1.
+error_envelope:
+  schema: BaseException
+  fields:
+  - domain
+  - code
+  - location
+  - message
+  - occurredAt
+  see: errors/paywithmybank-problem-types.yml
+events:
+  style: webhooks
+  see: asyncapi/paywithmybank-webhooks.yml
+  note: Async state changes delivered as event notifications.
+cross_links:
+  authentication: authentication/paywithmybank-authentication.yml
+  errors: errors/paywithmybank-problem-types.yml
+  lifecycle: lifecycle/paywithmybank-lifecycle.yml
