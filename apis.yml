@@ -190,7 +190,7 @@ common:
 - type: PrivacyPolicy
   url: https://www.trustly.com/us/privacy-policy
 - type: OpenAPI
-  url: openapi/paywithmybank-openapi-original.yml
+  url: openapi/_original/paywithmybank-openapi-original.yml
 - type: Authentication
   url: authentication/paywithmybank-authentication.yml
 - type: AgenticAccess
