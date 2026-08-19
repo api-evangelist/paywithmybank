@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData customers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/customers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "The externalId that was passed when the Customer record was created."
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of the Customer to be retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of customers associated with the merchant account. Use this endpoint to view customer details relevant to your integration. \n\n Results can be filtered by either the `externalId` or `customerId` properties in order to retrieve the details of a single customer using the unique `externalId` that was provided during customer creation. Other filtering and paging capabilities are not supported at this time."
+        },
+        {
+          "info": {
+            "name": "Create or Update a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/customers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "The externalId that was passed when the Customer record was created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new customer record in the merchant account. In cases when the customer was not created at the time an Authorization was established, use this endpoint to register customer details, such as name, email, and optional metadata, to support your integration.\n\nIf an existing `customerId` or `externalId` is provided, the specified customer will be updated with any new or updated properties. To remove properties of an existing customer, set the property to `null`. Before using this endpoint, "
+        },
+        {
+          "info": {
+            "name": "Get Customer by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/customers/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the Customer to be retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a Customer using the unique `customerId` that was returned upon customer creation."
+        },
+        {
+          "info": {
+            "name": "Update Customer by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/customers/:customerId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the Customer to be retrieved."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified Customer by setting the values of the parameters on the customer object passed. Before calling this endpoint, it may be beneficial to call [Get Customer by ID](/api-reference/api/customers/get-customers-customer-id) to obtain a Customer Object. Change the desired fields in the Customer object and then modify the object before calling the update endpoint with the modified object."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

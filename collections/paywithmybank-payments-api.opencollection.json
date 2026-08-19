@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData payments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/payments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "paymentType",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments of this Payment Type. It is possible to filter by multiple values by repeating this argument."
+              },
+              {
+                "name": "merchantReference",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments associated with this merchant reference."
+              },
+              {
+                "name": "authorization.status",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments at this payment Authorization Status."
+              },
+              {
+                "name": "verification.status",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments at this payment Verification Status."
+              },
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments of this identification."
+              },
+              {
+                "name": "merchant.merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments by this merchant identification."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments by description."
+              },
+              {
+                "name": "paymentProvider.paymentProviderId",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments by this payment provider identification."
+              },
+              {
+                "name": "customer.customerId",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments by this customer identification."
+              },
+              {
+                "name": "fingerprint",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments by this fingerprint."
+              },
+              {
+                "name": "createdAt.start",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments after this creation date"
+              },
+              {
+                "name": "createdAt.end",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments before this creation date"
+              },
+              {
+                "name": "updatedAt.start",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments after this update date"
+              },
+              {
+                "name": "updatedAt.end",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments before this update date"
+              },
+              {
+                "name": "amount.min",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments for that minimum amount."
+              },
+              {
+                "name": "amount.max",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments for that maximum amount."
+              },
+              {
+                "name": "paid.min",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments for that minimum paid."
+              },
+              {
+                "name": "paid.max",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments for that maximum paid."
+              },
+              {
+                "name": "refunded.min",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments with this minimum refund amount."
+              },
+              {
+                "name": "refunded.max",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments with this maximum refund amount."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "List payments by order field."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments by this sort order"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "Returns payments from that offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Returns the maximum number of payments specified by this field"
+              }
+            ]
+          },
+          "docs": "Returns a list of transactions. It can be paged and filtered by appending arguments to the query string of the request."
+        },
+        {
+          "info": {
+            "name": "Retrieve payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/payments/:paymentId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "paymentId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the payment object to be retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a Payment. Supply the unique paymentId that was returned from your previous request, and Trustly will return the corresponding payment information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

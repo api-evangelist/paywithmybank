@@ -1,0 +1,559 @@
+{
+  "item": [
+    {
+      "id": "4b16fad7-c156-4479-a4e9-985ff802ade6",
+      "name": "accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b209405a-aa69-4532-a33e-48a23fff9eb6",
+          "name": "Post account feedback",
+          "request": {
+            "name": "Post account feedback",
+            "description": {
+              "content": "Utilize this endpoint to record feedback regarding the result of an ACH payment using the account information verified by Trustly during a Verification Transaction. This feedback data helps optimize account verification scores over time. It is **required** when using Trustly Connect. \n\n> **Note for Trustly Pay** \n> For apps using Trustly Pay, feedback should be provided on individual transactions rather than on the account. See [`/transactions/{id}/feedback`](ref:post-transaction-feedback) for transaction-specific feedback details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"<string>\",\n    \"routingNumber\": \"<string>\",\n    \"token\": \"<string>\"\n  },\n  \"feedback\": {\n    \"status\": \"<string>\",\n    \"subStatus\": \"<string>\",\n    \"externalId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"submissionDate\": \"<double>\",\n    \"returnDate\": \"<double>\",\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1ad6385-6524-4ff8-b983-b9176cc2578d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"token\": \"string\"\n  },\n  \"feedback\": {\n    \"status\": \"9\",\n    \"subStatus\": \"string\",\n    \"externalId\": \"string\",\n    \"description\": \"string\",\n    \"submissionDate\": 329.0278600923313,\n    \"returnDate\": 1001.437636903173,\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79d7b5f4-5e23-467b-b7ca-236e66f1dde3",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"token\": \"string\"\n  },\n  \"feedback\": {\n    \"status\": \"9\",\n    \"subStatus\": \"string\",\n    \"externalId\": \"string\",\n    \"description\": \"string\",\n    \"submissionDate\": 329.0278600923313,\n    \"returnDate\": 1001.437636903173,\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"domain\": \"string\",\n  \"code\": 7500,\n  \"location\": \"string\",\n  \"message\": \"string\",\n  \"occurredAt\": 8796\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab96ff5b-380b-43d4-92ac-afdbf771d743",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"token\": \"string\"\n  },\n  \"feedback\": {\n    \"status\": \"9\",\n    \"subStatus\": \"string\",\n    \"externalId\": \"string\",\n    \"description\": \"string\",\n    \"submissionDate\": 329.0278600923313,\n    \"returnDate\": 1001.437636903173,\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"domain\": \"string\",\n  \"code\": 7500,\n  \"location\": \"string\",\n  \"message\": \"string\",\n  \"occurredAt\": 8796\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0efd830b-bf8e-4aea-b725-9940a8e5f182",
+          "name": "Tokenize an account",
+          "request": {
+            "name": "Tokenize an account",
+            "description": {
+              "content": "Convert legacy ACH ABA routing and account numbers or an International Bank Account Number (IBAN) into a verified token to meet NACHA requirements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "tokenize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "verifyAccount",
+                  "value": "false",
+                  "description": "If true, Trustly will verify the provided account data. Default value is false."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<string>\",\n  \"account\": {\n    \"accountNumber\": \"<string>\",\n    \"routingNumber\": \"<string>\",\n    \"iban\": \"<string>\",\n    \"nameOnAccount\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b411e682-debc-4d5f-abfb-8565090adc6e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verifyAccount",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<string>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"iban\": \"string\",\n    \"nameOnAccount\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"-1\",\n  \"profile\": \"1\",\n  \"verification\": {\n    \"verified\": false,\n    \"type\": \"2\",\n    \"hasEnoughFunds\": false,\n    \"verificationDate\": 1849,\n    \"score\": \"3\",\n    \"thirdPartyScore\": \"900\",\n    \"numberOfTries\": 5075.143537597536,\n    \"numberOfAttemptsLeft\": 1352.0239563976056\n  },\n  \"accountNumber\": \"string\",\n  \"token\": \"string\",\n  \"verified\": false,\n  \"nameOnAccount\": \"string\",\n  \"routingNumber\": \"string\",\n  \"iban\": \"string\",\n  \"accountId\": \"string\",\n  \"providerId\": \"string\",\n  \"paymentProvider\": {\n    \"name\": \"string\",\n    \"paymentProviderId\": \"string\",\n    \"type\": 1947.0726225071721,\n    \"instantPayoutAvailable\": false,\n    \"subType\": \"2000\",\n    \"swift\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"country\": \"AU\",\n    \"instantPayment\": false\n  },\n  \"country\": \"DE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "590d9fb6-bf69-4ff5-808e-e06547c00819",
+              "name": "One of the request parameters is invalid (sending an invalid amount format string for example).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "tokenize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verifyAccount",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<string>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"iban\": \"string\",\n    \"nameOnAccount\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a802bd1-eeda-4029-be3b-fed50baa45a8",
+          "name": "Verify an account",
+          "request": {
+            "name": "Verify an account",
+            "description": {
+              "content": "Allows for verification of most global accounts by passing in an account object containing either bank routing and account numbers or an IBAN.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided (e.g. account.paymentProvider)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"<string>\",\n    \"routingNumber\": \"<string>\",\n    \"iban\": \"<string>\",\n    \"nameOnAccount\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39168467-f798-46f6-b6a3-e2142c46e4ec",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"iban\": \"string\",\n    \"nameOnAccount\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"type\": \"0\",\n  \"profile\": \"1\",\n  \"verification\": {\n    \"verified\": true,\n    \"type\": \"3\",\n    \"hasEnoughFunds\": false,\n    \"verificationDate\": 6947,\n    \"score\": \"2\",\n    \"thirdPartyScore\": \"999\",\n    \"numberOfTries\": 2646.1225848857716,\n    \"numberOfAttemptsLeft\": 4081.533835121708\n  },\n  \"accountNumber\": \"string\",\n  \"token\": \"string\",\n  \"verified\": false,\n  \"nameOnAccount\": \"string\",\n  \"routingNumber\": \"string\",\n  \"iban\": \"string\",\n  \"accountId\": \"string\",\n  \"providerId\": \"string\",\n  \"paymentProvider\": {\n    \"name\": \"string\",\n    \"paymentProviderId\": \"string\",\n    \"type\": 1129.384170910397,\n    \"instantPayoutAvailable\": true,\n    \"subType\": \"1000\",\n    \"swift\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"country\": \"US\",\n    \"instantPayment\": true\n  },\n  \"country\": \"DE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d779f67b-3cc9-4ab6-a34c-b8dae4018dd1",
+              "name": "One of the request parameters is invalid (sending an invalid amount format string for example).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<double>\",\n  \"account\": {\n    \"accountNumber\": \"string\",\n    \"routingNumber\": \"string\",\n    \"iban\": \"string\",\n    \"nameOnAccount\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "26c6aa82-7b76-4c38-a669-87f1a96c1324",
+    "name": "accountData accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData verifyCustomer API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "verifyCustomer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get customer verification data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/payment/customer/verify",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the transaction."
+              }
+            ]
+          },
+          "docs": "Retrieves verification results for a given transaction. Returns a match result for each attribute compared."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

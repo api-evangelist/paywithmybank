@@ -1,0 +1,567 @@
+{
+  "item": [
+    {
+      "id": "a25cb6e4-eeab-44a1-9df8-a950e04e1559",
+      "name": "identity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e50b2d60-993d-41e3-a120-3d3476e372f0",
+          "name": "Get user",
+          "request": {
+            "name": "Get user",
+            "description": {
+              "content": "Retrieve the User object associated with the Trustly ID authorization transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided.\nSupported values:\n * `segmentedName`: returns a segmented version of the name field returned in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided.\nSupported values:\n * `segmentedName`: returns a segmented version of the name field returned in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6040406b-31c0-4a0a-ace3-58d1862cffae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "segmentedName"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "segmentedName"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"address\": [\n    {\n      \"country\": \"US\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    {\n      \"country\": \"US\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    }\n  ],\n  \"phone\": [\n    \"string\",\n    \"string\"\n  ],\n  \"email\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dateOfBirth\": \"string\",\n  \"taxId\": \"string\",\n  \"deceased\": false,\n  \"driverLicense\": {\n    \"number\": \"string\",\n    \"state\": \"string\"\n  },\n  \"eligible\": false,\n  \"createdAt\": 7385,\n  \"updatedAt\": 6214,\n  \"segmentedName\": {\n    \"title\": \"string\",\n    \"firstName\": \"string\",\n    \"middleName\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"suffix\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b604932-0133-4c53-8f5e-dc5dd367a5f4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "segmentedName"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "segmentedName"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 3412.1149109275293,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 4750.52160069077\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 935.341822014557,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 2807.5173086716077\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20f6edd4-2e29-4cbb-8a60-b98b84a224ac",
+          "name": "Get user verification details",
+          "request": {
+            "name": "Get user verification details",
+            "description": {
+              "content": "Retrieve the verification results and details of a Trustly ID-enabled authorization transaction. The details returned by this endpoint are segmented into two lists: verifications and attributes. \n\nThe verification objects contain the `name` and `result` of the verification as well as reason codes and reason descriptions corresponding to the results. If a verification includes a sanction screening and a match was returned, the results of the screening will also be included. If no `screeningResults` property is returned in the verification object, no match was returned.\n>**Note:** Verifications are configured per application, check with your Trustly services team member for definitions of your configured verifications.\n\nThe attribute objects contain metadata which describe how the property was verified and a list of `verification` objects which apply to the attribute.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "user",
+                "detail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided.\nSupported values:\n * `verification`: returns human-readable reason rules and descriptions."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided.\nSupported values:\n * `verification`: returns human-readable reason rules and descriptions."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6bdc2f29-2311-4204-93f4-845d53b1632f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "user",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "verification"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "verification"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {\n    \"verification\": [\n      {\n        \"result\": \"3\",\n        \"reasons\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason\": \"string\"\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason\": \"string\"\n          }\n        ],\n        \"screeningResult\": [\n          [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        ]\n      },\n      {\n        \"result\": \"1\",\n        \"reasons\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason\": \"string\"\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason\": \"string\"\n          }\n        ],\n        \"screeningResult\": [\n          [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        ]\n      }\n    ],\n    \"attribute\": [\n      {\n        \"name\": \"email\",\n        \"source\": {\n          \"name\": \"string\",\n          \"type\": 9418\n        },\n        \"createdAt\": 5529,\n        \"link\": \"string\",\n        \"verification\": [\n          {\n            \"trustedEntity\": \"string\",\n            \"verificationType\": 8804,\n            \"verificationMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"result\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"verifiedAt\": 6327\n          },\n          {\n            \"trustedEntity\": \"string\",\n            \"verificationType\": 917,\n            \"verificationMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"result\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"verifiedAt\": 3300\n          }\n        ]\n      },\n      {\n        \"name\": \"deceased\",\n        \"source\": {\n          \"name\": \"string\",\n          \"type\": 2116\n        },\n        \"createdAt\": 2331,\n        \"link\": \"string\",\n        \"verification\": [\n          {\n            \"trustedEntity\": \"string\",\n            \"verificationType\": 281,\n            \"verificationMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"result\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"verifiedAt\": 1202\n          },\n          {\n            \"trustedEntity\": \"string\",\n            \"verificationType\": 9023,\n            \"verificationMethod\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"result\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"verifiedAt\": 1584\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f5e5e32-3c70-41d6-af00-f2dbce63c076",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "user",
+                    "detail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "verification"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "verification"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 9299.036740733223,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 7176.771739575432\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 1025.200358551298,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 8178.977288497329\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7861b1a-1de7-4bc3-bf22-13d1370434f9",
+          "name": "Update user status",
+          "request": {
+            "name": "Update user status",
+            "description": {
+              "content": "This endpoint updates the status of a user by posting feedback data to Trustly for an authorized Identity transaction. This communicates to Trustly that the user associated with the transaction has been successfully registered in the merchant system, or that the user record has been voided and therefore will not be eligible for future payment transactions. \n\nTo confirm a user was registered, set properties `status` to `4`, `subStatus` to `559` and `description` to `Registered`. To void a user who did not complete registration after completing the Trustly ID flow, set `status` to `13`, `subStatus` to `558` and `description` to `Known bad user`. \n\nfor more information about Trustly ID, see [Verify identity with Trustly ID](/integrate/retrieve-data/trustly-id).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 4,\n  \"subStatus\": 559,\n  \"description\": \"Registered\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b80ca0a-88e0-4ca0-a7cd-09ec366b71a8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": 4,\n  \"subStatus\": 559,\n  \"description\": \"Registered\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"7\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"3\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"2\",\n      \"mode\": \"3\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 5983.414698214291,\n        \"instantPayoutAvailable\": true,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"US\",\n        \"instantPayment\": true\n      },\n      \"country\": \"US\",\n      \"name\": \"string\",\n      \"type\": 3750.93871747075,\n      \"profile\": 6567.672702750541,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": false,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"3\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9171,\n        \"score\": \"10\",\n        \"thirdPartyScore\": \"300\",\n        \"numberOfTries\": 3161.863687689388,\n        \"numberOfAttemptsLeft\": 5321.903621440435\n      },\n      \"source\": 824.7608195598655,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 6109.056645153325,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": false\n    },\n    \"allowedPaymentProviderType\": [\n      8137,\n      9339\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 65,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 6134.183293600631,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 5065,\n    \"updatedAt\": 5341,\n    \"recordVersion\": 4766.446125443641,\n    \"paymentFlow\": 8391.587888729759,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 9212,\n      \"updatedAt\": 599,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 8064,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1969-09-10T14:52:23.823Z\",\n      \"endDate\": \"2017-04-06T08:19:39.133Z\",\n      \"nextOccurrence\": \"1961-04-01T13:47:34.520Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 5339.0112469072255,\n      \"frequencyUnitType\": \"Day\",\n      \"automaticCapture\": false,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"AU\",\n    \"paymentProviderSubtype\": \"1000\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 1707,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": false\n  },\n  \"status\": \"7\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 4698,\n  \"processedAt\": 2370,\n  \"completedAt\": 3979,\n  \"updatedAt\": 2952,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 6755.758473714658,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 8636,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 1542.3768679661143,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a87a16e-dbfa-4ec9-a792-9c833ba9ee08",
+              "name": "Access not authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": 4,\n  \"subStatus\": 559,\n  \"description\": \"Registered\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 5560,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 2753\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 3380,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 9006\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e3fcd7d4-f13c-49c4-b822-0f1fbd84f31b",
+    "name": "accountData identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

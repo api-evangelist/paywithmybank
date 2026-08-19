@@ -1,0 +1,307 @@
+{
+  "item": [
+    {
+      "id": "fcd6a5a3-ffa8-4076-8226-4adf94356939",
+      "name": "networkCheckApi",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e682b91d-bb0a-409d-ad16-c61760db7f46",
+          "name": "Look up whether a user is known to Trustly",
+          "request": {
+            "name": "Look up whether a user is known to Trustly",
+            "description": {
+              "content": "Checks whether a user has previously used Trustly, based on one or more provided identifiers (email, phone, or your own customer ID).\n\nMerchants can use this endpoint without having to launch Trustly widget/lightbox. One such use case could be to use this endpoint early in the payment funnel — before the user reaches the payment selection screen — to determine whether to surface Trustly as the top payment option. A `true` response indicates the user is already familiar with Pay by Bank and is more likely to complete a Trustly-powered transaction.\n\n**How it works:** The lookup queries Trustly's user database across all stored identifiers. If any provided identifier matches a known Trustly user, `isTrustlyUser` is returned as `true`.\n\n**Authentication:** Requests must be authenticated with HTTP Basic Auth using your `accessId` as the username and `accessKey` as the password.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) User's email address."
+                },
+                {
+                  "disabled": false,
+                  "key": "externalId",
+                  "value": "<string>",
+                  "description": "(Required) Your external identifier for the Customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "phone",
+                  "value": "<string>",
+                  "description": "User's phone number in ITU E.164 format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7307b5e2-9d00-4c5a-817e-33db47900d4c",
+              "name": "Lookup result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isTrustlyUser\": false,\n  \"errorsList\": [\n    {\n      \"code\": 3904,\n      \"message\": \"string\",\n      \"location\": \"string\",\n      \"domain\": \"string\",\n      \"occurredAt\": 9468\n    },\n    {\n      \"code\": 2223,\n      \"message\": \"string\",\n      \"location\": \"string\",\n      \"domain\": \"string\",\n      \"occurredAt\": 2738\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1a90e6e-8651-4348-961d-6fe04973e1ed",
+              "name": "Bad Request — missing mandatory fields or invalid email",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isTrustlyUser\": false,\n  \"errorsList\": [\n    {\n      \"code\": 3904,\n      \"message\": \"string\",\n      \"location\": \"string\",\n      \"domain\": \"string\",\n      \"occurredAt\": 9468\n    },\n    {\n      \"code\": 2223,\n      \"message\": \"string\",\n      \"location\": \"string\",\n      \"domain\": \"string\",\n      \"occurredAt\": 2738\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "608b995c-22ee-4b3e-8114-0456ffb254c3",
+              "name": "Access not authorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 6326,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 8440\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 5446,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 347\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb84955f-56d9-4d96-9052-dbc69cdcd610",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "68d42770-9509-46f7-8e86-e01e8058ba68",
+    "name": "accountData networkCheckApi API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

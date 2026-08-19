@@ -1,0 +1,208 @@
+{
+  "item": [
+    {
+      "id": "df161397-6085-46bc-8d7b-8df17ca9ac98",
+      "name": "countries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d0bd54d-0032-49c9-ab37-8ed294d54c0e",
+          "name": "List countries",
+          "request": {
+            "name": "List countries",
+            "description": {
+              "content": "Returns a list of all available products by country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentType",
+                  "value": "<string>",
+                  "description": "Returns the countries that support this Payment Type."
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentProvider.subType",
+                  "value": "<string>",
+                  "description": "Returns the countries that support this Payment Provider SubType"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<string>",
+                  "description": "If true, returns all countries that are currently supported. Default value is true."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfeecb9f-84bf-4477-8618-9e3ab8cbbf9e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "paymentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentProvider.subType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"countries\": [\n    {\n      \"numericCode\": 3126,\n      \"alpha2Code\": \"string\",\n      \"alpha3Code\": \"string\",\n      \"name\": \"string\",\n      \"currencies\": [\n        \"string\",\n        \"string\"\n      ],\n      \"paymentTypes\": [\n        \"retrieval\",\n        \"verification\"\n      ],\n      \"paymentProviderSubtypes\": [\n        \"2001\",\n        \"2001\"\n      ],\n      \"enabled\": false\n    },\n    {\n      \"numericCode\": 1484,\n      \"alpha2Code\": \"string\",\n      \"alpha3Code\": \"string\",\n      \"name\": \"string\",\n      \"currencies\": [\n        \"string\",\n        \"string\"\n      ],\n      \"paymentTypes\": [\n        \"verification\",\n        \"instant\"\n      ],\n      \"paymentProviderSubtypes\": [\n        \"1000\",\n        \"2000\"\n      ],\n      \"enabled\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84e2442b-f808-4432-9880-c79fe4fcaaeb",
+              "name": "One of the request parameters is invalid (sending an invalid amount format string for example).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "US"
+                    },
+                    {
+                      "key": "paymentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentProvider.subType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a3ec2900-fa9d-4de6-be9b-7fff084089f4",
+    "name": "accountData countries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

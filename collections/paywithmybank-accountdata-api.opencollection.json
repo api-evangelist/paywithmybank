@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "accountData",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account activity summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/accountSummary",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              }
+            ]
+          },
+          "docs": "Returns summarized and aggregated information about an account such as deposits, withdrawals and balances for various time periods.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned."
+        },
+        {
+          "info": {
+            "name": "Get account balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/payment/paymentProvider/account/balance",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an Account that was authorized for a Transaction. You need only supply the unique transactionId that was returned as part of a bank authorization.\n\nThis is a restricted API and must be approved for usage by the Trustly Compliance team.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data"
+        },
+        {
+          "info": {
+            "name": "Get account users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/payment/paymentProvider/user",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "A field in the API response to be expanded in order for more details to be provided (e.g. customer.segmentedName)."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves users' information from an Authorized Bank transaction.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned."
+        },
+        {
+          "info": {
+            "name": "List all accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/payment/paymentProvider/accounts",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              }
+            ]
+          },
+          "docs": "Returns a list of all user-selected accounts associated with a given authorization transaction.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

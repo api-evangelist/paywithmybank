@@ -1,0 +1,672 @@
+{
+  "item": [
+    {
+      "id": "b5371005-f963-4a56-8684-4231e3883657",
+      "name": "accountData",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1e1709f-116c-4d67-9e2f-1fd4b27f61ed",
+          "name": "Get account activity summary",
+          "request": {
+            "name": "Get account activity summary",
+            "description": {
+              "content": "Returns summarized and aggregated information about an account such as deposits, withdrawals and balances for various time periods.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "accountSummary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c89876b-b478-4c56-9a4d-613a43c3e66e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "accountSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customerId\": \"string\",\n  \"lastUpdated\": 9047,\n  \"summary\": [\n    {\n      \"selectedAccount\": true,\n      \"currency\": \"string\",\n      \"nameOnAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"routingNumber\": \"string\",\n      \"aggregations\": [\n        {\n          \"days\": 80,\n          \"activityEarliestDate\": 434,\n          \"activityLatestDate\": 5607,\n          \"balanceMax\": \"string\",\n          \"balanceMin\": \"string\",\n          \"balanceAvg\": \"string\",\n          \"depositCount\": 6448,\n          \"depositAmountTotal\": \"string\",\n          \"depositAmountMax\": \"string\",\n          \"withdrawalCount\": 6243,\n          \"withdrawalAmountTotal\": \"string\",\n          \"withdrawalAmountMax\": \"string\",\n          \"overdraftCount\": 6559,\n          \"overdraftAmountTotal\": \"string\",\n          \"nsfCount\": 1530,\n          \"nsfFeeAmountTotal\": \"string\"\n        },\n        {\n          \"days\": 4759,\n          \"activityEarliestDate\": 6678,\n          \"activityLatestDate\": 5833,\n          \"balanceMax\": \"string\",\n          \"balanceMin\": \"string\",\n          \"balanceAvg\": \"string\",\n          \"depositCount\": 184,\n          \"depositAmountTotal\": \"string\",\n          \"depositAmountMax\": \"string\",\n          \"withdrawalCount\": 1185,\n          \"withdrawalAmountTotal\": \"string\",\n          \"withdrawalAmountMax\": \"string\",\n          \"overdraftCount\": 7683,\n          \"overdraftAmountTotal\": \"string\",\n          \"nsfCount\": 5905,\n          \"nsfFeeAmountTotal\": \"string\"\n        }\n      ]\n    },\n    {\n      \"selectedAccount\": true,\n      \"currency\": \"string\",\n      \"nameOnAccount\": \"string\",\n      \"accountNumber\": \"string\",\n      \"routingNumber\": \"string\",\n      \"aggregations\": [\n        {\n          \"days\": 4389,\n          \"activityEarliestDate\": 7961,\n          \"activityLatestDate\": 6478,\n          \"balanceMax\": \"string\",\n          \"balanceMin\": \"string\",\n          \"balanceAvg\": \"string\",\n          \"depositCount\": 1920,\n          \"depositAmountTotal\": \"string\",\n          \"depositAmountMax\": \"string\",\n          \"withdrawalCount\": 6595,\n          \"withdrawalAmountTotal\": \"string\",\n          \"withdrawalAmountMax\": \"string\",\n          \"overdraftCount\": 5183,\n          \"overdraftAmountTotal\": \"string\",\n          \"nsfCount\": 5589,\n          \"nsfFeeAmountTotal\": \"string\"\n        },\n        {\n          \"days\": 6137,\n          \"activityEarliestDate\": 7551,\n          \"activityLatestDate\": 1721,\n          \"balanceMax\": \"string\",\n          \"balanceMin\": \"string\",\n          \"balanceAvg\": \"string\",\n          \"depositCount\": 9940,\n          \"depositAmountTotal\": \"string\",\n          \"depositAmountMax\": \"string\",\n          \"withdrawalCount\": 34,\n          \"withdrawalAmountTotal\": \"string\",\n          \"withdrawalAmountMax\": \"string\",\n          \"overdraftCount\": 1041,\n          \"overdraftAmountTotal\": \"string\",\n          \"nsfCount\": 3789,\n          \"nsfFeeAmountTotal\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b8d69d8-4ccc-4e22-9b99-846cef9e0faf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "accountSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 2663.1857486780086,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 6888.500700928916\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 6736.393734468404,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 7528.6204177066675\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9283340-28b1-4f6d-8820-610ad8302c58",
+          "name": "Get account balance",
+          "request": {
+            "name": "Get account balance",
+            "description": {
+              "content": "Retrieves the details of an Account that was authorized for a Transaction. You need only supply the unique transactionId that was returned as part of a bank authorization.\n\nThis is a restricted API and must be approved for usage by the Trustly Compliance team.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.\n\n**Note for International Financial Institutions**</br>In some geographies the `Account` object in the response for this API may contain additional properties. For example, the `taxId` returned for accounts from Brazilian institutions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "payment",
+                "paymentProvider",
+                "account",
+                "balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cc86099-91c7-47fe-b5d3-2a596111990a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "payment",
+                    "paymentProvider",
+                    "account",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountBalance\": {\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"paymentProviderId\": \"string\",\n        \"type\": 4626.843946197009,\n        \"name\": \"string\",\n        \"instantPayoutAvailable\": true,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"address1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"address2\": \"string\"\n        },\n        \"country\": \"AU\",\n        \"instantPayment\": true\n      },\n      \"nameOnAccount\": \"string\",\n      \"country\": \"AU\",\n      \"name\": \"string\",\n      \"type\": 6167.418630275356,\n      \"profile\": 6264.245243583422,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": false,\n        \"type\": \"2\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 1953,\n        \"score\": \"1\",\n        \"thirdPartyScore\": \"900\",\n        \"numberOfTries\": 3109.6457284433477,\n        \"numberOfAttemptsLeft\": 4814.6058953457705\n      },\n      \"source\": 9987.016413939804,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": false,\n      \"taxId\": \"string\"\n    },\n    \"currency\": \"string\",\n    \"amount\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8134870e-3f52-4b3c-b991-fbdba15e3b2c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "payment",
+                    "paymentProvider",
+                    "account",
+                    "balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 3498.9903035012294,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 110.85723383272072\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 6932.563100331867,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 6852.865590565298\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a64555c5-a349-4ff4-b1cc-9ea8fa846560",
+          "name": "Get account users",
+          "request": {
+            "name": "Get account users",
+            "description": {
+              "content": "This endpoint retrieves users' information from an Authorized Bank transaction.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "payment",
+                "paymentProvider",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided (e.g. customer.segmentedName)."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A field in the API response to be expanded in order for more details to be provided (e.g. customer.segmentedName)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40ce379a-00dc-4fb6-a342-848f86c9d7ad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "payment",
+                    "paymentProvider",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "names"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "account.paymentProvider.address"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fingerprint\": \"string\",\n  \"paymentProvider\": {\n    \"paymentProviderId\": \"string\",\n    \"type\": 425.04154025802654,\n    \"name\": \"string\",\n    \"instantPayoutAvailable\": false,\n    \"subType\": \"2000\",\n    \"swift\": \"string\",\n    \"address\": {\n      \"country\": \"US\",\n      \"address1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"address2\": \"string\"\n    },\n    \"country\": \"US\",\n    \"instantPayment\": true\n  },\n  \"address\": [\n    {\n      \"country\": \"US\",\n      \"address1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"address2\": \"string\"\n    },\n    {\n      \"country\": \"US\",\n      \"address1\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"address2\": \"string\"\n    }\n  ],\n  \"createdAt\": 3553,\n  \"updatedAt\": 2067,\n  \"segmentedName\": {\n    \"title\": \"string\",\n    \"firstName\": \"string\",\n    \"middleName\": [\n      \"string\",\n      \"string\"\n    ],\n    \"lastName\": \"string\",\n    \"suffix\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "221bec77-d7bf-4ccf-a4ea-288ebee4f86f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "payment",
+                    "paymentProvider",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "names"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "account.paymentProvider.address"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 7883.26433485761,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 7230.402804721063\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 3647.9152456931265,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 7703.734925234648\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d3c1c8a-54d4-4c88-9ff8-94613382629b",
+          "name": "List all accounts",
+          "request": {
+            "name": "List all accounts",
+            "description": {
+              "content": "Returns a list of all user-selected accounts associated with a given authorization transaction.\n\n**Warning**</br>Please wait to receive the [DataReady](/api-reference/api/event-notifications/data-ready) event before calling this endpoint. Requests to this endpoint made prior to receiving the DataReady event can result in partial data being returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "payment",
+                "paymentProvider",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ef39e02-9194-4120-aea5-9e473e635610",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "payment",
+                    "paymentProvider",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"paymentProviderId\": \"string\",\n        \"type\": 9721.614123971063,\n        \"name\": \"string\",\n        \"instantPayoutAvailable\": true,\n        \"subType\": \"1000\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"US\",\n          \"address1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"address2\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"nameOnAccount\": \"string\",\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 4382.604105975653,\n      \"profile\": 686.32922108671,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": false,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"2\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 5224,\n        \"score\": \"10\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 5384.712994795621,\n        \"numberOfAttemptsLeft\": 9110.669531107622\n      },\n      \"source\": 4402.437100673789,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"paymentProviderId\": \"string\",\n        \"type\": 5324.868913167704,\n        \"name\": \"string\",\n        \"instantPayoutAvailable\": true,\n        \"subType\": \"2000\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"US\",\n          \"address1\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"address2\": \"string\"\n        },\n        \"country\": \"US\",\n        \"instantPayment\": false\n      },\n      \"nameOnAccount\": \"string\",\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 4713.774141947416,\n      \"profile\": 5345.178707730911,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"3\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 825,\n        \"score\": \"9\",\n        \"thirdPartyScore\": \"600\",\n        \"numberOfTries\": 4022.2214831682677,\n        \"numberOfAttemptsLeft\": 4029.619828749762\n      },\n      \"source\": 860.6657112136473,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0db191b-5ca0-4281-be60-df54538a99a5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "payment",
+                    "paymentProvider",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from a Trustly Authorization transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"domain\": \"string\",\n      \"code\": 7238.12623595649,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 4939.557899781112\n    },\n    {\n      \"domain\": \"string\",\n      \"code\": 9213.123233731452,\n      \"location\": \"string\",\n      \"message\": \"string\",\n      \"occurredAt\": 6564.432786986869\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0b378b75-349c-4182-b77c-b4b5e303a2c7",
+    "name": "accountData API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,448 @@
+{
+  "item": [
+    {
+      "id": "44644775-8876-49c0-be63-9b70565da927",
+      "name": "customers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e81384d6-00e0-4fc8-8c6d-e9825229ab18",
+          "name": "Create or Update a Customer",
+          "request": {
+            "name": "Create or Update a Customer",
+            "description": {
+              "content": "Creates a new customer record in the merchant account. In cases when the customer was not created at the time an Authorization was established, use this endpoint to register customer details, such as name, email, and optional metadata, to support your integration.\n\nIf an existing `customerId` or `externalId` is provided, the specified customer will be updated with any new or updated properties. To remove properties of an existing customer, set the property to `null`. Before using this endpoint, it may be helpful to call [Get Customer by ID](ref:get-customers-customerid) to obtain the relevant customer object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "externalId",
+                  "value": "<string>",
+                  "description": "The externalId that was passed when the Customer record was created."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": {\n    \"country\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"createdAt\": \"<integer>\",\n  \"updatedAt\": \"<integer>\",\n  \"customerId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"enrollDate\": \"<integer>\",\n  \"vip\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"balance\": \"<string>\",\n  \"organizationNumber\": \"<string>\",\n  \"externalTier\": \"<string>\",\n  \"personId\": \"<string>\",\n  \"customData\": {},\n  \"driverLicense\": {\n    \"number\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"nationalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2609b1a1-c99d-454a-ba56-0f781aa1669d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": {\n    \"country\": \"string\",\n    \"address1\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\"\n  },\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"createdAt\": \"<integer>\",\n  \"updatedAt\": \"<integer>\",\n  \"customerId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"enrollDate\": \"<integer>\",\n  \"vip\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"balance\": \"<string>\",\n  \"organizationNumber\": \"<string>\",\n  \"externalTier\": \"<string>\",\n  \"personId\": \"<string>\",\n  \"customData\": {},\n  \"driverLicense\": {\n    \"number\": \"string\",\n    \"state\": \"string\"\n  },\n  \"nationalId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customer\": {\n    \"name\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"string\",\n    \"taxId\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"createdAt\": 8651,\n    \"updatedAt\": 5063,\n    \"customerId\": \"string\",\n    \"externalId\": \"string\",\n    \"merchantId\": \"string\",\n    \"enrollDate\": 1567,\n    \"vip\": \"string\",\n    \"currency\": \"string\",\n    \"balance\": \"string\",\n    \"organizationNumber\": \"string\",\n    \"externalTier\": \"string\",\n    \"personId\": \"string\",\n    \"customData\": {},\n    \"driverLicense\": {\n      \"number\": \"string\",\n      \"state\": \"string\"\n    },\n    \"nationalId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8190bfc3-95fa-43b0-a568-bccc27b3760a",
+          "name": "Get Customers",
+          "request": {
+            "name": "Get Customers",
+            "description": {
+              "content": "Retrieves a list of customers associated with the merchant account. Use this endpoint to view customer details relevant to your integration. \n\n Results can be filtered by either the `externalId` or `customerId` properties in order to retrieve the details of a single customer using the unique `externalId` that was provided during customer creation. Other filtering and paging capabilities are not supported at this time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "externalId",
+                  "value": "<string>",
+                  "description": "The externalId that was passed when the Customer record was created."
+                },
+                {
+                  "disabled": false,
+                  "key": "customerId",
+                  "value": "<string>",
+                  "description": "The identifier of the Customer to be retrieved."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "624cdc30-178f-445b-ba6e-9c9dcb8086cc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "externalId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customers\": [\n    {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 2902,\n      \"updatedAt\": 2662,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 7392,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 9799,\n      \"updatedAt\": 829,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 1597,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff76a981-2c2f-4fa1-adfe-20866c562f8e",
+          "name": "Get Customer by ID",
+          "request": {
+            "name": "Get Customer by ID",
+            "description": {
+              "content": "Retrieves the details of a Customer using the unique `customerId` that was returned upon customer creation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) The identifier of the Customer to be retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4caa8eef-a9e3-4d47-bbfd-ff2e2748a521",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) The identifier of the Customer to be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customer\": {\n    \"name\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"string\",\n    \"taxId\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"createdAt\": 2047,\n    \"updatedAt\": 6841,\n    \"customerId\": \"string\",\n    \"externalId\": \"string\",\n    \"merchantId\": \"string\",\n    \"enrollDate\": 9813,\n    \"vip\": \"string\",\n    \"currency\": \"string\",\n    \"balance\": \"string\",\n    \"organizationNumber\": \"string\",\n    \"externalTier\": \"string\",\n    \"personId\": \"string\",\n    \"customData\": {},\n    \"driverLicense\": {\n      \"number\": \"string\",\n      \"state\": \"string\"\n    },\n    \"nationalId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78707cef-be8e-486a-be23-c6a31d22dc6e",
+          "name": "Update Customer by ID",
+          "request": {
+            "name": "Update Customer by ID",
+            "description": {
+              "content": "Updates the specified Customer by setting the values of the parameters on the customer object passed. Before calling this endpoint, it may be beneficial to call [Get Customer by ID](/api-reference/api/customers/get-customers-customer-id) to obtain a Customer Object. Change the desired fields in the Customer object and then modify the object before calling the update endpoint with the modified object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) The identifier of the Customer to be retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": {\n    \"country\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"createdAt\": \"<integer>\",\n  \"updatedAt\": \"<integer>\",\n  \"customerId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"enrollDate\": \"<integer>\",\n  \"vip\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"balance\": \"<string>\",\n  \"organizationNumber\": \"<string>\",\n  \"externalTier\": \"<string>\",\n  \"personId\": \"<string>\",\n  \"customData\": {},\n  \"driverLicense\": {\n    \"number\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"nationalId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3b9ade57-07a8-4b34-8986-f9c48c7d8aae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) The identifier of the Customer to be retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": {\n    \"country\": \"string\",\n    \"address1\": \"string\",\n    \"address2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"zip\": \"string\"\n  },\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"taxId\": \"<string>\",\n  \"dateOfBirth\": \"<string>\",\n  \"createdAt\": \"<integer>\",\n  \"updatedAt\": \"<integer>\",\n  \"customerId\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"enrollDate\": \"<integer>\",\n  \"vip\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"balance\": \"<string>\",\n  \"organizationNumber\": \"<string>\",\n  \"externalTier\": \"<string>\",\n  \"personId\": \"<string>\",\n  \"customData\": {},\n  \"driverLicense\": {\n    \"number\": \"string\",\n    \"state\": \"string\"\n  },\n  \"nationalId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"customer\": {\n    \"name\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"string\",\n    \"taxId\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"createdAt\": 5670,\n    \"updatedAt\": 1509,\n    \"customerId\": \"string\",\n    \"externalId\": \"string\",\n    \"merchantId\": \"string\",\n    \"enrollDate\": 82,\n    \"vip\": \"string\",\n    \"currency\": \"string\",\n    \"balance\": \"string\",\n    \"organizationNumber\": \"string\",\n    \"externalTier\": \"string\",\n    \"personId\": \"string\",\n    \"customData\": {},\n    \"driverLicense\": {\n      \"number\": \"string\",\n      \"state\": \"string\"\n    },\n    \"nationalId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aeb2b04b-ea64-4ccb-970e-adf1037f3980",
+    "name": "accountData customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

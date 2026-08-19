@@ -1,0 +1,1634 @@
+{
+  "item": [
+    {
+      "id": "91827148-44e8-4b88-a40c-f0a0124668f4",
+      "name": "transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "68acc13d-1805-461d-8fce-134e2b924d82",
+          "name": "Cancel transaction",
+          "request": {
+            "name": "Cancel transaction",
+            "description": {
+              "content": "Cancels an existing transaction that has not yet been processed. A cancellation should be issued as soon as you know the transaction will not be completed.\n\nA Deferred or Instant payment transaction can only be canceled before the payment processing cut-off time. If the Cancel request returns an error, a Refund call should be executed instead.\n\nAdditionally, this endpoint can be used to cancel a Bank Authorization when a user revokes access to their bank from your application. If the bank authorization transaction is voided, further `/capture` or `/deposit` requests using the canceled transaction will not be permitted. Any outstanding transactions with a `pending` status related to the bank authorization will remain unchanged and must be canceled individually if necessary.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<double>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "374baccc-a088-47f7-ad33-ba037e0c59a3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"message\": \"<string>\",\n  \"reason\": \"<double>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1af68e66-082e-4e13-9410-452080da3af2",
+          "name": "Capture transaction",
+          "request": {
+            "name": "Capture transaction",
+            "description": {
+              "content": "Capture collects money amounts (minimum of 0.99) from a customer bank account of a previously authorized transaction.\n\nThis operation creates a new transaction called a Capture transaction. It is linked to the payment you are partially or fully capturing.\n\nYou can issue multiple capture requests against a single Authorization. However, the sum of these captures must be less than or equal to what is allowed by the authorized payment.\n\nEnsure you also implement an Event Notification Handler to get transaction status updates. Although the splitToken field is optional at the API level, if you are using 'guaranteed' payments, omitting this field will result in a Fail event. When providing a splitToken, be sure the string is URL encoded.\n\n> **Note for Money Transfer** \n> If your application is configured for \"Money Transfer\" many properties in the `beneficiary` and `beneficiaryAccount` objects will be required. \n> See [Send money](/integrate/send-money) for more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"splitToken\": \"<string>\",\n  \"beneficiaryAccount.iban\": \"<string>\",\n  \"beneficiaryAccount.accountNumber\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.name\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.swift\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.routingNumber\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.country\": \"<string>\",\n  \"beneficiary.name\": \"<string>\",\n  \"beneficiary.email\": \"<string>\",\n  \"beneficiary.dateOfBirth\": \"<string>\",\n  \"beneficiary.taxId\": \"<string>\",\n  \"beneficiary.address.address1\": \"<string>\",\n  \"beneficiary.address.address2\": \"<string>\",\n  \"beneficiary.address.city\": \"<string>\",\n  \"beneficiary.address.state\": \"<string>\",\n  \"beneficiary.address.zip\": \"<string>\",\n  \"beneficiary.address.country\": \"<string>\",\n  \"metadata.remittance.withdrawalMethod\": \"<string>\",\n  \"interactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab4874e2-f4fa-41c7-a43d-595ef19024cd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"splitToken\": \"<string>\",\n  \"beneficiaryAccount.iban\": \"<string>\",\n  \"beneficiaryAccount.accountNumber\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.name\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.swift\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.routingNumber\": \"<string>\",\n  \"beneficiaryAccount.paymentProvider.country\": \"<string>\",\n  \"beneficiary.name\": \"<string>\",\n  \"beneficiary.email\": \"<string>\",\n  \"beneficiary.dateOfBirth\": \"<string>\",\n  \"beneficiary.taxId\": \"<string>\",\n  \"beneficiary.address.address1\": \"<string>\",\n  \"beneficiary.address.address2\": \"<string>\",\n  \"beneficiary.address.city\": \"<string>\",\n  \"beneficiary.address.state\": \"<string>\",\n  \"beneficiary.address.zip\": \"<string>\",\n  \"beneficiary.address.country\": \"<string>\",\n  \"metadata.remittance.withdrawalMethod\": \"DebitCard\",\n  \"interactionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19f1ae21-9c25-4344-977a-4410639a7eca",
+          "name": "Deposit transaction",
+          "request": {
+            "name": "Deposit transaction",
+            "description": {
+              "content": "Deposit sends money amounts (minimum of 0.99) to a customer bank account of a previously authorized Disbursement or Deferred transaction.\n\nThis operation creates a new transaction called a Deposit transaction. It is linked to the disbursement payment.\n\nYou can create multiple Deposit transactions against a single Disbursement or Deferred Authorization so long as the amount doesn't exceed the total of the Authorization.\n\nEnsure you also implement an Event Notification Handler to get transaction status updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "deposit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Disbursement Authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"instantPayoutRequest\": \"<boolean>\",\n  \"externalTier\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cfc1116b-e609-4a89-b0e5-f9fdebed1f14",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "deposit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Disbursement Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"instantPayoutRequest\": \"<boolean>\",\n  \"externalTier\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b3df8e6-1a19-4c69-852a-f66968dda7ed",
+          "name": "Establish a new transaction for authorization",
+          "request": {
+            "name": "Establish a new transaction for authorization",
+            "description": {
+              "content": "This endpoint creates a new unauthorized transaction and returns a URL to be provided for a user to authorize the transaction. After the user has authorized the transaction with a bank, the transaction can be used with other Trustly APIs to retrieve account data or process payments.\n\nFor more details and descriptions of the fields supported by this endpoint see [Establish Data object](doc:features/establish-data-object).\n\n> **Note for Money Transfer** \n> If your application is configured for \"Money Transfer\" many properties in the `customer`, `beneficiary` and `beneficiaryAccount` objects will be required. \n> See [Send money](/integrate/send-money) for more details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "establish"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "createTransaction",
+                  "value": "<boolean>",
+                  "description": "If true, Trustly will return a transactionId that can be used with other API's. Either createTransaction or notify is required."
+                },
+                {
+                  "disabled": false,
+                  "key": "notify",
+                  "value": "<boolean>",
+                  "description": "If true, Trustly will notify the User via SMS or Email with a URL that can be used to complete the transaction. Either createTransaction or notify is required."
+                },
+                {
+                  "disabled": false,
+                  "key": "channel",
+                  "value": "<string>",
+                  "description": "Comma separated list of notification channels. Currently only sms and email are supported. Example: sms,email will send a notification via SMS and email to the User. Required if notify is true."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantId\": \"<string>\",\n  \"accessId\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"returnUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"requestSignature\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"description\": \"<string>\",\n  \"notificationUrl\": \"<string>\",\n  \"paymentType\": \"<string>\",\n  \"displayAmount\": \"<double>\",\n  \"customer\": {\n    \"name\": \"<string>\",\n    \"address\": {\n      \"country\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"taxId\": \"<string>\",\n    \"dateOfBirth\": \"<string>\",\n    \"createdAt\": \"<integer>\",\n    \"updatedAt\": \"<integer>\",\n    \"customerId\": \"<string>\",\n    \"externalId\": \"<string>\",\n    \"merchantId\": \"<string>\",\n    \"enrollDate\": \"<integer>\",\n    \"vip\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"balance\": \"<string>\",\n    \"organizationNumber\": \"<string>\",\n    \"externalTier\": \"<string>\",\n    \"personId\": \"<string>\",\n    \"customData\": {},\n    \"driverLicense\": {\n      \"number\": \"<string>\",\n      \"state\": \"<string>\"\n    },\n    \"nationalId\": \"<string>\"\n  },\n  \"account\": {\n    \"routingNumber\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"taxId\": \"<string>\",\n    \"address\": {\n      \"country\": \"<string>\",\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"dateOfBirth\": \"<string>\",\n    \"createdAt\": \"<integer>\",\n    \"updatedAt\": \"<integer>\"\n  },\n  \"beneficiaryAccount\": {\n    \"accountNumber\": \"<double>\",\n    \"iban\": \"<string>\",\n    \"paymentProvider\": {\n      \"name\": \"<string>\",\n      \"paymentProviderId\": \"<string>\",\n      \"type\": \"<double>\",\n      \"instantPayoutAvailable\": \"<boolean>\",\n      \"subType\": \"<string>\",\n      \"swift\": \"<string>\",\n      \"address\": {\n        \"country\": \"<string>\",\n        \"address1\": \"<string>\",\n        \"address2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      \"country\": \"<string>\",\n      \"instantPayment\": \"<boolean>\"\n    }\n  },\n  \"kycType\": \"<string>\",\n  \"metadata\": {\n    \"lang\": \"<string>\",\n    \"finishButtonLabelType\": \"<string>\",\n    \"integrationContext\": \"<string>\",\n    \"urlScheme\": \"<string>\",\n    \"clc\": {\n      \"propertyId\": \"<double>\",\n      \"machineId\": \"<double>\",\n      \"qrTimestamp\": \"<dateTime>\",\n      \"playerNumber\": \"<double>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b94972dd-5f47-479d-9ff4-797fb2529e2f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "establish"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "createTransaction",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "notify",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "channel",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantId\": \"<string>\",\n  \"accessId\": \"<string>\",\n  \"currency\": \"CAD\",\n  \"returnUrl\": \"<string>\",\n  \"cancelUrl\": \"<string>\",\n  \"requestSignature\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"description\": \"<string>\",\n  \"notificationUrl\": \"<string>\",\n  \"paymentType\": \"Instant\",\n  \"displayAmount\": \"<double>\",\n  \"customer\": {\n    \"name\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"string\",\n    \"taxId\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"createdAt\": 3175,\n    \"updatedAt\": 2825,\n    \"customerId\": \"string\",\n    \"externalId\": \"string\",\n    \"merchantId\": \"string\",\n    \"enrollDate\": 9301,\n    \"vip\": \"string\",\n    \"currency\": \"string\",\n    \"balance\": \"string\",\n    \"organizationNumber\": \"string\",\n    \"externalTier\": \"string\",\n    \"personId\": \"string\",\n    \"customData\": {},\n    \"driverLicense\": {\n      \"number\": \"string\",\n      \"state\": \"string\"\n    },\n    \"nationalId\": \"string\"\n  },\n  \"account\": {\n    \"routingNumber\": \"string\",\n    \"accountNumber\": \"string\",\n    \"type\": \"string\"\n  },\n  \"beneficiary\": {\n    \"name\": \"string\",\n    \"taxId\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"createdAt\": 1325,\n    \"updatedAt\": 9619\n  },\n  \"beneficiaryAccount\": {\n    \"accountNumber\": 1369.6761435708415,\n    \"iban\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 6722.120417990063,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2001\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": false\n    }\n  },\n  \"kycType\": \"<string>\",\n  \"metadata\": {\n    \"lang\": \"string\",\n    \"finishButtonLabelType\": \"deposit\",\n    \"integrationContext\": \"InAppBrowser\",\n    \"urlScheme\": \"string\",\n    \"clc\": {\n      \"propertyId\": 4736.121904183296,\n      \"machineId\": 4940.12506698091,\n      \"qrTimestamp\": \"2001-05-17T13:47:15.138Z\",\n      \"playerNumber\": 3010.380345572096\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\",\n  \"merchantId\": \"string\",\n  \"paymentType\": 7854.8771918426155,\n  \"returnUrl\": \"string\",\n  \"cancelUrl\": \"string\",\n  \"notificationUrl\": \"string\",\n  \"data\": \"string\",\n  \"accessId\": \"string\",\n  \"requestSignature\": \"string\",\n  \"transactionId\": \"string\",\n  \"merchantReference\": \"string\",\n  \"description\": \"string\",\n  \"currency\": \"USD\",\n  \"kycType\": \"OnlineBanking\",\n  \"amount\": \"string\",\n  \"verification\": {\n    \"status\": \"4\",\n    \"mode\": \"3\",\n    \"verifyCustomer\": false\n  },\n  \"customer\": {\n    \"name\": \"string\",\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"phone\": \"string\",\n    \"email\": \"string\",\n    \"taxId\": \"string\",\n    \"dateOfBirth\": \"string\",\n    \"createdAt\": 5149,\n    \"updatedAt\": 5448,\n    \"customerId\": \"string\",\n    \"externalId\": \"string\",\n    \"merchantId\": \"string\",\n    \"enrollDate\": 3608,\n    \"vip\": \"string\",\n    \"currency\": \"string\",\n    \"balance\": \"string\",\n    \"organizationNumber\": \"string\",\n    \"externalTier\": \"string\",\n    \"personId\": \"string\",\n    \"customData\": {},\n    \"driverLicense\": {\n      \"number\": \"string\",\n      \"state\": \"string\"\n    },\n    \"nationalId\": \"string\"\n  },\n  \"account\": {\n    \"providerId\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 6341.436535476281,\n      \"instantPayoutAvailable\": true,\n      \"subType\": \"1000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"AU\",\n      \"instantPayment\": true\n    },\n    \"country\": \"UK\",\n    \"name\": \"string\",\n    \"type\": 2037.5065505097057,\n    \"profile\": 5412.631273206412,\n    \"accountNumber\": \"string\",\n    \"iban\": \"string\",\n    \"verified\": true,\n    \"verification\": {\n      \"verified\": true,\n      \"type\": \"1\",\n      \"hasEnoughFunds\": true,\n      \"verificationDate\": 4350,\n      \"score\": \"10\",\n      \"thirdPartyScore\": \"600\",\n      \"numberOfTries\": 2183.2878110686893,\n      \"numberOfAttemptsLeft\": 5829.585359111558\n    },\n    \"source\": 980.6747325052634,\n    \"routingNumber\": \"string\",\n    \"token\": \"string\",\n    \"accountNumberLastFour\": \"string\",\n    \"virtualAccountRoutingPair\": false\n  },\n  \"metadata\": {\n    \"name\": \"string\",\n    \"value\": \"string\"\n  },\n  \"trustlyABRequest\": {\n    \"successURL\": \"string\",\n    \"failURL\": \"string\",\n    \"uRLTarget\": \"string\",\n    \"callbackURL\": \"string\",\n    \"notificationURL\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8b55127-f09a-4c34-9895-5e89b2eded80",
+          "name": "Get transactions",
+          "request": {
+            "name": "Get transactions",
+            "description": {
+              "content": "Returns a list of transactions. It can be paged and filtered by appending arguments to the query string of the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "transactionType",
+                  "value": "<string>",
+                  "description": "Returns transactions of this Transaction Type. It is possible to filter by multiple values by repeating this argument."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionType",
+                  "value": "<string>",
+                  "description": "Returns transactions of this Transaction Type. It is possible to filter by multiple values by repeating this argument."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionStatus",
+                  "value": "<string>",
+                  "description": "Returns transactions that currently have this Transaction Status. It is possible to filter by multiple values by repeating this argument."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionStatus",
+                  "value": "<string>",
+                  "description": "Returns transactions that currently have this Transaction Status. It is possible to filter by multiple values by repeating this argument."
+                },
+                {
+                  "disabled": false,
+                  "key": "originalTransactionId",
+                  "value": "<string>",
+                  "description": "Returns transactions that belongs to this original transaction identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.paymentId",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by this payment ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.paymentType",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payments of this Payment Type. It is possible to filter by multiple values by repeating this argument."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.paymentType",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payments of this Payment Type. It is possible to filter by multiple values by repeating this argument."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.merchantReference",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payments associated with this merchant reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.verification.status",
+                  "value": "<double>",
+                  "description": "Returns transactions of the payments at this payment Verification Status."
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentProviderTransaction.ppTrxStatusCode",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by this payment provider status code."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Returns transactions by this order field"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "<string>",
+                  "description": "Returns transactions by this sort order"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<string>",
+                  "description": "Returns transactions from that offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<string>",
+                  "description": "Returns the maximum number of transactions specified by this field"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.min",
+                  "value": "<string>",
+                  "description": "Returns transactions for that minimum amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "amount.max",
+                  "value": "<string>",
+                  "description": "Returns transactions for that maximum amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "paid.min",
+                  "value": "<string>",
+                  "description": "Returns transactions for that minimum paid."
+                },
+                {
+                  "disabled": false,
+                  "key": "paid.max",
+                  "value": "<string>",
+                  "description": "Returns transactions for that maximum paid."
+                },
+                {
+                  "disabled": false,
+                  "key": "refunded.min",
+                  "value": "<string>",
+                  "description": "Returns transactions with this minimum refund amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "refunded.max",
+                  "value": "<string>",
+                  "description": "Returns transactions with this maximum refund amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt.start",
+                  "value": "<string>",
+                  "description": "Returns transactions after this creation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt.end",
+                  "value": "<string>",
+                  "description": "Returns transactions before this creation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "updatedAt.start",
+                  "value": "<string>",
+                  "description": "Returns transactions after this update date"
+                },
+                {
+                  "disabled": false,
+                  "key": "updatedAt.end",
+                  "value": "<string>",
+                  "description": "Returns transactions before this update date"
+                },
+                {
+                  "disabled": false,
+                  "key": "processedAt.start",
+                  "value": "<string>",
+                  "description": "Returns transactions after this processing date"
+                },
+                {
+                  "disabled": false,
+                  "key": "processedAt.end",
+                  "value": "<string>",
+                  "description": "Returns transactions before this processing date"
+                },
+                {
+                  "disabled": false,
+                  "key": "completedAt.start",
+                  "value": "<string>",
+                  "description": "Returns transactions after this completion date"
+                },
+                {
+                  "disabled": false,
+                  "key": "completedAt.end",
+                  "value": "<string>",
+                  "description": "Returns transactions before this completion date"
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentProviderTransaction.paymentProviderTransactionId",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by this payment provider id."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.description",
+                  "value": "<string>",
+                  "description": "Returns transactions with this payment description"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.fingerprint",
+                  "value": "<string>",
+                  "description": "Returns transactions with this payment fingerprint"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.merchant.merchantId",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by this merchant identification."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.paymentProvider.paymentProviderId",
+                  "value": "<string>",
+                  "description": "Returns transactions by this payment provider identification."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.authorization.status",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payments at this payment Authorization Status."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.authorization.status",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payments at this payment Authorization Status."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.fiAccount.providerId",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by this payment provider identification."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.fiAccount.accountNumber",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by account number."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.fiAccount.routingNumber",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by routing number."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.fiAccount.verified",
+                  "value": "<boolean>",
+                  "description": "Returns transactions of the payment if account is verified."
+                },
+                {
+                  "disabled": false,
+                  "key": "ipAddr",
+                  "value": "<string>",
+                  "description": "Returns transactions with this IP address"
+                },
+                {
+                  "disabled": false,
+                  "key": "routingNumber",
+                  "value": "<string>",
+                  "description": "Returns transactions with this routing number"
+                },
+                {
+                  "disabled": false,
+                  "key": "accountNumber",
+                  "value": "<string>",
+                  "description": "Returns transactions with this account number"
+                },
+                {
+                  "disabled": false,
+                  "key": "customerName",
+                  "value": "<string>",
+                  "description": "Returns transactions with this customer name"
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.customer.name",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by customer name."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.customer.externalId",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment specified by customer external identification."
+                },
+                {
+                  "disabled": false,
+                  "key": "ignoreUserPortalTransactions",
+                  "value": "<boolean>",
+                  "description": "Returns transactions bypassing the portal user."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment.paymentProvider.framework",
+                  "value": "<string>",
+                  "description": "Returns transactions of the payment provider specified by framework."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81d8a146-36f7-45f0-b4b4-9573181cea7a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "transactionType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "originalTransactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.paymentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.paymentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.paymentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.merchantReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.verification.status",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "paymentProviderTransaction.ppTrxStatusCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount.min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount.max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paid.min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paid.max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "refunded.min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "refunded.max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt.start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdAt.end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedAt.start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedAt.end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "processedAt.start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "processedAt.end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "completedAt.start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "completedAt.end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentProviderTransaction.paymentProviderTransactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.fingerprint",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.merchant.merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.paymentProvider.paymentProviderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.authorization.status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.authorization.status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.fiAccount.providerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.fiAccount.accountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.fiAccount.routingNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.fiAccount.verified",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ipAddr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routingNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "customerName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.customer.name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment.customer.externalId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ignoreUserPortalTransactions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "payment.paymentProvider.framework",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"string\",\n      \"transactionType\": \"0\",\n      \"payment\": {\n        \"paymentId\": \"string\",\n        \"paymentType\": \"1\",\n        \"merchant\": {\n          \"merchantId\": \"string\",\n          \"name\": \"string\"\n        },\n        \"merchantReference\": \"string\",\n        \"merchantId\": \"string\",\n        \"fingerprint\": \"string\",\n        \"verification\": {\n          \"status\": \"3\",\n          \"mode\": \"4\",\n          \"verifyCustomer\": true\n        },\n        \"account\": {\n          \"providerId\": \"string\",\n          \"paymentProvider\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paymentProviderId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instantPayoutAvailable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"subType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swift\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instantPayment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"country\": \"AU\",\n          \"name\": \"string\",\n          \"type\": 5746.176268684049,\n          \"profile\": 8556.490926453736,\n          \"accountNumber\": \"string\",\n          \"iban\": \"string\",\n          \"verified\": false,\n          \"verification\": {\n            \"verified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasEnoughFunds\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"verificationDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"score\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"thirdPartyScore\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"numberOfTries\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"numberOfAttemptsLeft\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"source\": 7792.727831913644,\n          \"routingNumber\": \"string\",\n          \"token\": \"string\",\n          \"accountNumberLastFour\": \"string\",\n          \"virtualAccountRoutingPair\": true\n        },\n        \"currency\": \"USD\",\n        \"amount\": \"string\",\n        \"paymentProvider\": {\n          \"name\": \"string\",\n          \"paymentProviderId\": \"string\",\n          \"type\": 2316.3650390616276,\n          \"instantPayoutAvailable\": false,\n          \"subType\": \"2000\",\n          \"swift\": \"string\",\n          \"address\": {\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"zip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"country\": \"UK\",\n          \"instantPayment\": true\n        },\n        \"allowedPaymentProviderType\": [\n          670,\n          7140\n        ],\n        \"auth\": {\n          \"token\": \"string\",\n          \"status\": 6994,\n          \"message\": \"string\"\n        },\n        \"authorization\": \"string\",\n        \"authorizationStatus\": 8891.486392818215,\n        \"authorizationStatusMessage\": \"string\",\n        \"pending\": \"string\",\n        \"paid\": \"string\",\n        \"refunded\": \"string\",\n        \"reversed\": \"string\",\n        \"balance\": \"string\",\n        \"createdAt\": 9870,\n        \"updatedAt\": 5574,\n        \"recordVersion\": 6142.695062096625,\n        \"paymentFlow\": 7228.344202881311,\n        \"description\": \"string\",\n        \"returnUrl\": \"string\",\n        \"cancelUrl\": \"string\",\n        \"customer\": {\n          \"name\": \"string\",\n          \"address\": {\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"zip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"phone\": \"string\",\n          \"email\": \"string\",\n          \"taxId\": \"string\",\n          \"dateOfBirth\": \"string\",\n          \"createdAt\": 9075,\n          \"updatedAt\": 7213,\n          \"customerId\": \"string\",\n          \"externalId\": \"string\",\n          \"merchantId\": \"string\",\n          \"enrollDate\": 8179,\n          \"vip\": \"string\",\n          \"currency\": \"string\",\n          \"balance\": \"string\",\n          \"organizationNumber\": \"string\",\n          \"externalTier\": \"string\",\n          \"personId\": \"string\",\n          \"customData\": {},\n          \"driverLicense\": {\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nationalId\": \"string\"\n        },\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"recurrence\": {\n          \"startDate\": \"1974-03-07T01:14:04.454Z\",\n          \"endDate\": \"1998-05-10T04:09:43.151Z\",\n          \"nextOccurrence\": \"1950-09-24T22:52:44.994Z\",\n          \"recurringAmount\": \"string\",\n          \"debtSettlement\": \"string\",\n          \"frequency\": 1,\n          \"frequencyUnit\": 2874.7303795482735,\n          \"frequencyUnitType\": \"Week\",\n          \"automaticCapture\": true,\n          \"recurrenceId\": \"string\"\n        },\n        \"system\": \"-1\",\n        \"country\": \"UK\",\n        \"paymentProviderSubtype\": \"1000\"\n      },\n      \"currency\": \"USD\",\n      \"amount\": \"string\",\n      \"pending\": \"string\",\n      \"paid\": \"string\",\n      \"refunded\": \"string\",\n      \"reversed\": \"string\",\n      \"balance\": \"string\",\n      \"paymentProviderTransaction\": {\n        \"paymentProviderTransactionId\": \"string\",\n        \"status\": \"string\",\n        \"statusMessage\": \"string\",\n        \"signature\": \"string\",\n        \"statusDescription\": \"string\",\n        \"paymentProcessor\": {\n          \"paymentProcessorId\": \"string\",\n          \"type\": 4764,\n          \"name\": \"string\",\n          \"shortName\": \"string\",\n          \"url\": \"string\",\n          \"active\": \"string\"\n        },\n        \"thirdPartyDeclineCode\": \"string\",\n        \"clearingHouse\": \"string\",\n        \"instantSettle\": false\n      },\n      \"status\": \"1\",\n      \"statusMessage\": \"string\",\n      \"ip\": \"string\",\n      \"createdAt\": 307,\n      \"processedAt\": 9165,\n      \"completedAt\": 1819,\n      \"updatedAt\": 499,\n      \"merchantReference\": \"string\",\n      \"recordVersion\": 2943.9796965935093,\n      \"ppTrxId\": \"string\",\n      \"expiredAt\": 4373,\n      \"originalTransactionId\": \"string\",\n      \"fee\": \"string\",\n      \"timeZone\": \"string\",\n      \"representmentScheduledAt\": 3202.128465366184,\n      \"paymentProcessorType\": \"string\",\n      \"statusCode\": \"string\",\n      \"preAuthorized\": false\n    },\n    {\n      \"transactionId\": \"string\",\n      \"transactionType\": \"4\",\n      \"payment\": {\n        \"paymentId\": \"string\",\n        \"paymentType\": \"3\",\n        \"merchant\": {\n          \"merchantId\": \"string\",\n          \"name\": \"string\"\n        },\n        \"merchantReference\": \"string\",\n        \"merchantId\": \"string\",\n        \"fingerprint\": \"string\",\n        \"verification\": {\n          \"status\": \"2\",\n          \"mode\": \"2\",\n          \"verifyCustomer\": true\n        },\n        \"account\": {\n          \"providerId\": \"string\",\n          \"paymentProvider\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"paymentProviderId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instantPayoutAvailable\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"subType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"swift\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instantPayment\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"country\": \"AU\",\n          \"name\": \"string\",\n          \"type\": 7699.231494285438,\n          \"profile\": 2307.3130032310305,\n          \"accountNumber\": \"string\",\n          \"iban\": \"string\",\n          \"verified\": true,\n          \"verification\": {\n            \"verified\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasEnoughFunds\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"verificationDate\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"score\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"thirdPartyScore\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"numberOfTries\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"numberOfAttemptsLeft\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"source\": 8646.678679900479,\n          \"routingNumber\": \"string\",\n          \"token\": \"string\",\n          \"accountNumberLastFour\": \"string\",\n          \"virtualAccountRoutingPair\": false\n        },\n        \"currency\": \"USD\",\n        \"amount\": \"string\",\n        \"paymentProvider\": {\n          \"name\": \"string\",\n          \"paymentProviderId\": \"string\",\n          \"type\": 3445.6153958020764,\n          \"instantPayoutAvailable\": false,\n          \"subType\": \"2000\",\n          \"swift\": \"string\",\n          \"address\": {\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"zip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"country\": \"CA\",\n          \"instantPayment\": false\n        },\n        \"allowedPaymentProviderType\": [\n          5897,\n          2545\n        ],\n        \"auth\": {\n          \"token\": \"string\",\n          \"status\": 9541,\n          \"message\": \"string\"\n        },\n        \"authorization\": \"string\",\n        \"authorizationStatus\": 4763.731303738961,\n        \"authorizationStatusMessage\": \"string\",\n        \"pending\": \"string\",\n        \"paid\": \"string\",\n        \"refunded\": \"string\",\n        \"reversed\": \"string\",\n        \"balance\": \"string\",\n        \"createdAt\": 689,\n        \"updatedAt\": 8274,\n        \"recordVersion\": 6694.667057018576,\n        \"paymentFlow\": 5392.66643346876,\n        \"description\": \"string\",\n        \"returnUrl\": \"string\",\n        \"cancelUrl\": \"string\",\n        \"customer\": {\n          \"name\": \"string\",\n          \"address\": {\n            \"country\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"address2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"zip\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"phone\": \"string\",\n          \"email\": \"string\",\n          \"taxId\": \"string\",\n          \"dateOfBirth\": \"string\",\n          \"createdAt\": 8045,\n          \"updatedAt\": 7664,\n          \"customerId\": \"string\",\n          \"externalId\": \"string\",\n          \"merchantId\": \"string\",\n          \"enrollDate\": 5393,\n          \"vip\": \"string\",\n          \"currency\": \"string\",\n          \"balance\": \"string\",\n          \"organizationNumber\": \"string\",\n          \"externalTier\": \"string\",\n          \"personId\": \"string\",\n          \"customData\": {},\n          \"driverLicense\": {\n            \"number\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"nationalId\": \"string\"\n        },\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"recurrence\": {\n          \"startDate\": \"2020-11-17T12:21:21.838Z\",\n          \"endDate\": \"1998-04-13T01:32:39.156Z\",\n          \"nextOccurrence\": \"1983-05-05T21:36:18.225Z\",\n          \"recurringAmount\": \"string\",\n          \"debtSettlement\": \"string\",\n          \"frequency\": 1,\n          \"frequencyUnit\": 546.0235113787193,\n          \"frequencyUnitType\": \"Year\",\n          \"automaticCapture\": true,\n          \"recurrenceId\": \"string\"\n        },\n        \"system\": \"-1\",\n        \"country\": \"CA\",\n        \"paymentProviderSubtype\": \"2001\"\n      },\n      \"currency\": \"USD\",\n      \"amount\": \"string\",\n      \"pending\": \"string\",\n      \"paid\": \"string\",\n      \"refunded\": \"string\",\n      \"reversed\": \"string\",\n      \"balance\": \"string\",\n      \"paymentProviderTransaction\": {\n        \"paymentProviderTransactionId\": \"string\",\n        \"status\": \"string\",\n        \"statusMessage\": \"string\",\n        \"signature\": \"string\",\n        \"statusDescription\": \"string\",\n        \"paymentProcessor\": {\n          \"paymentProcessorId\": \"string\",\n          \"type\": 5059,\n          \"name\": \"string\",\n          \"shortName\": \"string\",\n          \"url\": \"string\",\n          \"active\": \"string\"\n        },\n        \"thirdPartyDeclineCode\": \"string\",\n        \"clearingHouse\": \"string\",\n        \"instantSettle\": true\n      },\n      \"status\": \"14\",\n      \"statusMessage\": \"string\",\n      \"ip\": \"string\",\n      \"createdAt\": 9547,\n      \"processedAt\": 2120,\n      \"completedAt\": 8748,\n      \"updatedAt\": 9578,\n      \"merchantReference\": \"string\",\n      \"recordVersion\": 7385.7334466279235,\n      \"ppTrxId\": \"string\",\n      \"expiredAt\": 8760,\n      \"originalTransactionId\": \"string\",\n      \"fee\": \"string\",\n      \"timeZone\": \"string\",\n      \"representmentScheduledAt\": 8691.656349561974,\n      \"paymentProcessorType\": \"string\",\n      \"statusCode\": \"string\",\n      \"preAuthorized\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebbb54c8-dcbf-4777-b1fd-158aa95c7eb1",
+          "name": "Preauthorize transaction",
+          "request": {
+            "name": "Preauthorize transaction",
+            "description": {
+              "content": "The Preauthorize API allows the merchant to pre-authorize one or more captures up to the total pre-authorized amount on a pre-authorized period interval in hours. Captures after the pre-authorized period interval are treated as normal Captures (will need to pass the full balance and risk analysis to be guaranteed).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "capture",
+                "preAuth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"period\": 0,\n  \"amount\": \"<string>\",\n  \"splitToken\": \"<string>\",\n  \"externalTier\": \"<string>\",\n  \"metadata.remittance.withdrawalMethod\": \"<string>\",\n  \"interactionId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ead2fea-b321-42fa-b2ed-61624c9169cb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "capture",
+                    "preAuth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"period\": 0,\n  \"amount\": \"<string>\",\n  \"splitToken\": \"<string>\",\n  \"externalTier\": \"<string>\",\n  \"metadata.remittance.withdrawalMethod\": \"HomeDelivery\",\n  \"interactionId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f3da385-967c-4d44-82b9-b8c95d9d588e",
+          "name": "Reclaim transaction",
+          "request": {
+            "name": "Reclaim transaction",
+            "description": {
+              "content": "Reclaims a previously completed Deposit transaction (minimum of 0.99). You can optionally reclaim partially. You can do so as many times as you wish until the entire deposited amount has been reclaimed.\n\nA Deposit transaction can only be reclaimed after the transaction has been processed and completed.\n\nEnsure you also implement an [event notification](/integrate/core-concepts/webhooks-and-events) handler to get transaction status updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "reclaim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Deposit Transaction ID retrieved from a Trustly Deposit transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c92d592-8a1e-4556-9b50-400259428003",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "reclaim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Deposit Transaction ID retrieved from a Trustly Deposit transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ba5b6a7-56a5-48e2-bfdd-2054dd075a97",
+          "name": "Refresh a transaction",
+          "request": {
+            "name": "Refresh a transaction",
+            "description": {
+              "content": "Refresh allows for data associated with a transaction to be updated to the most recent available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "refresh"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"splitToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f164b88-b319-4650-a438-db1d775669ae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "refresh"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"splitToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"refresh\": {\n    \"processId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd8b1c81-f29d-4236-9758-0fe39ae95cde",
+          "name": "Refund transaction",
+          "request": {
+            "name": "Refund transaction",
+            "description": {
+              "content": "Refunds a previously completed Capture or Instant transaction (minimum of 0.99). You can optionally refund partially. You can do so as many times as you wish until the entire collected amount has been refunded.\n\nA *Capture* or *Pay* transaction can only be refunded after the bank money collection has been processed and completed.\n\nEnsure you also implement an Event Notification Handler to get transaction status updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Capture Transaction ID retrieved from a Trustly Capture transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8114287-4626-42e1-94ec-f93aac66e67d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Capture Transaction ID retrieved from a Trustly Capture transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"<string>\",\n  \"amount\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00f09d38-ba7c-48c4-bf6c-c9cd0962a31a",
+          "name": "Retrieve a transaction",
+          "request": {
+            "name": "Retrieve a transaction",
+            "description": {
+              "content": "This endpoint allows you to retrieve comprehensive details about a transaction using its unique identifier `transactionId`. The response includes key transaction information, such as the transaction status, as well as amounts, and account details for payment or authorization transactions. This endpoint is useful for checking the current state of a transaction or verifying transaction information after processing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Transaction ID retrieved from Trustly."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fe62579-ca3c-49b0-9bec-b7c1e56612a9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Transaction ID retrieved from Trustly."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"8\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"5\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6817.649005804639,\n        \"instantPayoutAvailable\": false,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"UK\",\n        \"instantPayment\": false\n      },\n      \"country\": \"DE\",\n      \"name\": \"string\",\n      \"type\": 5547.062870465785,\n      \"profile\": 671.5004253961775,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": true,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": true,\n        \"verificationDate\": 9803,\n        \"score\": \"6\",\n        \"thirdPartyScore\": \"200\",\n        \"numberOfTries\": 7561.01801796844,\n        \"numberOfAttemptsLeft\": 8054.010853915881\n      },\n      \"source\": 6173.292786334024,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": true\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7102.702348711858,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"UK\",\n      \"instantPayment\": true\n    },\n    \"allowedPaymentProviderType\": [\n      8173,\n      3928\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 1424,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 5000.656578080952,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6652,\n    \"updatedAt\": 2977,\n    \"recordVersion\": 1337.5131274413898,\n    \"paymentFlow\": 7360.549672856016,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 417,\n      \"updatedAt\": 3583,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 3313,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"1997-04-19T06:35:24.283Z\",\n      \"endDate\": \"1971-09-15T11:09:19.014Z\",\n      \"nextOccurrence\": \"1984-12-28T03:52:47.029Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 7633.070965089021,\n      \"frequencyUnitType\": \"Month\",\n      \"automaticCapture\": true,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"-1\",\n    \"country\": \"UK\",\n    \"paymentProviderSubtype\": \"2001\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 8314,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"0\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 2196,\n  \"processedAt\": 5559,\n  \"completedAt\": 9477,\n  \"updatedAt\": 5315,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 5452.928443207923,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 5333,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 181.70728110227574,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eaccccd8-35ba-4ede-a66a-d507aae7bf0f",
+    "name": "accountData transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

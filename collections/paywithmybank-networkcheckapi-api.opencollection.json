@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData networkCheckApi API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "networkCheckApi",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up whether a user is known to Trustly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/users/lookup",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "User's email address."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "Your external identifier for the Customer."
+              },
+              {
+                "name": "phone",
+                "value": "",
+                "type": "query",
+                "description": "User's phone number in ITU E.164 format."
+              }
+            ]
+          },
+          "docs": "Checks whether a user has previously used Trustly, based on one or more provided identifiers (email, phone, or your own customer ID).\n\nMerchants can use this endpoint without having to launch Trustly widget/lightbox. One such use case could be to use this endpoint early in the payment funnel — before the user reaches the payment selection screen — to determine whether to surface Trustly as the top payment option. A `true` response indicates the user is already familiar with Pay by Bank and is mo"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

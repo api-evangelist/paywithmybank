@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "bfbba197-4ee4-4394-af00-4fdd4a9f324d",
+      "name": "paymentProviders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc8b7cc0-8d43-46e6-81f8-a1c837c68713",
+          "name": "List payment providers",
+          "request": {
+            "name": "List payment providers",
+            "description": {
+              "content": "Returns a list of payment providers, filtered by country. It can be paged and filtered by appending arguments to the query string of the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentProviders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "countries",
+                  "value": "<string>",
+                  "description": "2 character ISO Country code. There can be multiple instances of this query parameter to represent a list of countries."
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentType",
+                  "value": "<string>",
+                  "description": "Filters out payment providers not enabled for the specified payment type. Possible values are Instant, Deferred, Disbursement, Recurring, Verification, and Retrieval."
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<string>",
+                  "description": "Returns payment providers from that offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<string>",
+                  "description": "Returns the maximum number of payment providers specified by this field."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33181820-f600-4c69-80f2-bb4e0b8d4964",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentProviders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "countries",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "paymentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"paymentProviders\": [\n    {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 7714.822199003558,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2001\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"US\",\n      \"instantPayment\": false\n    },\n    {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 6006.028239756086,\n      \"instantPayoutAvailable\": true,\n      \"subType\": \"1000\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"DE\",\n      \"instantPayment\": true\n    }\n  ],\n  \"startIndex\": 7778.290502803405,\n  \"itemsPerPage\": 4054.028972560475\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "10ad9c65-a5bf-4ac6-9f3f-9f3c6fce1a81",
+    "name": "accountData paymentProviders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

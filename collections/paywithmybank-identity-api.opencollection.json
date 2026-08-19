@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData identity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "identity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/user",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "A field in the API response to be expanded in order for more details to be provided.\nSupported values:\n * `segmentedName`: returns a segmented version of the name field returned in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve the User object associated with the Trustly ID authorization transaction."
+        },
+        {
+          "info": {
+            "name": "Get user verification details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/user/detail",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "A field in the API response to be expanded in order for more details to be provided.\nSupported values:\n * `verification`: returns human-readable reason rules and descriptions."
+              }
+            ]
+          },
+          "docs": "Retrieve the verification results and details of a Trustly ID-enabled authorization transaction. The details returned by this endpoint are segmented into two lists: verifications and attributes. \n\nThe verification objects contain the `name` and `result` of the verification as well as reason codes and reason descriptions corresponding to the results. If a verification includes a sanction screening and a match was returned, the results of the screening will also be included. If no `screeningResult"
+        },
+        {
+          "info": {
+            "name": "Update user status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/feedback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from a Trustly Authorization transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint updates the status of a user by posting feedback data to Trustly for an authorized Identity transaction. This communicates to Trustly that the user associated with the transaction has been successfully registered in the merchant system, or that the user record has been voided and therefore will not be eligible for future payment transactions. \n\nTo confirm a user was registered, set properties `status` to `4`, `subStatus` to `559` and `description` to `Registered`. To void a user wh"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

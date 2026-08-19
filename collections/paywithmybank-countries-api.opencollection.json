@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData countries API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "countries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/countries",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported."
+              },
+              {
+                "name": "paymentType",
+                "value": "",
+                "type": "query",
+                "description": "Returns the countries that support this Payment Type."
+              },
+              {
+                "name": "paymentProvider.subType",
+                "value": "",
+                "type": "query",
+                "description": "Returns the countries that support this Payment Provider SubType"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns all countries that are currently supported. Default value is true."
+              }
+            ]
+          },
+          "docs": "Returns a list of all available products by country."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

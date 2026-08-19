@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData paymentProviders API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "paymentProviders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payment providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/paymentProviders",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query",
+                "description": "2 character ISO Country code. There can be multiple instances of this query parameter to represent a list of countries."
+              },
+              {
+                "name": "paymentType",
+                "value": "",
+                "type": "query",
+                "description": "Filters out payment providers not enabled for the specified payment type. Possible values are Instant, Deferred, Disbursement, Recurring, Verification, and Retrieval."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "Returns payment providers from that offset."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Returns the maximum number of payment providers specified by this field."
+              }
+            ]
+          },
+          "docs": "Returns a list of payment providers, filtered by country. It can be paged and filtered by appending arguments to the query string of the request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

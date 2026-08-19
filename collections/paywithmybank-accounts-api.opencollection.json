@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData accounts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post account feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/feedback",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Utilize this endpoint to record feedback regarding the result of an ACH payment using the account information verified by Trustly during a Verification Transaction. This feedback data helps optimize account verification scores over time. It is **required** when using Trustly Connect. \n\n> **Note for Trustly Pay** \n> For apps using Trustly Pay, feedback should be provided on individual transactions rather than on the account. See [`/transactions/{id}/feedback`](ref:post-transaction-feedback) for t"
+        },
+        {
+          "info": {
+            "name": "Tokenize an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/accounts/tokenize",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "verifyAccount",
+                "value": "",
+                "type": "query",
+                "description": "If true, Trustly will verify the provided account data. Default value is false."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert legacy ACH ABA routing and account numbers or an International Bank Account Number (IBAN) into a verified token to meet NACHA requirements."
+        },
+        {
+          "info": {
+            "name": "Verify an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/accounts/verify",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "A field in the API response to be expanded in order for more details to be provided (e.g. account.paymentProvider)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows for verification of most global accounts by passing in an account object containing either bank routing and account numbers or an IBAN."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

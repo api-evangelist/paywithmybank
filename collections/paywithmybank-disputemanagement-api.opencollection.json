@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData disputeManagement API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "disputeManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post a dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/collections/recovery/dispute",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows you to recover a retail dispute. The response includes key transaction information, such as the transaction status, as well as amounts, and account details for payment or authorization transactions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

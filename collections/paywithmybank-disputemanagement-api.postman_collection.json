@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "d8005549-2f34-4cf4-ad54-3e281a8730f2",
+      "name": "disputeManagement",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eaca7331-61b4-4967-a977-284b070270d4",
+          "name": "Post a dispute",
+          "request": {
+            "name": "Post a dispute",
+            "description": {
+              "content": "This endpoint allows you to recover a retail dispute. The response includes key transaction information, such as the transaction status, as well as amounts, and account details for payment or authorization transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                "recovery",
+                "dispute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "Idempotency-Key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionId\": \"<string>\",\n  \"amount\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "308d9724-5526-440c-af2c-3197acda1b00",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "recovery",
+                    "dispute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"amount\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"transactionType\": \"7\",\n  \"payment\": {\n    \"paymentId\": \"string\",\n    \"paymentType\": \"3\",\n    \"merchant\": {\n      \"merchantId\": \"string\",\n      \"name\": \"string\"\n    },\n    \"merchantReference\": \"string\",\n    \"merchantId\": \"string\",\n    \"fingerprint\": \"string\",\n    \"verification\": {\n      \"status\": \"4\",\n      \"mode\": \"4\",\n      \"verifyCustomer\": false\n    },\n    \"account\": {\n      \"providerId\": \"string\",\n      \"paymentProvider\": {\n        \"name\": \"string\",\n        \"paymentProviderId\": \"string\",\n        \"type\": 6449.033337377664,\n        \"instantPayoutAvailable\": true,\n        \"subType\": \"2001\",\n        \"swift\": \"string\",\n        \"address\": {\n          \"country\": \"string\",\n          \"address1\": \"string\",\n          \"address2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        },\n        \"country\": \"DE\",\n        \"instantPayment\": true\n      },\n      \"country\": \"CA\",\n      \"name\": \"string\",\n      \"type\": 5013.803865923691,\n      \"profile\": 6602.135387528279,\n      \"accountNumber\": \"string\",\n      \"iban\": \"string\",\n      \"verified\": false,\n      \"verification\": {\n        \"verified\": true,\n        \"type\": \"1\",\n        \"hasEnoughFunds\": false,\n        \"verificationDate\": 3701,\n        \"score\": \"5\",\n        \"thirdPartyScore\": \"600\",\n        \"numberOfTries\": 5670.463508366997,\n        \"numberOfAttemptsLeft\": 8746.238563016155\n      },\n      \"source\": 5779.313671413902,\n      \"routingNumber\": \"string\",\n      \"token\": \"string\",\n      \"accountNumberLastFour\": \"string\",\n      \"virtualAccountRoutingPair\": false\n    },\n    \"currency\": \"USD\",\n    \"amount\": \"string\",\n    \"paymentProvider\": {\n      \"name\": \"string\",\n      \"paymentProviderId\": \"string\",\n      \"type\": 393.04226294379794,\n      \"instantPayoutAvailable\": false,\n      \"subType\": \"2001\",\n      \"swift\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"country\": \"AU\",\n      \"instantPayment\": false\n    },\n    \"allowedPaymentProviderType\": [\n      481,\n      8069\n    ],\n    \"auth\": {\n      \"token\": \"string\",\n      \"status\": 3298,\n      \"message\": \"string\"\n    },\n    \"authorization\": \"string\",\n    \"authorizationStatus\": 9691.766371095679,\n    \"authorizationStatusMessage\": \"string\",\n    \"pending\": \"string\",\n    \"paid\": \"string\",\n    \"refunded\": \"string\",\n    \"reversed\": \"string\",\n    \"balance\": \"string\",\n    \"createdAt\": 6773,\n    \"updatedAt\": 8315,\n    \"recordVersion\": 227.63289136432775,\n    \"paymentFlow\": 8371.720782917955,\n    \"description\": \"string\",\n    \"returnUrl\": \"string\",\n    \"cancelUrl\": \"string\",\n    \"customer\": {\n      \"name\": \"string\",\n      \"address\": {\n        \"country\": \"string\",\n        \"address1\": \"string\",\n        \"address2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\"\n      },\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"taxId\": \"string\",\n      \"dateOfBirth\": \"string\",\n      \"createdAt\": 2740,\n      \"updatedAt\": 7621,\n      \"customerId\": \"string\",\n      \"externalId\": \"string\",\n      \"merchantId\": \"string\",\n      \"enrollDate\": 4508,\n      \"vip\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": \"string\",\n      \"organizationNumber\": \"string\",\n      \"externalTier\": \"string\",\n      \"personId\": \"string\",\n      \"customData\": {},\n      \"driverLicense\": {\n        \"number\": \"string\",\n        \"state\": \"string\"\n      },\n      \"nationalId\": \"string\"\n    },\n    \"address\": {\n      \"country\": \"string\",\n      \"address1\": \"string\",\n      \"address2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    },\n    \"recurrence\": {\n      \"startDate\": \"2024-02-12T07:56:47.586Z\",\n      \"endDate\": \"2024-01-29T09:53:21.200Z\",\n      \"nextOccurrence\": \"1957-09-29T03:21:48.645Z\",\n      \"recurringAmount\": \"string\",\n      \"debtSettlement\": \"string\",\n      \"frequency\": 1,\n      \"frequencyUnit\": 1720.9494739924291,\n      \"frequencyUnitType\": \"Year\",\n      \"automaticCapture\": false,\n      \"recurrenceId\": \"string\"\n    },\n    \"system\": \"1\",\n    \"country\": \"AU\",\n    \"paymentProviderSubtype\": \"1000\"\n  },\n  \"currency\": \"USD\",\n  \"amount\": \"string\",\n  \"pending\": \"string\",\n  \"paid\": \"string\",\n  \"refunded\": \"string\",\n  \"reversed\": \"string\",\n  \"balance\": \"string\",\n  \"paymentProviderTransaction\": {\n    \"paymentProviderTransactionId\": \"string\",\n    \"status\": \"string\",\n    \"statusMessage\": \"string\",\n    \"signature\": \"string\",\n    \"statusDescription\": \"string\",\n    \"paymentProcessor\": {\n      \"paymentProcessorId\": \"string\",\n      \"type\": 4208,\n      \"name\": \"string\",\n      \"shortName\": \"string\",\n      \"url\": \"string\",\n      \"active\": \"string\"\n    },\n    \"thirdPartyDeclineCode\": \"string\",\n    \"clearingHouse\": \"string\",\n    \"instantSettle\": true\n  },\n  \"status\": \"13\",\n  \"statusMessage\": \"string\",\n  \"ip\": \"string\",\n  \"createdAt\": 6220,\n  \"processedAt\": 5509,\n  \"completedAt\": 9707,\n  \"updatedAt\": 7126,\n  \"merchantReference\": \"string\",\n  \"recordVersion\": 1594.494214591593,\n  \"ppTrxId\": \"string\",\n  \"expiredAt\": 4154,\n  \"originalTransactionId\": \"string\",\n  \"fee\": \"string\",\n  \"timeZone\": \"string\",\n  \"representmentScheduledAt\": 9626.337267896617,\n  \"paymentProcessorType\": \"string\",\n  \"statusCode\": \"string\",\n  \"preAuthorized\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d7174f2-0055-4112-9872-d1817b3f2ca7",
+              "name": "Invalid parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    "recovery",
+                    "dispute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Idempotency-Key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"amount\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"domain\": \"string\",\n  \"code\": 2655,\n  \"location\": \"string\",\n  \"message\": \"string\",\n  \"occurredAt\": 3408\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox.trustly.one/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b4fa49f2-1426-40e0-90ac-7cfae6b61030",
+    "name": "accountData disputeManagement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

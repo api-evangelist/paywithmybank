@@ -1,0 +1,570 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "accountData transactions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/cancel",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an existing transaction that has not yet been processed. A cancellation should be issued as soon as you know the transaction will not be completed.\n\nA Deferred or Instant payment transaction can only be canceled before the payment processing cut-off time. If the Cancel request returns an error, a Refund call should be executed instead.\n\nAdditionally, this endpoint can be used to cancel a Bank Authorization when a user revokes access to their bank from your application. If the bank author"
+        },
+        {
+          "info": {
+            "name": "Capture transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/capture",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Capture collects money amounts (minimum of 0.99) from a customer bank account of a previously authorized transaction.\n\nThis operation creates a new transaction called a Capture transaction. It is linked to the payment you are partially or fully capturing.\n\nYou can issue multiple capture requests against a single Authorization. However, the sum of these captures must be less than or equal to what is allowed by the authorized payment.\n\nEnsure you also implement an Event Notification Handler to get"
+        },
+        {
+          "info": {
+            "name": "Deposit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/deposit",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Transaction ID retrieved from a Trustly Deferred or Disbursement Authorization."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deposit sends money amounts (minimum of 0.99) to a customer bank account of a previously authorized Disbursement or Deferred transaction.\n\nThis operation creates a new transaction called a Deposit transaction. It is linked to the disbursement payment.\n\nYou can create multiple Deposit transactions against a single Disbursement or Deferred Authorization so long as the amount doesn't exceed the total of the Authorization.\n\nEnsure you also implement an Event Notification Handler to get transaction s"
+        },
+        {
+          "info": {
+            "name": "Establish a new transaction for authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/establish",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "createTransaction",
+                "value": "",
+                "type": "query",
+                "description": "If true, Trustly will return a transactionId that can be used with other API's. Either createTransaction or notify is required."
+              },
+              {
+                "name": "notify",
+                "value": "",
+                "type": "query",
+                "description": "If true, Trustly will notify the User via SMS or Email with a URL that can be used to complete the transaction. Either createTransaction or notify is required."
+              },
+              {
+                "name": "channel",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of notification channels. Currently only sms and email are supported. Example: sms,email will send a notification via SMS and email to the User. Required if notify is true."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint creates a new unauthorized transaction and returns a URL to be provided for a user to authorize the transaction. After the user has authorized the transaction with a bank, the transaction can be used with other Trustly APIs to retrieve account data or process payments.\n\nFor more details and descriptions of the fields supported by this endpoint see [Establish Data object](doc:features/establish-data-object).\n\n> **Note for Money Transfer** \n> If your application is configured for \"Mo"
+        },
+        {
+          "info": {
+            "name": "Get transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionType",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of this Transaction Type. It is possible to filter by multiple values by repeating this argument."
+              },
+              {
+                "name": "transactionStatus",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions that currently have this Transaction Status. It is possible to filter by multiple values by repeating this argument."
+              },
+              {
+                "name": "originalTransactionId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions that belongs to this original transaction identifier."
+              },
+              {
+                "name": "payment.paymentId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by this payment ID."
+              },
+              {
+                "name": "payment.paymentType",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments of this Payment Type. It is possible to filter by multiple values by repeating this argument."
+              },
+              {
+                "name": "payment.merchantReference",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments associated with this merchant reference."
+              },
+              {
+                "name": "payment.verification.status",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments at this payment Verification Status."
+              },
+              {
+                "name": "paymentProviderTransaction.ppTrxStatusCode",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by this payment provider status code."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions by this order field"
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions by this sort order"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions from that offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Returns the maximum number of transactions specified by this field"
+              },
+              {
+                "name": "amount.min",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions for that minimum amount."
+              },
+              {
+                "name": "amount.max",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions for that maximum amount."
+              },
+              {
+                "name": "paid.min",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions for that minimum paid."
+              },
+              {
+                "name": "paid.max",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions for that maximum paid."
+              },
+              {
+                "name": "refunded.min",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this minimum refund amount."
+              },
+              {
+                "name": "refunded.max",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this maximum refund amount."
+              },
+              {
+                "name": "createdAt.start",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions after this creation date"
+              },
+              {
+                "name": "createdAt.end",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions before this creation date"
+              },
+              {
+                "name": "updatedAt.start",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions after this update date"
+              },
+              {
+                "name": "updatedAt.end",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions before this update date"
+              },
+              {
+                "name": "processedAt.start",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions after this processing date"
+              },
+              {
+                "name": "processedAt.end",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions before this processing date"
+              },
+              {
+                "name": "completedAt.start",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions after this completion date"
+              },
+              {
+                "name": "completedAt.end",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions before this completion date"
+              },
+              {
+                "name": "paymentProviderTransaction.paymentProviderTransactionId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by this payment provider id."
+              },
+              {
+                "name": "payment.description",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this payment description"
+              },
+              {
+                "name": "payment.fingerprint",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this payment fingerprint"
+              },
+              {
+                "name": "payment.merchant.merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by this merchant identification."
+              },
+              {
+                "name": "payment.paymentProvider.paymentProviderId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions by this payment provider identification."
+              },
+              {
+                "name": "payment.authorization.status",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payments at this payment Authorization Status."
+              },
+              {
+                "name": "payment.fiAccount.providerId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by this payment provider identification."
+              },
+              {
+                "name": "payment.fiAccount.accountNumber",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by account number."
+              },
+              {
+                "name": "payment.fiAccount.routingNumber",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by routing number."
+              },
+              {
+                "name": "payment.fiAccount.verified",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment if account is verified."
+              },
+              {
+                "name": "ipAddr",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this IP address"
+              },
+              {
+                "name": "routingNumber",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this routing number"
+              },
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this account number"
+              },
+              {
+                "name": "customerName",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions with this customer name"
+              },
+              {
+                "name": "payment.customer.name",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by customer name."
+              },
+              {
+                "name": "payment.customer.externalId",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment specified by customer external identification."
+              },
+              {
+                "name": "ignoreUserPortalTransactions",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions bypassing the portal user."
+              },
+              {
+                "name": "payment.paymentProvider.framework",
+                "value": "",
+                "type": "query",
+                "description": "Returns transactions of the payment provider specified by framework."
+              }
+            ]
+          },
+          "docs": "Returns a list of transactions. It can be paged and filtered by appending arguments to the query string of the request."
+        },
+        {
+          "info": {
+            "name": "Preauthorize transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/capture/preAuth",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The Preauthorize API allows the merchant to pre-authorize one or more captures up to the total pre-authorized amount on a pre-authorized period interval in hours. Captures after the pre-authorized period interval are treated as normal Captures (will need to pass the full balance and risk analysis to be guaranteed)."
+        },
+        {
+          "info": {
+            "name": "Reclaim transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/reclaim",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Deposit Transaction ID retrieved from a Trustly Deposit transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reclaims a previously completed Deposit transaction (minimum of 0.99). You can optionally reclaim partially. You can do so as many times as you wish until the entire deposited amount has been reclaimed.\n\nA Deposit transaction can only be reclaimed after the transaction has been processed and completed.\n\nEnsure you also implement an [event notification](/integrate/core-concepts/webhooks-and-events) handler to get transaction status updates."
+        },
+        {
+          "info": {
+            "name": "Refresh a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/refresh",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Transaction ID retrieved from a Trustly Deferred or Recurring transaction, or Preauthorization Transaction ID retrieved from a Trustly Preauthorize API."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh allows for data associated with a transaction to be updated to the most recent available."
+        },
+        {
+          "info": {
+            "name": "Refund transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId/refund",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Capture Transaction ID retrieved from a Trustly Capture transaction."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refunds a previously completed Capture or Instant transaction (minimum of 0.99). You can optionally refund partially. You can do so as many times as you wish until the entire collected amount has been refunded.\n\nA *Capture* or *Pay* transaction can only be refunded after the bank money collection has been processed and completed.\n\nEnsure you also implement an Event Notification Handler to get transaction status updates."
+        },
+        {
+          "info": {
+            "name": "Retrieve a transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox.trustly.one/api/v1/transactions/:transactionId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Transaction ID retrieved from Trustly."
+              }
+            ]
+          },
+          "docs": "This endpoint allows you to retrieve comprehensive details about a transaction using its unique identifier `transactionId`. The response includes key transaction information, such as the transaction status, as well as amounts, and account details for payment or authorization transactions. This endpoint is useful for checking the current state of a transaction or verifying transaction information after processing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
