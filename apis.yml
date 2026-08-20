@@ -44,6 +44,16 @@ tags:
 - Bank Transfers
 - Fintech
 - Identity Verification
+- Webhook
+tags_raw:
+- Company
+- Payments
+- Pay by Bank
+- Open Banking
+- ACH
+- Bank Transfers
+- Fintech
+- Identity Verification
 - Webhooks
 apis:
 - aid: paywithmybank:paywithmybank-accountdata-api
@@ -52,6 +62,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Account Data
+  tags_raw:
   - accountData
   properties:
   - type: OpenAPI
@@ -62,6 +74,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Account
+  tags_raw:
   - accounts
   properties:
   - type: OpenAPI
@@ -72,6 +86,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Countries
+  tags_raw:
   - countries
   properties:
   - type: OpenAPI
@@ -82,6 +98,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Customers
+  tags_raw:
   - customers
   properties:
   - type: OpenAPI
@@ -92,7 +110,8 @@ apis:
     The disputeManagement API from PayWithMyBank (Trustly) — 1 operation(s) for disputemanagement.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
-  tags:
+  tags: []
+  tags_raw:
   - disputeManagement
   properties:
   - type: OpenAPI
@@ -103,6 +122,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Identity
+  tags_raw:
   - identity
   properties:
   - type: OpenAPI
@@ -113,7 +134,8 @@ apis:
     The networkCheckApi API from PayWithMyBank (Trustly) — 1 operation(s) for networkcheckapi.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
-  tags:
+  tags: []
+  tags_raw:
   - networkCheckApi
   properties:
   - type: OpenAPI
@@ -125,6 +147,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Payment Providers
+  tags_raw:
   - paymentProviders
   properties:
   - type: OpenAPI
@@ -135,6 +159,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Payments
+  tags_raw:
   - payments
   properties:
   - type: OpenAPI
@@ -145,6 +171,8 @@ apis:
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
   tags:
+  - Transaction
+  tags_raw:
   - transactions
   properties:
   - type: OpenAPI
@@ -154,7 +182,8 @@ apis:
   description: The verifyCustomer API from PayWithMyBank (Trustly) — 1 operation(s) for verifycustomer.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
-  tags:
+  tags: []
+  tags_raw:
   - verifyCustomer
   properties:
   - type: OpenAPI
