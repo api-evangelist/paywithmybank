@@ -1,0 +1,46 @@
+slug: paywithmybank
+provider: PayWithMyBank (Trustly)
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: transactions
+  spec_file: paywithmybank-transactions-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /establish 'Establish a new transaction for authorization', 'Capture transaction', 'Refund
+    transaction', 'Preauthorize transaction'
+  reason: 'Core pay-by-bank transaction lifecycle: authorisation, capture, refund, cancel — payment initiation
+    and processing.'
+- tag: payments
+  spec_file: paywithmybank-payments-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.75
+  evidence: GET /payments list-payments 'List payments'; schemas PaymentAuth, PaymentSystem, PaymentMerchant,
+    FinancialInstitutionAccountVerification
+  reason: Open-banking payment records retrieval for merchant bank-account payments; payment processing
+    domain, though the tag is read-only query surface.
+- tag: identity
+  spec_file: paywithmybank-identity-api-openapi.yml
+  capability_id: BC-1300.20
+  capability_id_l1: BC-1300
+  capability_name: KYC & Customer Due Diligence Management
+  confidence: 0.7
+  evidence: 'GET /transactions/{transactionId}/user/detail  get-trustly-id-user-details  Get user verification
+    details; schemas: WatchlistScreeningResult, AdversityMediaScreeningResult, UserVerificationDetail'
+  reason: Returns identity verification outcomes plus watchlist and adverse-media screening results for
+    the payer — the substance of KYC/CDD due diligence. Some ambiguity with sanctions screening (BC-1400.20),
+    but the surface is user identity verification rather than list/hit administration.
