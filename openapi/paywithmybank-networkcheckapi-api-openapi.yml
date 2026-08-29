@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: accountData networkCheckApi API
+  title: Network Check API
   version: 1.0.0
 servers:
 - url: https://sandbox.trustly.one/api/v1
@@ -77,20 +77,28 @@ paths:
                 description: Any type
 components:
   schemas:
-    UserLookupResponseErrorsListItems:
+    UserLookupResponse:
       type: object
       properties:
-        code:
-          type: integer
-        message:
-          type: string
-        location:
-          type: string
-        domain:
-          type: string
-        occurredAt:
-          type: integer
-      title: UserLookupResponseErrorsListItems
+        isTrustlyUser:
+          type: boolean
+          description: True if any provided identifier matches a TRM user.
+        errorsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLookupResponseErrorsListItems'
+          description: Present only on error responses.
+      title: UserLookupResponse
+    Get-user-lookupRequestUnauthorizedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseException'
+      required:
+      - errors
+      title: Get-user-lookupRequestUnauthorizedError
     BaseException:
       type: object
       properties:
@@ -105,28 +113,20 @@ components:
         occurredAt:
           type: integer
       title: BaseException
-    Get-user-lookupRequestUnauthorizedError:
+    UserLookupResponseErrorsListItems:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseException'
-      required:
-      - errors
-      title: Get-user-lookupRequestUnauthorizedError
-    UserLookupResponse:
-      type: object
-      properties:
-        isTrustlyUser:
-          type: boolean
-          description: True if any provided identifier matches a TRM user.
-        errorsList:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserLookupResponseErrorsListItems'
-          description: Present only on error responses.
-      title: UserLookupResponse
+        code:
+          type: integer
+        message:
+          type: string
+        location:
+          type: string
+        domain:
+          type: string
+        occurredAt:
+          type: integer
+      title: UserLookupResponseErrorsListItems
   securitySchemes:
     HTTPBasic:
       type: http

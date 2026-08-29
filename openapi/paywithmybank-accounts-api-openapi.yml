@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: accountData accounts API
+  title: Accounts API
   version: 1.0.0
 servers:
 - url: https://sandbox.trustly.one/api/v1
@@ -88,13 +88,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Accounts_post-accounts-tokenize?-verifyAccount_Response_200'
+                $ref: '#/components/schemas/Accounts_post-accounts-tokenize_-verifyAccount_Response_200'
         '400':
           description: One of the request parameters is invalid (sending an invalid amount format string for example).
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Post-accounts-tokenize?-verifyAccountRequestBadRequestError'
+                $ref: '#/components/schemas/Post-accounts-tokenize_-verifyAccountRequestBadRequestError'
       requestBody:
         description: ''
         content:
@@ -159,126 +159,6 @@ paths:
               - account
 components:
   schemas:
-    AccountsVerifyPostRequestBodyContentApplicationJsonSchemaAccount:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        routingNumber:
-          type: string
-        iban:
-          type: string
-          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
-        nameOnAccount:
-          type: string
-          description: The name of the account owner for name verification purposes.
-      title: AccountsVerifyPostRequestBodyContentApplicationJsonSchemaAccount
-    AccountsTokenizePostResponsesContentApplicationJsonSchemaProfile:
-      type: string
-      enum:
-      - '-1'
-      - '0'
-      - '1'
-      - '2'
-      description: "Financial Institution Account Profile:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Personal\n * `2`: Business            \n"
-      title: AccountsTokenizePostResponsesContentApplicationJsonSchemaProfile
-    Get-accounts-verifyRequestBadRequestError:
-      type: object
-      properties:
-        message:
-          type: string
-      title: Get-accounts-verifyRequestBadRequestError
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-          description: Address line 1 (e.g., street or PO Box)
-        address2:
-          type: string
-          description: Address line 2 (e.g., apartment, suite or unit number)
-        city:
-          type: string
-          description: City, district, town or village
-        state:
-          type: string
-          description: State, province or region code
-        zip:
-          type: string
-          description: ZIP or Postal Code
-        country:
-          type: string
-          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-      required:
-      - country
-      description: Valid mailing or billing address associated with the customer
-      title: Address
-    FinancialInstitutionAccountProfile:
-      type: string
-      enum:
-      - '-1'
-      - '0'
-      - '1'
-      - '2'
-      description: "Financial Institution Account Profile:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Personal\n * `2`: Business            \n"
-      title: FinancialInstitutionAccountProfile
-    PaymentProviderSubType:
-      type: string
-      enum:
-      - '1000'
-      - '2000'
-      - '2001'
-      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
-      title: PaymentProviderSubType
-    FinancialInstitutionAccountVerificationScore:
-      type: string
-      enum:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      - '5'
-      - '6'
-      - '7'
-      - '8'
-      - '9'
-      - '10'
-      description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
-      title: FinancialInstitutionAccountVerificationScore
-    FeedbackPostRequestBodyContentApplicationJsonSchemaAccount:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        routingNumber:
-          type: string
-        token:
-          type: string
-          description: The token received as return of the Tokenize API.
-      description: The token is required only when account number and routing number are not sent and vice-versa.
-      title: FeedbackPostRequestBodyContentApplicationJsonSchemaAccount
-    AccountsTokenizePostRequestBodyContentApplicationJsonSchemaAccount:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-        routingNumber:
-          type: string
-        iban:
-          type: string
-          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
-        nameOnAccount:
-          type: string
-          description: The name of the account owner for name verification purposes.
-      title: AccountsTokenizePostRequestBodyContentApplicationJsonSchemaAccount
-    Accounts_post-account-feedback_Response_200:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Successful message.
-      title: Accounts_post-account-feedback_Response_200
     Feedback:
       type: object
       properties:
@@ -337,63 +217,97 @@ components:
       - subStatus
       description: The resulting feedback of an ACH transaction
       title: Feedback
-    FeedbackCurrency:
+    FinancialInstitutionAccountProfile:
       type: string
       enum:
-      - USD
-      description: 3-letter ISO Currency Code. Currently only USD is supported.
-      title: FeedbackCurrency
-    Accounts_post-accounts-tokenize?-verifyAccount_Response_200:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      description: "Financial Institution Account Profile:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Personal\n * `2`: Business            \n"
+      title: FinancialInstitutionAccountProfile
+    Get-accounts-verifyRequestBadRequestError:
       type: object
       properties:
-        nameOnAccount:
+        message:
           type: string
-          description: Account owner name.
-        name:
-          type: string
-          description: Account name.
-        type:
-          $ref: '#/components/schemas/AccountsTokenizePostResponsesContentApplicationJsonSchemaType'
-          description: "Financial Institution Account Type:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Checking\n * `2`: Savings        \n"
-        profile:
-          $ref: '#/components/schemas/AccountsTokenizePostResponsesContentApplicationJsonSchemaProfile'
-          description: "Financial Institution Account Profile:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Personal\n * `2`: Business            \n"
-        verification:
-          $ref: '#/components/schemas/FinancialInstitutionAccountVerification'
+      title: Get-accounts-verifyRequestBadRequestError
+    FinancialInstitutionAccountCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      title: FinancialInstitutionAccountCountry
+    AccountsVerifyPostRequestBodyContentApplicationJsonSchemaAccount:
+      type: object
+      properties:
         accountNumber:
           type: string
-          description: Financial institution account number
         routingNumber:
           type: string
-          description: Bank Routing Number provided by the selected account.
         iban:
           type: string
           description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
-        token:
+        nameOnAccount:
           type: string
-          description: Account token for the returned account. This can be used to identify duplicate bank accounts in your system.
-        accountId:
+          description: The name of the account owner for name verification purposes.
+      title: AccountsVerifyPostRequestBodyContentApplicationJsonSchemaAccount
+    Accounts_post-account-feedback_Response_200:
+      type: object
+      properties:
+        message:
           type: string
-        providerId:
+          description: Successful message.
+      title: Accounts_post-account-feedback_Response_200
+    PaymentProvider:
+      type: object
+      properties:
+        paymentProviderId:
           type: string
-        paymentProvider:
-          $ref: '#/components/schemas/PaymentProvider'
-        verified:
+          description: A unique identifier for the Payment Provider.
+        type:
+          type: number
+          format: double
+        name:
+          type: string
+          description: Name of the payment provider
+        instantPayoutAvailable:
           type: boolean
-          description: If true, the account is verified.
+          description: Whether payment provider supports instant payout.
+        subType:
+          $ref: '#/components/schemas/PaymentProviderSubType'
+          description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+        swift:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
         country:
-          $ref: '#/components/schemas/AccountsTokenizePostResponsesContentApplicationJsonSchemaCountry'
-          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+          $ref: '#/components/schemas/PaymentProviderCountry'
+          description: 2-letter ISO country code of the financial institution
+        instantPayment:
+          type: boolean
       required:
       - name
-      - type
-      - profile
-      - verification
-      - accountNumber
-      - token
-      - verified
-      description: Financial Institution account
-      title: Accounts_post-accounts-tokenize?-verifyAccount_Response_200
+      description: Details of the Financial institution
+      title: PaymentProvider
+    BaseException:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: integer
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: integer
+      title: BaseException
     FinancialInstitutionAccount:
       type: object
       properties:
@@ -445,7 +359,41 @@ components:
       - verified
       description: Financial Institution account
       title: FinancialInstitutionAccount
-    FinancialInstitutionAccountCountry:
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
+    AccountsTokenizePostRequestBodyContentApplicationJsonSchemaAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        routingNumber:
+          type: string
+        iban:
+          type: string
+          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
+        nameOnAccount:
+          type: string
+          description: The name of the account owner for name verification purposes.
+      title: AccountsTokenizePostRequestBodyContentApplicationJsonSchemaAccount
+    FeedbackPostRequestBodyContentApplicationJsonSchemaAccount:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        routingNumber:
+          type: string
+        token:
+          type: string
+          description: The token received as return of the Tokenize API.
+      description: The token is required only when account number and routing number are not sent and vice-versa.
+      title: FeedbackPostRequestBodyContentApplicationJsonSchemaAccount
+    AccountsTokenizePostResponsesContentApplicationJsonSchemaCountry:
       type: string
       enum:
       - US
@@ -454,13 +402,32 @@ components:
       - DE
       - AU
       description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
-      title: FinancialInstitutionAccountCountry
-    Post-accounts-tokenize?-verifyAccountRequestBadRequestError:
+      title: AccountsTokenizePostResponsesContentApplicationJsonSchemaCountry
+    Address:
       type: object
       properties:
-        message:
+        address1:
           type: string
-      title: Post-accounts-tokenize?-verifyAccountRequestBadRequestError
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
     AccountsTokenizePostResponsesContentApplicationJsonSchemaType:
       type: string
       enum:
@@ -470,46 +437,6 @@ components:
       - '2'
       description: "Financial Institution Account Type:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Checking\n * `2`: Savings        \n"
       title: AccountsTokenizePostResponsesContentApplicationJsonSchemaType
-    FinancialInstitutionAccountType:
-      type: string
-      enum:
-      - '-1'
-      - '0'
-      - '1'
-      - '2'
-      description: "Financial Institution Account Type:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Checking\n * `2`: Savings        \n"
-      title: FinancialInstitutionAccountType
-    PaymentProvider:
-      type: object
-      properties:
-        paymentProviderId:
-          type: string
-          description: A unique identifier for the Payment Provider.
-        type:
-          type: number
-          format: double
-        name:
-          type: string
-          description: Name of the payment provider
-        instantPayoutAvailable:
-          type: boolean
-          description: Whether payment provider supports instant payout.
-        subType:
-          $ref: '#/components/schemas/PaymentProviderSubType'
-          description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
-        swift:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
-        country:
-          $ref: '#/components/schemas/PaymentProviderCountry'
-          description: 2-letter ISO country code of the financial institution
-        instantPayment:
-          type: boolean
-      required:
-      - name
-      description: Details of the Financial institution
-      title: PaymentProvider
     FinancialInstitutionAccountVerification:
       type: object
       properties:
@@ -545,34 +472,72 @@ components:
       - hasEnoughFunds
       - verificationDate
       title: FinancialInstitutionAccountVerification
-    PaymentProviderCountry:
+    FinancialInstitutionAccountType:
       type: string
       enum:
-      - US
-      - CA
-      - UK
-      - DE
-      - AU
-      description: 2-letter ISO country code of the financial institution
-      title: PaymentProviderCountry
-    FinancialInstitutionAccountVerificationType:
-      type: string
-      enum:
+      - '-1'
+      - '0'
       - '1'
       - '2'
-      - '3'
-      description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
-      title: FinancialInstitutionAccountVerificationType
-    AccountsTokenizePostResponsesContentApplicationJsonSchemaCountry:
+      description: "Financial Institution Account Type:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Checking\n * `2`: Savings        \n"
+      title: FinancialInstitutionAccountType
+    FeedbackCurrency:
       type: string
       enum:
-      - US
-      - CA
-      - UK
-      - DE
-      - AU
-      description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
-      title: AccountsTokenizePostResponsesContentApplicationJsonSchemaCountry
+      - USD
+      description: 3-letter ISO Currency Code. Currently only USD is supported.
+      title: FeedbackCurrency
+    Accounts_post-accounts-tokenize_-verifyAccount_Response_200:
+      type: object
+      properties:
+        nameOnAccount:
+          type: string
+          description: Account owner name.
+        name:
+          type: string
+          description: Account name.
+        type:
+          $ref: '#/components/schemas/AccountsTokenizePostResponsesContentApplicationJsonSchemaType'
+          description: "Financial Institution Account Type:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Checking\n * `2`: Savings        \n"
+        profile:
+          $ref: '#/components/schemas/AccountsTokenizePostResponsesContentApplicationJsonSchemaProfile'
+          description: "Financial Institution Account Profile:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Personal\n * `2`: Business            \n"
+        verification:
+          $ref: '#/components/schemas/FinancialInstitutionAccountVerification'
+        accountNumber:
+          type: string
+          description: Financial institution account number
+        routingNumber:
+          type: string
+          description: Bank Routing Number provided by the selected account.
+        iban:
+          type: string
+          description: IBAN (International Bank Account Number) is an internationally agreed system of identifying bank accounts across national borders
+        token:
+          type: string
+          description: Account token for the returned account. This can be used to identify duplicate bank accounts in your system.
+        accountId:
+          type: string
+        providerId:
+          type: string
+        paymentProvider:
+          $ref: '#/components/schemas/PaymentProvider'
+        verified:
+          type: boolean
+          description: If true, the account is verified.
+        country:
+          $ref: '#/components/schemas/AccountsTokenizePostResponsesContentApplicationJsonSchemaCountry'
+          description: 2-character ISO code of the country for the bank account that was selected. Currently only the US, CA, UK, DE, and AU are supported.
+      required:
+      - name
+      - type
+      - profile
+      - verification
+      - accountNumber
+      - token
+      - verified
+      description: Financial Institution account
+      title: Accounts_post-accounts-tokenize?-verifyAccount_Response_200
     FeedbackStatus:
       type: string
       enum:
@@ -605,20 +570,46 @@ components:
 
         * `13`: Voided'
       title: FeedbackStatus
-    BaseException:
+    FinancialInstitutionAccountVerificationScore:
+      type: string
+      enum:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
+      - '7'
+      - '8'
+      - '9'
+      - '10'
+      description: "Verification Score:\n * `0`: Invalid input. The account or routing number are invalid. (Verified Mapping = false)\n * `1`: There is a strong indication that the account is invalid. (Verified Mapping = false)\n * `2`: There are active non-bankable returns on this account that are less than 3 years old. (Verified Mapping = false)\n * `3`: There are administrative returns on this account. (Verified Mapping = false)\n * `4`: The format appears to be suspicious. (Verified Mapping = false)\n * `5`: There is no data on this account or format. (Verified Mapping = false)\n * `6`: We have not seen this account, but the format appears to be valid. (Verified Mapping = true)\n * `7`: We have seen this account but have not received a final disposition on the transaction. (Verified Mapping = true)\n * `8`: We have seen this account, but not in the last 6 months, and have seen no returns associated with the account. (Verified Mapping = true)\n * `9`: We have seen this account in the last 6 months and have seen no returns associated with the account. (Verified Mapping = true)\n * `10`: This account has been directly validated with/by the financial institution or 3rd party. We have the highest confidence that this account is valid. (Verified Mapping = true)\n"
+      title: FinancialInstitutionAccountVerificationScore
+    Post-accounts-tokenize_-verifyAccountRequestBadRequestError:
       type: object
       properties:
-        domain:
-          type: string
-        code:
-          type: integer
-        location:
-          type: string
         message:
           type: string
-        occurredAt:
-          type: integer
-      title: BaseException
+      title: Post-accounts-tokenize?-verifyAccountRequestBadRequestError
+    FinancialInstitutionAccountVerificationType:
+      type: string
+      enum:
+      - '1'
+      - '2'
+      - '3'
+      description: "Verification Type:\n * `1`: Manual - The account was verified with manual account verification. For example, Manual Electronic Check and Micro Challenge Deposit.\n * `2`: Online Banking verification\t- The Account was verified using the Trustly Online Banking application.\n * `3`: Database verification\t- The Account was verified using the Trustly database or a Third-Party Service.  \n"
+      title: FinancialInstitutionAccountVerificationType
+    PaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-letter ISO country code of the financial institution
+      title: PaymentProviderCountry
     FinancialInstitutionAccountVerificationThirdPartyScore:
       type: string
       enum:
@@ -635,6 +626,15 @@ components:
       - '999'
       description: "Verification Third-Party Score:\n * `0`: Failed RT validation. (Verified Mapping = 0)\n * `100`: The supplier has a strong indication that this account is invalid. (Verified Mapping = 1)\n * `200`: The supplier has active non-bankable debt(s) on this account that are less than 3 years old. (Verified Mapping = 2)\n * `300`: The supplier has administrative returns on this account. (Verified Mapping = 3)\n * `400`: The supplier does not have Neg data on this account, but the format appears to be suspicious. (Verified Mapping = 4)\n * `500`: The supplier does not have data on this account or format. (Verified Mapping = 5)\n * `600`: The supplier has not seen this account, but the format appears valid. (Verified Mapping = 6)\n * `700`: The supplier has seen this account, but did not receive a final disposition on the transaction. (Verified Mapping = 7)\n * `800`: The supplier has seen this account, but not in the last 6 months. (Verified Mapping = 8)\n * `900`: The supplier has seen this account in the last 6 months. (Verified Mapping = 9)\n * `999`: The supplier has the highest confidence that this account is valid. (Verified Mapping = 10)\n"
       title: FinancialInstitutionAccountVerificationThirdPartyScore
+    AccountsTokenizePostResponsesContentApplicationJsonSchemaProfile:
+      type: string
+      enum:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      description: "Financial Institution Account Profile:\n * `-1`: Unknown\n * `0`: Other\n * `1`: Personal\n * `2`: Business            \n"
+      title: AccountsTokenizePostResponsesContentApplicationJsonSchemaProfile
   securitySchemes:
     HTTPBasic:
       type: http

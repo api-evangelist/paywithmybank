@@ -200,6 +200,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/paywithmybank-verifycustomer-api-openapi.yml
+- aid: paywithmybank:paywithmybank-api-api
+  name: PayWithMyBank (Trustly) API
+  description: The API API from PayWithMyBank (Trustly) — 0 operation(s) for api.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - API
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-api-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: accountData customers API
+  title: Customers API
   version: 1.0.0
 servers:
 - url: https://sandbox.trustly.one/api/v1
@@ -136,20 +136,6 @@ paths:
               $ref: '#/components/schemas/Customer'
 components:
   schemas:
-    Customers_get-customers-customerId_Response_200:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Customers_get-customers-customerId_Response_200
-    Customers_get-customers_Response_200:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-      title: Customers_get-customers_Response_200
     Customers_post-customers_Response_200:
       type: object
       properties:
@@ -161,12 +147,64 @@ components:
       properties: {}
       description: Object for sending merchant-specific custom data.
       title: CustomerCustomData
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
+    Customers_get-customers-customerId_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers-customerId_Response_200
     Customers_post-customers-customerId_Response_200:
       type: object
       properties:
         customer:
           $ref: '#/components/schemas/Customer'
       title: Customers_post-customers-customerId_Response_200
+    DriverLicense:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Driver License number.
+        state:
+          type: string
+          description: 2 character ISO State code.
+      required:
+      - number
+      - state
+      title: DriverLicense
+    Customers_get-customers_Response_200:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers_Response_200
     Customer:
       type: object
       properties:
@@ -238,44 +276,6 @@ components:
       - email
       description: The Trustly customer object, containing identification details and contact information.
       title: Customer
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-          description: Address line 1 (e.g., street or PO Box)
-        address2:
-          type: string
-          description: Address line 2 (e.g., apartment, suite or unit number)
-        city:
-          type: string
-          description: City, district, town or village
-        state:
-          type: string
-          description: State, province or region code
-        zip:
-          type: string
-          description: ZIP or Postal Code
-        country:
-          type: string
-          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-      required:
-      - country
-      description: Valid mailing or billing address associated with the customer
-      title: Address
-    DriverLicense:
-      type: object
-      properties:
-        number:
-          type: string
-          description: Driver License number.
-        state:
-          type: string
-          description: 2 character ISO State code.
-      required:
-      - number
-      - state
-      title: DriverLicense
   securitySchemes:
     HTTPBasic:
       type: http

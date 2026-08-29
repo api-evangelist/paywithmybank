@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: accountData paymentProviders API
+  title: Payment Providers API
   version: 1.0.0
 servers:
 - url: https://sandbox.trustly.one/api/v1
@@ -52,23 +52,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Payment Providers_get-paymentProviders_Response_200'
+                $ref: '#/components/schemas/Payment_Providers_get-paymentProviders_Response_200'
 components:
   schemas:
-    Payment Providers_get-paymentProviders_Response_200:
-      type: object
-      properties:
-        paymentProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentProvider'
-        startIndex:
-          type: number
-          format: double
-        itemsPerPage:
-          type: number
-          format: double
-      title: Payment Providers_get-paymentProviders_Response_200
     PaymentProvider:
       type: object
       properties:
@@ -125,14 +111,6 @@ components:
       - country
       description: Valid mailing or billing address associated with the customer
       title: Address
-    PaymentProviderSubType:
-      type: string
-      enum:
-      - '1000'
-      - '2000'
-      - '2001'
-      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
-      title: PaymentProviderSubType
     PaymentProviderCountry:
       type: string
       enum:
@@ -143,6 +121,28 @@ components:
       - AU
       description: 2-letter ISO country code of the financial institution
       title: PaymentProviderCountry
+    Payment_Providers_get-paymentProviders_Response_200:
+      type: object
+      properties:
+        paymentProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProvider'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      title: Payment Providers_get-paymentProviders_Response_200
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
   securitySchemes:
     HTTPBasic:
       type: http

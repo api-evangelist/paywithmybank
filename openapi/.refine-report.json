@@ -1,19 +1,10 @@
 {
   "provider": "paywithmybank",
   "sources": [
-    "paywithmybank-accountdata-api-openapi.yml",
-    "paywithmybank-accounts-api-openapi.yml",
-    "paywithmybank-countries-api-openapi.yml",
-    "paywithmybank-customers-api-openapi.yml",
-    "paywithmybank-disputemanagement-api-openapi.yml",
-    "paywithmybank-identity-api-openapi.yml",
-    "paywithmybank-networkcheckapi-api-openapi.yml",
-    "paywithmybank-paymentproviders-api-openapi.yml",
-    "paywithmybank-payments-api-openapi.yml",
-    "paywithmybank-transactions-api-openapi.yml",
-    "paywithmybank-verifycustomer-api-openapi.yml"
+    "_original/paywithmybank-openapi-original.yml"
   ],
   "outputs": [
+    "paywithmybank-api-api-openapi.yml",
     "paywithmybank-accountdata-api-openapi.yml",
     "paywithmybank-accounts-api-openapi.yml",
     "paywithmybank-countries-api-openapi.yml",
@@ -29,6 +20,43 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "paywithmybank-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0; renamed 7 component key(s) illegal in 3.x (e.g. Account Data_get-transaction-account-summary_Response_200)",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Authorize -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Completed -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.DataReady -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Dispute -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Establish -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Expired -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Failed -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Refresh -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.Update -> API",
+    "paywithmybank-openapi-original.yml: tagged webhooks POST subpackage_eventNotifications.VerifyCustomer -> API",
+    "paywithmybank-openapi-original.yml: declared missing tag: API",
+    "paywithmybank-openapi-original.yml: declared missing tag: accountData",
+    "paywithmybank-openapi-original.yml: declared missing tag: accounts",
+    "paywithmybank-openapi-original.yml: declared missing tag: countries",
+    "paywithmybank-openapi-original.yml: declared missing tag: customers",
+    "paywithmybank-openapi-original.yml: declared missing tag: disputeManagement",
+    "paywithmybank-openapi-original.yml: declared missing tag: identity",
+    "paywithmybank-openapi-original.yml: declared missing tag: networkCheckApi",
+    "paywithmybank-openapi-original.yml: declared missing tag: paymentProviders",
+    "paywithmybank-openapi-original.yml: declared missing tag: payments",
+    "paywithmybank-openapi-original.yml: declared missing tag: transactions",
+    "paywithmybank-openapi-original.yml: declared missing tag: verifyCustomer"
+  ],
+  "skipped": [
+    "paywithmybank-accountdata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-countries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-disputemanagement-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-networkcheckapi-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-paymentproviders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-verifycustomer-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
