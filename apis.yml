@@ -73,7 +73,8 @@ apis:
   description: The accountData API from PayWithMyBank (Trustly) — 4 operation(s) for accountdata.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
-  tags: []
+  tags:
+  - Account Data
   tags_raw:
   - accountData
   properties:
@@ -157,7 +158,8 @@ apis:
     The paymentProviders API from PayWithMyBank (Trustly) — 1 operation(s) for paymentproviders.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
-  tags: []
+  tags:
+  - Payment Providers
   tags_raw:
   - paymentProviders
   properties:
