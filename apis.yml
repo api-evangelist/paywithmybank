@@ -70,18 +70,6 @@ tags_raw:
 - Identity Verification
 - Webhooks
 apis:
-- aid: paywithmybank:paywithmybank-accountdata-api
-  name: PayWithMyBank (Trustly) accountData API
-  description: The accountData API from PayWithMyBank (Trustly) — 4 operation(s) for accountdata.
-  humanURL: https://amer.developers.trustly.com/
-  baseURL: https://api.trustly.one/api/v1
-  tags:
-  - Account Data
-  tags_raw:
-  - accountData
-  properties:
-  - type: OpenAPI
-    url: openapi/paywithmybank-accountdata-api-openapi.yml
 - aid: paywithmybank:paywithmybank-accounts-api
   name: PayWithMyBank (Trustly) accounts API
   description: The accounts API from PayWithMyBank (Trustly) — 3 operation(s) for accounts.
@@ -118,18 +106,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/paywithmybank-customers-api-openapi.yml
-- aid: paywithmybank:paywithmybank-disputemanagement-api
-  name: PayWithMyBank (Trustly) disputeManagement API
-  description: >-
-    The disputeManagement API from PayWithMyBank (Trustly) — 1 operation(s) for disputemanagement.
-  humanURL: https://amer.developers.trustly.com/
-  baseURL: https://api.trustly.one/api/v1
-  tags: []
-  tags_raw:
-  - disputeManagement
-  properties:
-  - type: OpenAPI
-    url: openapi/paywithmybank-disputemanagement-api-openapi.yml
 - aid: paywithmybank:paywithmybank-identity-api
   name: PayWithMyBank (Trustly) identity API
   description: The identity API from PayWithMyBank (Trustly) — 3 operation(s) for identity.
@@ -154,19 +130,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/paywithmybank-networkcheckapi-api-openapi.yml
-- aid: paywithmybank:paywithmybank-paymentproviders-api
-  name: PayWithMyBank (Trustly) paymentProviders API
-  description: >-
-    The paymentProviders API from PayWithMyBank (Trustly) — 1 operation(s) for paymentproviders.
-  humanURL: https://amer.developers.trustly.com/
-  baseURL: https://api.trustly.one/api/v1
-  tags:
-  - Payment Providers
-  tags_raw:
-  - paymentProviders
-  properties:
-  - type: OpenAPI
-    url: openapi/paywithmybank-paymentproviders-api-openapi.yml
 - aid: paywithmybank:paywithmybank-payments-api
   name: PayWithMyBank (Trustly) payments API
   description: The payments API from PayWithMyBank (Trustly) — 2 operation(s) for payments.
@@ -213,6 +176,38 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/paywithmybank-api-api-openapi.yml
+- aid: paywithmybank:paywithmybank-account-data-api
+  name: PayWithMyBank (Trustly) Account Data API
+  description: The Account Data API from PayWithMyBank (Trustly) — 4 operation(s) for account data.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - Account Data
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-account-data-api-openapi.yml
+- aid: paywithmybank:paywithmybank-dispute-management-api
+  name: PayWithMyBank (Trustly) Dispute Management API
+  description: >-
+    The Dispute Management API from PayWithMyBank (Trustly) — 1 operation(s) for dispute management.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - Dispute Management
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-dispute-management-api-openapi.yml
+- aid: paywithmybank:paywithmybank-payment-providers-api
+  name: PayWithMyBank (Trustly) Payment Providers API
+  description: >-
+    The Payment Providers API from PayWithMyBank (Trustly) — 1 operation(s) for payment providers.
+  humanURL: https://amer.developers.trustly.com/
+  baseURL: https://api.trustly.one/api/v1
+  tags:
+  - Payment Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/paywithmybank-payment-providers-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
