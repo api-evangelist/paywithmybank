@@ -17,7 +17,9 @@
     "paywithmybank-transactions-api-openapi.yml",
     "paywithmybank-verifycustomer-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 3 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -44,17 +46,20 @@
     "paywithmybank-openapi-original.yml: declared missing tag: paymentProviders",
     "paywithmybank-openapi-original.yml: declared missing tag: payments",
     "paywithmybank-openapi-original.yml: declared missing tag: transactions",
-    "paywithmybank-openapi-original.yml: declared missing tag: verifyCustomer"
+    "paywithmybank-openapi-original.yml: declared missing tag: verifyCustomer",
+    "superseded outputs removed: paywithmybank-account-data-api-openapi.yml, paywithmybank-dispute-management-api-openapi.yml, paywithmybank-payment-providers-api-openapi.yml",
+    "apis.yml register: written (+3 apis, 12 total)"
   ],
   "skipped": [
-    "paywithmybank-accountdata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-account-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-countries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "paywithmybank-disputemanagement-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-dispute-management-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-networkcheckapi-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "paywithmybank-paymentproviders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "paywithmybank-payment-providers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "paywithmybank-verifycustomer-api-openapi.yml: previously refined output, superseded by openapi/_original/"

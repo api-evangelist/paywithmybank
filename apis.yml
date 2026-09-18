@@ -288,3 +288,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 18
   pass: local-v1
+x-parent: trustly
+x-relationship: product

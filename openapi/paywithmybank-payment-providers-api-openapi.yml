@@ -6,7 +6,7 @@ servers:
 - url: https://sandbox.trustly.one/api/v1
   description: Sandbox
 tags:
-- name: paymentProviders
+- name: Payment Providers
 paths:
   /paymentProviders:
     get:
@@ -14,7 +14,7 @@ paths:
       summary: List payment providers
       description: Returns a list of payment providers, filtered by country. It can be paged and filtered by appending arguments to the query string of the request.
       tags:
-      - paymentProviders
+      - Payment Providers
       parameters:
       - name: countries
         in: query
@@ -86,6 +86,20 @@ components:
       - name
       description: Details of the Financial institution
       title: PaymentProvider
+    Payment_Providers_get-paymentProviders_Response_200:
+      type: object
+      properties:
+        paymentProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProvider'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      title: Payment Providers_get-paymentProviders_Response_200
     Address:
       type: object
       properties:
@@ -121,20 +135,6 @@ components:
       - AU
       description: 2-letter ISO country code of the financial institution
       title: PaymentProviderCountry
-    Payment_Providers_get-paymentProviders_Response_200:
-      type: object
-      properties:
-        paymentProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentProvider'
-        startIndex:
-          type: number
-          format: double
-        itemsPerPage:
-          type: number
-          format: double
-      title: Payment Providers_get-paymentProviders_Response_200
     PaymentProviderSubType:
       type: string
       enum:

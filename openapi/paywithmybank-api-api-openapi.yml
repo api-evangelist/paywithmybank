@@ -6,7 +6,7 @@ servers:
 - url: https://sandbox.trustly.one/api/v1
   description: Sandbox
 tags:
-- name: API
+- name: api
 paths: {}
 webhooks:
   subpackage_eventNotifications.Authorize:
@@ -23,7 +23,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventAuthorize'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Completed:
     post:
       operationId: subpackage_eventNotifications.Completed
@@ -38,7 +38,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventCompleted'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.DataReady:
     post:
       operationId: subpackage_eventNotifications.DataReady
@@ -53,7 +53,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventDataReady'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Dispute:
     post:
       operationId: subpackage_eventNotifications.Dispute
@@ -99,7 +99,7 @@ webhooks:
                 amountReturned:
                   type: string
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Establish:
     post:
       operationId: subpackage_eventNotifications.Establish
@@ -114,7 +114,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventEstablish'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Expired:
     post:
       operationId: subpackage_eventNotifications.Expired
@@ -129,7 +129,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventExpire'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Failed:
     post:
       operationId: subpackage_eventNotifications.Failed
@@ -144,7 +144,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventFailed'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Refresh:
     post:
       operationId: subpackage_eventNotifications.Refresh
@@ -159,7 +159,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventRefresh'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.Update:
     post:
       operationId: subpackage_eventNotifications.Update
@@ -174,7 +174,7 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventUpdate'
       tags:
-      - API
+      - api
   subpackage_eventNotifications.VerifyCustomer:
     post:
       operationId: subpackage_eventNotifications.VerifyCustomer
@@ -189,9 +189,53 @@ webhooks:
             schema:
               $ref: '#/components/schemas/EventVerifyCustomer'
       tags:
-      - API
+      - api
 components:
   schemas:
+    EventFailed:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: int64
+          description: The timestamp when the event was created, represented as a Unix timestamp in milliseconds.
+        eventId:
+          type: string
+          description: Unique identifier for the event.
+        eventType:
+          type: string
+          description: The type of event that triggered the webhook.
+        merchantId:
+          type: string
+          description: The unique identifier of the merchant.
+        message:
+          type: string
+          description: A message describing the event.
+        objectId:
+          type: string
+          description: Unique identifier for the object associated with the event, such as a transaction.
+        objectType:
+          type: string
+          description: The type of object associated with the event (e.g., Transaction).
+        paymentType:
+          type: string
+          description: Type of payment, denoted by a numeric code.
+        status:
+          type: string
+          description: Status code representing the current state of the transaction.
+        statusMessage:
+          type: string
+          description: A message describing the current status of the transaction.
+        timeZone:
+          type: string
+          description: The timezone of the event, formatted in IANA timezone database format.
+        transactionType:
+          type: string
+          description: Type of transaction, denoted by a numeric code.
+        paymentProviderTransaction:
+          $ref: '#/components/schemas/EventFailedPaymentProviderTransaction'
+      description: A transaction has failed.
+      title: EventFailed
     EventEstablish:
       type: object
       properties:
@@ -238,64 +282,6 @@ components:
           $ref: '#/components/schemas/EventEstablishPaymentProviderTransaction'
       description: The 'Establish' event is triggered when a new transaction has been created. This event may occur when a user activates the Trustly UI or when a transaction is created via an API call.
       title: EventEstablish
-    EventRefreshPaymentProviderTransaction:
-      type: object
-      properties:
-        status:
-          type: string
-        statusMessage:
-          type: string
-      title: EventRefreshPaymentProviderTransaction
-    EventDataReady:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: int64
-          description: The timestamp when the event was created, represented as a Unix timestamp in milliseconds.
-        eventId:
-          type: string
-          description: Unique identifier for the event.
-        eventType:
-          type: string
-          description: The type of event that triggered the webhook.
-        merchantId:
-          type: string
-          description: The unique identifier of the merchant.
-        message:
-          type: string
-          description: A message describing the event.
-        objectId:
-          type: string
-          description: Unique identifier for the object associated with the event, such as a transaction.
-        objectType:
-          type: string
-          description: The type of object associated with the event (e.g., Transaction).
-        paymentType:
-          type: string
-          description: Type of payment, denoted by a numeric code.
-        status:
-          type: string
-          description: Status code representing the current state of the transaction.
-        statusMessage:
-          type: string
-          description: A message describing the current status of the transaction.
-        timeZone:
-          type: string
-          description: The timezone of the event, formatted in IANA timezone database format.
-        transactionType:
-          type: string
-          description: Type of transaction, denoted by a numeric code.
-      description: The 'DataReady' event indicates that the required transaction data is available and ready for processing.
-      title: EventDataReady
-    EventCompletedPaymentProviderTransaction:
-      type: object
-      properties:
-        status:
-          type: string
-        statusMessage:
-          type: string
-      title: EventCompletedPaymentProviderTransaction
     EventVerifyCustomer:
       type: object
       properties:
@@ -340,50 +326,6 @@ components:
           type: string
       description: The `VerifyCustomer` event provides the result of the identity verification check performed against the data from the bank.
       title: EventVerifyCustomer
-    EventUpdate:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: int64
-          description: The timestamp when the event was created, represented as a Unix timestamp in milliseconds.
-        eventId:
-          type: string
-          description: Unique identifier for the event.
-        eventType:
-          type: string
-          description: The type of event that triggered the webhook.
-        merchantId:
-          type: string
-          description: The unique identifier of the merchant.
-        message:
-          type: string
-          description: A message describing the event.
-        objectId:
-          type: string
-          description: Unique identifier for the object associated with the event, such as a transaction.
-        objectType:
-          type: string
-          description: The type of object associated with the event (e.g., Transaction).
-        paymentType:
-          type: string
-          description: Type of payment, denoted by a numeric code.
-        status:
-          type: string
-          description: Status code representing the current state of the transaction.
-        statusMessage:
-          type: string
-          description: A message describing the current status of the transaction.
-        timeZone:
-          type: string
-          description: The timezone of the event, formatted in IANA timezone database format.
-        transactionType:
-          type: string
-          description: Type of transaction, denoted by a numeric code.
-        fiName:
-          type: string
-      description: A generic event object that includes common properties for all webhook events. This can be extended for specific event types.
-      title: EventUpdate
     EventAuthorize:
       type: object
       properties:
@@ -429,7 +371,15 @@ components:
           description: Encrypted token generated during user authorization. Note, token may include url escape characters which must be encoded or the request will result in an error. See [Split Token](doc:reference-split-token) for more info.
       description: A generic event object that includes common properties for all webhook events. This can be extended for specific event types.
       title: EventAuthorize
-    EventCompleted:
+    EventRefreshPaymentProviderTransaction:
+      type: object
+      properties:
+        status:
+          type: string
+        statusMessage:
+          type: string
+      title: EventRefreshPaymentProviderTransaction
+    EventUpdate:
       type: object
       properties:
         createdAt:
@@ -469,18 +419,100 @@ components:
         transactionType:
           type: string
           description: Type of transaction, denoted by a numeric code.
-        paymentProviderTransaction:
-          $ref: '#/components/schemas/EventCompletedPaymentProviderTransaction'
-      description: A transaction has been successfully completed.
-      title: EventCompleted
-    EventFailedPaymentProviderTransaction:
+        fiName:
+          type: string
+      description: A generic event object that includes common properties for all webhook events. This can be extended for specific event types.
+      title: EventUpdate
+    EventDataReady:
       type: object
       properties:
+        createdAt:
+          type: string
+          format: int64
+          description: The timestamp when the event was created, represented as a Unix timestamp in milliseconds.
+        eventId:
+          type: string
+          description: Unique identifier for the event.
+        eventType:
+          type: string
+          description: The type of event that triggered the webhook.
+        merchantId:
+          type: string
+          description: The unique identifier of the merchant.
+        message:
+          type: string
+          description: A message describing the event.
+        objectId:
+          type: string
+          description: Unique identifier for the object associated with the event, such as a transaction.
+        objectType:
+          type: string
+          description: The type of object associated with the event (e.g., Transaction).
+        paymentType:
+          type: string
+          description: Type of payment, denoted by a numeric code.
         status:
           type: string
+          description: Status code representing the current state of the transaction.
         statusMessage:
           type: string
-      title: EventFailedPaymentProviderTransaction
+          description: A message describing the current status of the transaction.
+        timeZone:
+          type: string
+          description: The timezone of the event, formatted in IANA timezone database format.
+        transactionType:
+          type: string
+          description: Type of transaction, denoted by a numeric code.
+      description: The 'DataReady' event indicates that the required transaction data is available and ready for processing.
+      title: EventDataReady
+    EventExpire:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: int64
+          description: The timestamp when the event was created, represented as a Unix timestamp in milliseconds.
+        eventId:
+          type: string
+          description: Unique identifier for the event.
+        eventType:
+          type: string
+          description: The type of event that triggered the webhook.
+        merchantId:
+          type: string
+          description: The unique identifier of the merchant.
+        message:
+          type: string
+          description: A message describing the event.
+        objectId:
+          type: string
+          description: Unique identifier for the object associated with the event, such as a transaction.
+        objectType:
+          type: string
+          description: The type of object associated with the event (e.g., Transaction).
+        paymentType:
+          type: string
+          description: Type of payment, denoted by a numeric code.
+        status:
+          type: string
+          description: Status code representing the current state of the transaction.
+        statusMessage:
+          type: string
+          description: A message describing the current status of the transaction.
+        timeZone:
+          type: string
+          description: The timezone of the event, formatted in IANA timezone database format.
+        transactionType:
+          type: string
+          description: Type of transaction, denoted by a numeric code.
+        paymentProviderTransaction.status:
+          type: string
+          description: Status code representing the current state of the transaction.
+        paymentProviderTransaction.statusMessage:
+          type: string
+          description: A message describing the current status of the transaction.
+      description: A generic event object that includes common properties for all webhook events. This can be extended for specific event types.
+      title: EventExpire
     EventRefresh:
       type: object
       properties:
@@ -531,7 +563,23 @@ components:
           type: boolean
       description: This event occurs when an attempt to refresh account data is made
       title: EventRefresh
-    EventFailed:
+    EventFailedPaymentProviderTransaction:
+      type: object
+      properties:
+        status:
+          type: string
+        statusMessage:
+          type: string
+      title: EventFailedPaymentProviderTransaction
+    EventEstablishPaymentProviderTransaction:
+      type: object
+      properties:
+        status:
+          type: string
+        statusMessage:
+          type: string
+      title: EventEstablishPaymentProviderTransaction
+    EventCompleted:
       type: object
       properties:
         createdAt:
@@ -572,65 +620,17 @@ components:
           type: string
           description: Type of transaction, denoted by a numeric code.
         paymentProviderTransaction:
-          $ref: '#/components/schemas/EventFailedPaymentProviderTransaction'
-      description: A transaction has failed.
-      title: EventFailed
-    EventEstablishPaymentProviderTransaction:
+          $ref: '#/components/schemas/EventCompletedPaymentProviderTransaction'
+      description: A transaction has been successfully completed.
+      title: EventCompleted
+    EventCompletedPaymentProviderTransaction:
       type: object
       properties:
         status:
           type: string
         statusMessage:
           type: string
-      title: EventEstablishPaymentProviderTransaction
-    EventExpire:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: int64
-          description: The timestamp when the event was created, represented as a Unix timestamp in milliseconds.
-        eventId:
-          type: string
-          description: Unique identifier for the event.
-        eventType:
-          type: string
-          description: The type of event that triggered the webhook.
-        merchantId:
-          type: string
-          description: The unique identifier of the merchant.
-        message:
-          type: string
-          description: A message describing the event.
-        objectId:
-          type: string
-          description: Unique identifier for the object associated with the event, such as a transaction.
-        objectType:
-          type: string
-          description: The type of object associated with the event (e.g., Transaction).
-        paymentType:
-          type: string
-          description: Type of payment, denoted by a numeric code.
-        status:
-          type: string
-          description: Status code representing the current state of the transaction.
-        statusMessage:
-          type: string
-          description: A message describing the current status of the transaction.
-        timeZone:
-          type: string
-          description: The timezone of the event, formatted in IANA timezone database format.
-        transactionType:
-          type: string
-          description: Type of transaction, denoted by a numeric code.
-        paymentProviderTransaction.status:
-          type: string
-          description: Status code representing the current state of the transaction.
-        paymentProviderTransaction.statusMessage:
-          type: string
-          description: A message describing the current status of the transaction.
-      description: A generic event object that includes common properties for all webhook events. This can be extended for specific event types.
-      title: EventExpire
+      title: EventCompletedPaymentProviderTransaction
   securitySchemes:
     HTTPBasic:
       type: http
