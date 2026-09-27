@@ -77,6 +77,18 @@ paths:
                 description: Any type
 components:
   schemas:
+    UserLookupResponse:
+      type: object
+      properties:
+        isTrustlyUser:
+          type: boolean
+          description: True if any provided identifier matches a TRM user.
+        errorsList:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLookupResponseErrorsListItems'
+          description: Present only on error responses.
+      title: UserLookupResponse
     BaseException:
       type: object
       properties:
@@ -105,18 +117,6 @@ components:
         occurredAt:
           type: integer
       title: UserLookupResponseErrorsListItems
-    UserLookupResponse:
-      type: object
-      properties:
-        isTrustlyUser:
-          type: boolean
-          description: True if any provided identifier matches a TRM user.
-        errorsList:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserLookupResponseErrorsListItems'
-          description: Present only on error responses.
-      title: UserLookupResponse
     Get-user-lookupRequestUnauthorizedError:
       type: object
       properties:

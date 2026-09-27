@@ -95,7 +95,7 @@ apis:
   - type: OpenAPI
     url: openapi/paywithmybank-countries-api-openapi.yml
 - aid: paywithmybank:paywithmybank-customers-api
-  name: PayWithMyBank (Trustly) customers API
+  name: PayWithMyBank (Trustly) Customers API
   description: The customers API from PayWithMyBank (Trustly) — 2 operation(s) for customers.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
@@ -107,7 +107,7 @@ apis:
   - type: OpenAPI
     url: openapi/paywithmybank-customers-api-openapi.yml
 - aid: paywithmybank:paywithmybank-identity-api
-  name: PayWithMyBank (Trustly) identity API
+  name: PayWithMyBank (Trustly) Identity API
   description: The identity API from PayWithMyBank (Trustly) — 3 operation(s) for identity.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
@@ -119,7 +119,7 @@ apis:
   - type: OpenAPI
     url: openapi/paywithmybank-identity-api-openapi.yml
 - aid: paywithmybank:paywithmybank-networkcheckapi-api
-  name: PayWithMyBank (Trustly) networkCheckApi API
+  name: PayWithMyBank (Trustly) Network Check API
   description: >-
     The networkCheckApi API from PayWithMyBank (Trustly) — 1 operation(s) for networkcheckapi.
   humanURL: https://amer.developers.trustly.com/
@@ -131,7 +131,7 @@ apis:
   - type: OpenAPI
     url: openapi/paywithmybank-networkcheckapi-api-openapi.yml
 - aid: paywithmybank:paywithmybank-payments-api
-  name: PayWithMyBank (Trustly) payments API
+  name: PayWithMyBank (Trustly) Payments API
   description: The payments API from PayWithMyBank (Trustly) — 2 operation(s) for payments.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
@@ -143,7 +143,7 @@ apis:
   - type: OpenAPI
     url: openapi/paywithmybank-payments-api-openapi.yml
 - aid: paywithmybank:paywithmybank-transactions-api
-  name: PayWithMyBank (Trustly) transactions API
+  name: PayWithMyBank (Trustly) Transactions API
   description: The transactions API from PayWithMyBank (Trustly) — 10 operation(s) for transactions.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1
@@ -155,7 +155,7 @@ apis:
   - type: OpenAPI
     url: openapi/paywithmybank-transactions-api-openapi.yml
 - aid: paywithmybank:paywithmybank-verifycustomer-api
-  name: PayWithMyBank (Trustly) verifyCustomer API
+  name: PayWithMyBank (Trustly) Verify Customer API
   description: The verifyCustomer API from PayWithMyBank (Trustly) — 1 operation(s) for verifycustomer.
   humanURL: https://amer.developers.trustly.com/
   baseURL: https://api.trustly.one/api/v1

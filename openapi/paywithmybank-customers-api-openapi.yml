@@ -139,18 +139,26 @@ paths:
               $ref: '#/components/schemas/Customer'
 components:
   schemas:
+    Customers_get-customers_Response_200:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers_Response_200
+    Customers_get-customers-customerId_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers-customerId_Response_200
     Customers_post-customers-customerId_Response_200:
       type: object
       properties:
         customer:
           $ref: '#/components/schemas/Customer'
       title: Customers_post-customers-customerId_Response_200
-    Customers_post-customers_Response_200:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Customers_post-customers_Response_200
     DriverLicense:
       type: object
       properties:
@@ -164,14 +172,17 @@ components:
       - number
       - state
       title: DriverLicense
-    Customers_get-customers_Response_200:
+    CustomerCustomData:
+      type: object
+      properties: {}
+      description: Object for sending merchant-specific custom data.
+      title: CustomerCustomData
+    Customers_post-customers_Response_200:
       type: object
       properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-      title: Customers_get-customers_Response_200
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_post-customers_Response_200
     Customer:
       type: object
       properties:
@@ -243,11 +254,6 @@ components:
       - email
       description: The Trustly customer object, containing identification details and contact information.
       title: Customer
-    CustomerCustomData:
-      type: object
-      properties: {}
-      description: Object for sending merchant-specific custom data.
-      title: CustomerCustomData
     Address:
       type: object
       properties:
@@ -273,12 +279,6 @@ components:
       - country
       description: Valid mailing or billing address associated with the customer
       title: Address
-    Customers_get-customers-customerId_Response_200:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Customers_get-customers-customerId_Response_200
   securitySchemes:
     HTTPBasic:
       type: http

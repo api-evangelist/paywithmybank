@@ -55,6 +55,28 @@ paths:
                 $ref: '#/components/schemas/Payment_Providers_get-paymentProviders_Response_200'
 components:
   schemas:
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
+    Payment_Providers_get-paymentProviders_Response_200:
+      type: object
+      properties:
+        paymentProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProvider'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      title: Payment Providers_get-paymentProviders_Response_200
     PaymentProvider:
       type: object
       properties:
@@ -86,20 +108,16 @@ components:
       - name
       description: Details of the Financial institution
       title: PaymentProvider
-    Payment_Providers_get-paymentProviders_Response_200:
-      type: object
-      properties:
-        paymentProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentProvider'
-        startIndex:
-          type: number
-          format: double
-        itemsPerPage:
-          type: number
-          format: double
-      title: Payment Providers_get-paymentProviders_Response_200
+    PaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-letter ISO country code of the financial institution
+      title: PaymentProviderCountry
     Address:
       type: object
       properties:
@@ -125,24 +143,6 @@ components:
       - country
       description: Valid mailing or billing address associated with the customer
       title: Address
-    PaymentProviderCountry:
-      type: string
-      enum:
-      - US
-      - CA
-      - UK
-      - DE
-      - AU
-      description: 2-letter ISO country code of the financial institution
-      title: PaymentProviderCountry
-    PaymentProviderSubType:
-      type: string
-      enum:
-      - '1000'
-      - '2000'
-      - '2001'
-      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
-      title: PaymentProviderSubType
   securitySchemes:
     HTTPBasic:
       type: http
