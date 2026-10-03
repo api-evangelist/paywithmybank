@@ -55,28 +55,31 @@ paths:
                 $ref: '#/components/schemas/Payment_Providers_get-paymentProviders_Response_200'
 components:
   schemas:
-    PaymentProviderSubType:
-      type: string
-      enum:
-      - '1000'
-      - '2000'
-      - '2001'
-      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
-      title: PaymentProviderSubType
-    Payment_Providers_get-paymentProviders_Response_200:
+    Address:
       type: object
       properties:
-        paymentProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentProvider'
-        startIndex:
-          type: number
-          format: double
-        itemsPerPage:
-          type: number
-          format: double
-      title: Payment Providers_get-paymentProviders_Response_200
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
     PaymentProvider:
       type: object
       properties:
@@ -108,6 +111,20 @@ components:
       - name
       description: Details of the Financial institution
       title: PaymentProvider
+    Payment_Providers_get-paymentProviders_Response_200:
+      type: object
+      properties:
+        paymentProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProvider'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      title: Payment Providers_get-paymentProviders_Response_200
     PaymentProviderCountry:
       type: string
       enum:
@@ -118,31 +135,14 @@ components:
       - AU
       description: 2-letter ISO country code of the financial institution
       title: PaymentProviderCountry
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-          description: Address line 1 (e.g., street or PO Box)
-        address2:
-          type: string
-          description: Address line 2 (e.g., apartment, suite or unit number)
-        city:
-          type: string
-          description: City, district, town or village
-        state:
-          type: string
-          description: State, province or region code
-        zip:
-          type: string
-          description: ZIP or Postal Code
-        country:
-          type: string
-          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-      required:
-      - country
-      description: Valid mailing or billing address associated with the customer
-      title: Address
+    PaymentProviderSubType:
+      type: string
+      enum:
+      - '1000'
+      - '2000'
+      - '2001'
+      description: "Financial Institution Account Type:\n * `1000`: Online Banking\n * `2000`: Manual Entry\n * `2001`: Manual Entry with Challenge Deposit\n"
+      title: PaymentProviderSubType
   securitySchemes:
     HTTPBasic:
       type: http

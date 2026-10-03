@@ -77,6 +77,20 @@ paths:
                 description: Any type
 components:
   schemas:
+    UserLookupResponseErrorsListItems:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        location:
+          type: string
+        domain:
+          type: string
+        occurredAt:
+          type: integer
+      title: UserLookupResponseErrorsListItems
     UserLookupResponse:
       type: object
       properties:
@@ -103,20 +117,6 @@ components:
         occurredAt:
           type: integer
       title: BaseException
-    UserLookupResponseErrorsListItems:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        location:
-          type: string
-        domain:
-          type: string
-        occurredAt:
-          type: integer
-      title: UserLookupResponseErrorsListItems
     Get-user-lookupRequestUnauthorizedError:
       type: object
       properties:
