@@ -1,30 +1,28 @@
-# Kin Score artifact — paywithmybank — 2026-08-27T094438
+# Kin Score artifact — paywithmybank — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: paywithmybank
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T094438
-  composite: 49.7
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 49.8
   band: developing
   facets:
-    discoverability: 92.6
-    contract_quality: 61.9
-    governance: 16.7
+    discoverability: 75.0
+    contract_quality: 54.5
+    contract_governance: 4.5
     operational_transparency: 10.5
     developer_ergonomics: 73.2
-    commercial_clarity: 34.2
-    contract_governance: 16.7
     access_clarity: 34.2
   agent_readiness:
-    score: 50.5
+    score: 44.0
     band: agent-native
     dimensions:
       spec_presence: true
       agentic_access: derived
       reversibility_documented: documented
-      mcp_server: verified
+      mcp_server: platform
       auth_clarity: bearer
       idempotency: verified
       error_semantics: verified
@@ -44,7 +42,7 @@ kin_score:
     applies: true
     regime: Banking & Open Finance
     regime_id: banking_open_finance
-    score: 31.6
+    score: 19.7
     matched_via: tags
   provenance:
     mcp: first-party
@@ -52,7 +50,7 @@ kin_score:
     agentic_access: derived
     conformance: derived
     contracts:
-      total: 11
+      total: 12
       derived: 0
       coverage: 0.0
       callable: 100.0
