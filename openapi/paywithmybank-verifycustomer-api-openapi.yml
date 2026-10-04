@@ -49,16 +49,6 @@ paths:
                 $ref: '#/components/schemas/Get-verify-customerRequestUnauthorizedError'
 components:
   schemas:
-    Get-verify-customerRequestUnauthorizedError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseException'
-      required:
-      - errors
-      title: Get-verify-customerRequestUnauthorizedError
     VerifyCustomerMatchResult:
       type: string
       enum:
@@ -76,6 +66,20 @@ components:
 
         * `2`: Match'
       title: VerifyCustomerMatchResult
+    BaseException:
+      type: object
+      properties:
+        domain:
+          type: string
+        code:
+          type: integer
+        location:
+          type: string
+        message:
+          type: string
+        occurredAt:
+          type: integer
+      title: BaseException
     VerifyCustomerMatchSource:
       type: string
       enum:
@@ -93,6 +97,24 @@ components:
 
         * `4`: TrustlyUser'
       title: VerifyCustomerMatchSource
+    Get-verify-customerRequestUnauthorizedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseException'
+      required:
+      - errors
+      title: Get-verify-customerRequestUnauthorizedError
+    Verify_Customer_get-verify-customer_Response_200:
+      type: object
+      properties:
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/VerifyCustomerMatch'
+      title: Verify Customer_get-verify-customer_Response_200
     VerifyCustomerMatch:
       type: object
       properties:
@@ -132,28 +154,6 @@ components:
       required:
       - errors
       title: Get-verify-customerRequestBadRequestError
-    BaseException:
-      type: object
-      properties:
-        domain:
-          type: string
-        code:
-          type: integer
-        location:
-          type: string
-        message:
-          type: string
-        occurredAt:
-          type: integer
-      title: BaseException
-    Verify_Customer_get-verify-customer_Response_200:
-      type: object
-      properties:
-        matches:
-          type: array
-          items:
-            $ref: '#/components/schemas/VerifyCustomerMatch'
-      title: Verify Customer_get-verify-customer_Response_200
   securitySchemes:
     HTTPBasic:
       type: http

@@ -139,69 +139,6 @@ paths:
               $ref: '#/components/schemas/Customer'
 components:
   schemas:
-    Customers_post-customers-customerId_Response_200:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Customers_post-customers-customerId_Response_200
-    Customers_get-customers-customerId_Response_200:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/Customer'
-      title: Customers_get-customers-customerId_Response_200
-    Customers_get-customers_Response_200:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-      title: Customers_get-customers_Response_200
-    CustomerCustomData:
-      type: object
-      properties: {}
-      description: Object for sending merchant-specific custom data.
-      title: CustomerCustomData
-    DriverLicense:
-      type: object
-      properties:
-        number:
-          type: string
-          description: Driver License number.
-        state:
-          type: string
-          description: 2 character ISO State code.
-      required:
-      - number
-      - state
-      title: DriverLicense
-    Address:
-      type: object
-      properties:
-        address1:
-          type: string
-          description: Address line 1 (e.g., street or PO Box)
-        address2:
-          type: string
-          description: Address line 2 (e.g., apartment, suite or unit number)
-        city:
-          type: string
-          description: City, district, town or village
-        state:
-          type: string
-          description: State, province or region code
-        zip:
-          type: string
-          description: ZIP or Postal Code
-        country:
-          type: string
-          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-      required:
-      - country
-      description: Valid mailing or billing address associated with the customer
-      title: Address
     Customer:
       type: object
       properties:
@@ -279,6 +216,69 @@ components:
         customer:
           $ref: '#/components/schemas/Customer'
       title: Customers_post-customers_Response_200
+    Address:
+      type: object
+      properties:
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
+    CustomerCustomData:
+      type: object
+      properties: {}
+      description: Object for sending merchant-specific custom data.
+      title: CustomerCustomData
+    Customers_get-customers_Response_200:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers_Response_200
+    Customers_get-customers-customerId_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_get-customers-customerId_Response_200
+    Customers_post-customers-customerId_Response_200:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      title: Customers_post-customers-customerId_Response_200
+    DriverLicense:
+      type: object
+      properties:
+        number:
+          type: string
+          description: Driver License number.
+        state:
+          type: string
+          description: 2 character ISO State code.
+      required:
+      - number
+      - state
+      title: DriverLicense
   securitySchemes:
     HTTPBasic:
       type: http

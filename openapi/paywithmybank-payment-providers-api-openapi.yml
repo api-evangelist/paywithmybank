@@ -55,31 +55,30 @@ paths:
                 $ref: '#/components/schemas/Payment_Providers_get-paymentProviders_Response_200'
 components:
   schemas:
-    Address:
+    Payment_Providers_get-paymentProviders_Response_200:
       type: object
       properties:
-        address1:
-          type: string
-          description: Address line 1 (e.g., street or PO Box)
-        address2:
-          type: string
-          description: Address line 2 (e.g., apartment, suite or unit number)
-        city:
-          type: string
-          description: City, district, town or village
-        state:
-          type: string
-          description: State, province or region code
-        zip:
-          type: string
-          description: ZIP or Postal Code
-        country:
-          type: string
-          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-      required:
-      - country
-      description: Valid mailing or billing address associated with the customer
-      title: Address
+        paymentProviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentProvider'
+        startIndex:
+          type: number
+          format: double
+        itemsPerPage:
+          type: number
+          format: double
+      title: Payment Providers_get-paymentProviders_Response_200
+    PaymentProviderCountry:
+      type: string
+      enum:
+      - US
+      - CA
+      - UK
+      - DE
+      - AU
+      description: 2-letter ISO country code of the financial institution
+      title: PaymentProviderCountry
     PaymentProvider:
       type: object
       properties:
@@ -111,30 +110,31 @@ components:
       - name
       description: Details of the Financial institution
       title: PaymentProvider
-    Payment_Providers_get-paymentProviders_Response_200:
+    Address:
       type: object
       properties:
-        paymentProviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentProvider'
-        startIndex:
-          type: number
-          format: double
-        itemsPerPage:
-          type: number
-          format: double
-      title: Payment Providers_get-paymentProviders_Response_200
-    PaymentProviderCountry:
-      type: string
-      enum:
-      - US
-      - CA
-      - UK
-      - DE
-      - AU
-      description: 2-letter ISO country code of the financial institution
-      title: PaymentProviderCountry
+        address1:
+          type: string
+          description: Address line 1 (e.g., street or PO Box)
+        address2:
+          type: string
+          description: Address line 2 (e.g., apartment, suite or unit number)
+        city:
+          type: string
+          description: City, district, town or village
+        state:
+          type: string
+          description: State, province or region code
+        zip:
+          type: string
+          description: ZIP or Postal Code
+        country:
+          type: string
+          description: 2 character [ISO Country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+      required:
+      - country
+      description: Valid mailing or billing address associated with the customer
+      title: Address
     PaymentProviderSubType:
       type: string
       enum:
