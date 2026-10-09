@@ -1,17 +1,22 @@
-generated: '2026-07-20'
+generated: '2026-09-23'
 method: generated
-source: openapi/paywithmybank-openapi-original.yml
+source: openapi/paywithmybank-account-data-api-openapi.yml, openapi/paywithmybank-accounts-api-openapi.yml,
+  openapi/paywithmybank-countries-api-openapi.yml, openapi/paywithmybank-customers-api-openapi.yml,
+  openapi/paywithmybank-dispute-management-api-openapi.yml, openapi/paywithmybank-identity-api-openapi.yml,
+  openapi/paywithmybank-networkcheckapi-api-openapi.yml, openapi/paywithmybank-payment-providers-api-openapi.yml,
+  openapi/paywithmybank-payments-api-openapi.yml, openapi/paywithmybank-transactions-api-openapi.yml,
+  openapi/paywithmybank-verifycustomer-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 31
   by_action_class:
-    connected: 16
-    acting: 15
+    connected: 17
+    acting: 14
   by_consequence:
-    read: 16
-    write: 13
+    read: 17
+    write: 12
     physical: 2
   human_in_the_loop_required: 0
 operations:
@@ -91,18 +96,12 @@ operations:
   method: post
   operationId: get-accounts-verify
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /countries
   method: get
   operationId: get-countries
