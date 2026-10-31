@@ -1,4 +1,4 @@
-# paywithmybank
+# PayWithMyBank (Trustly)
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,6 +64,146 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-paywithmybank is a company surfaced as a portfolio company of balderton-capital and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+PayWithMyBank is the U.S. "Pay by Bank" brand of Trustly, a global open-banking payments provider that lets merchants accept payments directly from a consumer's bank account as an alternative to cards. The paywithmybank.com domain now redirects to Trustly, whose AMER developer platform exposes a REST Payments API (OpenAPI 3.1) covering transactions (establish, capture, deposit, cancel, reclaim, refund), payments retrieval, bank-account tokenization and verification, customer records, identity (Trustly ID), account data, dispute recovery, and asynchronous event notifications (webhooks). Authentication is HTTP Basic with a provisioned accessId/accessKey plus a server-generated requestSignature for the client-side Lightbox. Trustly operates the largest open-banking payments network with 12,000+ connected banks across 30+ countries.
 
-Backed by: balderton-capital — https://www.paywithmybank.com/
+**Areas:** Company · Payments · Pay by Bank · Open Banking · ACH · Bank Transfers · Fintech · Identity Verification · Webhook
+
+## PayWithMyBank (Trustly) on APIs.io
+
+Everything profiled for PayWithMyBank (Trustly) is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paywithmybank/](https://apis.io/providers/paywithmybank/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [PayWithMyBank (Trustly) accounts API](https://apis.io/apis/paywithmybank/paywithmybank-accounts-api/) — The accounts API from PayWithMyBank (Trustly) — 3 operation(s) for accounts.
+- [PayWithMyBank (Trustly) countries API](https://apis.io/apis/paywithmybank/paywithmybank-countries-api/) — The countries API from PayWithMyBank (Trustly) — 1 operation(s) for countries.
+- [PayWithMyBank (Trustly) Customers API](https://apis.io/apis/paywithmybank/paywithmybank-customers-api/) — The customers API from PayWithMyBank (Trustly) — 2 operation(s) for customers.
+- [PayWithMyBank (Trustly) Identity API](https://apis.io/apis/paywithmybank/paywithmybank-identity-api/) — The identity API from PayWithMyBank (Trustly) — 3 operation(s) for identity.
+- [PayWithMyBank (Trustly) Network Check API](https://apis.io/apis/paywithmybank/paywithmybank-networkcheckapi-api/) — The networkCheckApi API from PayWithMyBank (Trustly) — 1 operation(s) for networkcheckapi.
+- [PayWithMyBank (Trustly) Payments API](https://apis.io/apis/paywithmybank/paywithmybank-payments-api/) — The payments API from PayWithMyBank (Trustly) — 2 operation(s) for payments.
+- [PayWithMyBank (Trustly) Transactions API](https://apis.io/apis/paywithmybank/paywithmybank-transactions-api/) — The transactions API from PayWithMyBank (Trustly) — 10 operation(s) for transactions.
+- [PayWithMyBank (Trustly) Verify Customer API](https://apis.io/apis/paywithmybank/paywithmybank-verifycustomer-api/) — The verifyCustomer API from PayWithMyBank (Trustly) — 1 operation(s) for verifycustomer.
+- [PayWithMyBank (Trustly) API](https://apis.io/apis/paywithmybank/paywithmybank-api-api/) — The API API from PayWithMyBank (Trustly) — 0 operation(s) for api.
+- [PayWithMyBank (Trustly) Account Data API](https://apis.io/apis/paywithmybank/paywithmybank-account-data-api/) — The Account Data API from PayWithMyBank (Trustly) — 4 operation(s) for account data.
+- [PayWithMyBank (Trustly) Dispute Management API](https://apis.io/apis/paywithmybank/paywithmybank-dispute-management-api/) — The Dispute Management API from PayWithMyBank (Trustly) — 1 operation(s) for dispute management.
+- [PayWithMyBank (Trustly) Payment Providers API](https://apis.io/apis/paywithmybank/paywithmybank-payment-providers-api/) — The Payment Providers API from PayWithMyBank (Trustly) — 1 operation(s) for payment providers.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Paywithmybank Webhooks](https://apis.io/asyncapis/paywithmybank/paywithmybank-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [trustly-amer](https://apis.io/servers/paywithmybank/trustly-amer/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Paywithmybank Agentic Access](https://apis.io/agentic-access/paywithmybank/paywithmybank-agentic-access/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [accountData API](https://apis.io/collections/paywithmybank/open-paywithmybank-accountdata-api/)
+- [accountData accounts API](https://apis.io/collections/paywithmybank/open-paywithmybank-accounts-api/)
+- [accountData countries API](https://apis.io/collections/paywithmybank/open-paywithmybank-countries-api/)
+- [accountData customers API](https://apis.io/collections/paywithmybank/open-paywithmybank-customers-api/)
+- [accountData disputeManagement API](https://apis.io/collections/paywithmybank/open-paywithmybank-disputemanagement-api/)
+- [accountData identity API](https://apis.io/collections/paywithmybank/open-paywithmybank-identity-api/)
+- [accountData networkCheckApi API](https://apis.io/collections/paywithmybank/open-paywithmybank-networkcheckapi-api/)
+- [accountData paymentProviders API](https://apis.io/collections/paywithmybank/open-paywithmybank-paymentproviders-api/)
+- [accountData payments API](https://apis.io/collections/paywithmybank/open-paywithmybank-payments-api/)
+- [accountData transactions API](https://apis.io/collections/paywithmybank/open-paywithmybank-transactions-api/)
+- [accountData verifyCustomer API](https://apis.io/collections/paywithmybank/open-paywithmybank-verifycustomer-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Paywithmybank Api Overlay](https://apis.io/overlays/paywithmybank/paywithmybank-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Paywithmybank Authentication](https://apis.io/security/paywithmybank/paywithmybank-authentication/)
+- [Paywithmybank Domain Security](https://apis.io/security/paywithmybank/paywithmybank-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.trustly.com/us)
+- [Documentation](https://amer.developers.trustly.com/payments/docs/get-started)
+- [Getting started](https://amer.developers.trustly.com/integrate/get-started/explore-solutions)
+- [API reference](https://amer.developers.trustly.com/api-reference/api)
+- [Sign up](https://trustly.one/merchant-portal/)
+- [Support](https://amer.developers.trustly.com/integrate/get-started/get-support)
+- [Blog](https://www.trustly.com/us/blog)
+- [Terms of service](https://www.trustly.com/us/terms-of-use)
+- [Privacy policy](https://www.trustly.com/us/privacy-policy)
+- [GitHub](https://github.com/TrustlyInc)
+
+## API Evangelist rating
+
+**Kin Score 50.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 55.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 34.2 |
+
+**Agent readiness 45.2** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 19.7** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paywithmybank/](https://apis.io/providers/paywithmybank/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PayWithMyBank (Trustly): the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paywithmybank/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
